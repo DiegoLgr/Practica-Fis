@@ -39,8 +39,9 @@ public class Usuario implements IUsuario, IRecuperador {
         publicaciones[0] = new PublicacionTexto("1", 1, 1, "Primera publicación");
         publicaciones[1] = new PublicacionTexto("2", 4, 1, "Como usar maven");
         publicaciones[2] = new PublicacionTexto("3", 100000, 1, "Por qué usar Git en vez de SVN");
+        publicaciones[3] = new PublicacionTexto("4", 1, 1000, "Arriba Espania");
+        publicaciones[5] = new PublicacionTexto("5", 100000, 1, "PENE");
         publicaciones[4] = new PublicacionTexto("3", 100000, 1, "vez de SVN");
-
         return publicaciones;
     }
 
