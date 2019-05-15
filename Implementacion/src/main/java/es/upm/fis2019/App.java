@@ -2,6 +2,10 @@ package es.upm.fis2019;
 
 public class App {
 	public static void main(String[] args) {
+		//lanzarApp();
+		runTests();
+	}
+	private static void lanzarApp(){
 		Sesion sesion = new Sesion();
 		sesion.setUsuario(new Usuario("usuarioPrueba", "prueba@upm.com", "123")); // Esto hace lo que debieria hacer el login.
 
@@ -12,5 +16,9 @@ public class App {
 
 		ManagerGui gui = new ManagerGui(controladorGestorUsuarios, controladorUsuario);
 		gui.run();
+	}
+	private static void runTests(){
+		TestPublicacion.testGetLikes();
+		TestPublicacion.testGetDislikes();
 	}
 }
