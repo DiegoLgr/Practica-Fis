@@ -1,4 +1,28 @@
 package es.upm.fis2019;
 
-public class GestorUsuarios {
+public class GestorUsuarios implements ICreador,IBuscador{
+   private IEjecutador accesobd;
+
+   public GestorUsuarios (){
+       accesobd=Conexion.getInstance();
+   }
+
+    @Override
+    public void Crear(String alias, String correo, String pssw){
+       // String query="Insert into usuario values("+alias +","+correo +","+pssw+");"  ;
+        String query="Insert into usuario values(\"c\",\"cc\",\"ccc\");";
+        accesobd.conectar();
+        accesobd.ejecutar(query);
+        accesobd.desconectar();
+    }
+
+    @Override
+    public IUsuario Buscar(String alias) {
+        return null;
+    }
+
+    public static void main(String[] args) {
+        GestorUsuarios g=new GestorUsuarios();
+        g.Crear("ca","ca","ca");
+    }
 }

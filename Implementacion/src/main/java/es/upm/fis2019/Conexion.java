@@ -3,7 +3,7 @@ import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Conexion implements IEjecutador {
-	private String url;
+	private String url="jdbc:sqlite:BDEspacioUpm.db";
 	private String User;
 	private String Mode;
 	private String Pssw;
@@ -12,7 +12,7 @@ public class Conexion implements IEjecutador {
 
 	//Constructor Privado
 	private Conexion(){
-		this.url="jdbc:sqlite:BDEspacioUpm.db";
+
 	}
 	//Singleton
 	public static Conexion getInstance(){
@@ -48,13 +48,12 @@ public class Conexion implements IEjecutador {
 	public void ejecutar(String query){
 		try {
 			Statement st = c.createStatement();
-			ResultSet rs=st.executeQuery(query);
+			st.execute(query);
 		}catch (SQLException e){
 			System.out.println(e.getMessage());
-
 		}
 	}
-	public ResultSet ejecutarQuery(String query) {
+	public void ejecutarQuery(String query) {
 		/*
 		ResultSet rs;
 		try {

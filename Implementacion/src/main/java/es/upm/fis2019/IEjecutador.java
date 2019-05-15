@@ -4,7 +4,8 @@ import java.sql.ResultSet;
 
 public interface IEjecutador {
 	public void ejecutar(String query);
-	public ResultSet ejecutarQuery(String query);
+	public void ejecutarQuery(String query);
 	public Boolean conectar();
+	public Boolean desconectar();
 
 }
