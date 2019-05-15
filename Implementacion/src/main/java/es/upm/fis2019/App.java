@@ -18,7 +18,14 @@ public class App {
 		gui.run();
 	}
 	private static void runTests(){
+		System.out.println("~~~ Publicaciones ~~~");
 		TestPublicacion.testGetLikes();
 		TestPublicacion.testGetDislikes();
+		
+		System.out.println("~~~ Comentario ~~~");
+		TestComentario.testGetFecha();
+		TestComentario.testGetId();
+		TestComentario.testGetText();
+		TestComentario.testGetRespuesta();
 	}
 }
