@@ -5,6 +5,7 @@ public class Usuario implements IUsuario, IRecuperador {
     String alias;
     String correo;
     String contraseña;
+    IEjecutador bd;
 
     public Usuario(String alias, String correo, String contraseña) {
         this.alias = alias;
