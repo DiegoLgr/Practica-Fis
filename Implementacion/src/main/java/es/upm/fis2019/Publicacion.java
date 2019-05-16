@@ -1,6 +1,6 @@
 package es.upm.fis2019;
 
-public abstract class Publicacion implements IPublicacion {
+public abstract class Publicacion implements IPublicacion,ILikeable {
     // TODO: Poner las fechas de alguna manera que funcionen
     String id;
     int likes;
@@ -37,5 +37,17 @@ public abstract class Publicacion implements IPublicacion {
     @Override
     public String getFecha() {
         return fecha;
+    }
+
+    @Override
+    public void Likear(IUsuario user) {
+        this.likes++;
+        //Añadir el usuario a una lista de usuarios que han dado like
+    }
+
+    @Override
+    public void Dislikear(IUsuario user) {
+        this.dislikes++;
+        //Añadir el usuario a una lista de usuarios que han dado dislike
     }
 }
