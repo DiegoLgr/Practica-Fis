@@ -7,25 +7,7 @@ public class PublicacionTexto extends Publicacion{
         this.contenido = contenido;
     }
 
-    @Override
-    public int getId() {
-        return 0;
-    }
 
-    @Override
-    public int getLikes() {
-        return 0;
-    }
-
-    @Override
-    public int getDislikes() {
-        return 0;
-    }
-
-    @Override
-    public <date> date getFecha() {
-        return null;
-    }
 
     public String getContenido() {
         String respresentaciónContenido = this.contenido + "    Likes: " +this.likes + "     Dislikes: " + this.dislikes;

@@ -35,18 +35,11 @@ public class Usuario implements IUsuario, IRecuperador {
 
     @Override
     public Publicacion[] GetPublicacionesUsuario(Object PrimeraFecha) {
-        PublicacionTexto[] publicaciones = new PublicacionTexto[6];
-        //hola pene
+        Publicacion[] publicaciones = new Publicacion[6];
 
-
-
-
-
-
-        //pene
-        publicaciones[0] = new PublicacionTexto("1", 1, 1, "Primera publicación");
-        publicaciones[1] = new PublicacionTexto("2", 4, 1, "Como usar maven");
-        publicaciones[2] = new PublicacionTexto("3", 100000, 1, "Por qué usddar Git en vez de SVN");
+        publicaciones[0] = new PublicacionTexto("1", 1, 1, "EN verdad Diego mola más");
+        publicaciones[1] = new PublicacionEnlace("2", 4, 1, "www.Publicacion.enlace.es");
+        publicaciones[2] = new PublicacionTexto("3", 100000, 1, "Por qué usar Git en vez de SVN");
         publicaciones[3] = new PublicacionTexto("4", 1, 1000, "Arriba Espania");
         publicaciones[5] = new PublicacionTexto("5", 100000, 1, "Colita");
         publicaciones[4] = new PublicacionTexto("3", 100000, 1, "vez de SVN");
