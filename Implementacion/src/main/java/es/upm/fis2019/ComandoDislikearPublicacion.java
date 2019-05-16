@@ -1,6 +1,6 @@
 package es.upm.fis2019;
 public class ComandoDislikearPublicacion implements IComando {
-    @Override
+
      int dislikes;
 
     Publicacion publicacion;
