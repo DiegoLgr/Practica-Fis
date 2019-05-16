@@ -7,6 +7,9 @@ public class ControladorPublicaciones implements IComenta, IBorraPublicacion, IL
 		return true;
 	};
 	public Boolean likear(Publicacion publicacion){
+
+		ComandoLikearPublicacion comandoLikearPublicacion = new ComandoLikearPublicacion(publicacion);
+		comandoLikearPublicacion.ejecutar();
 		return true;
 	};
 	public Boolean dislikear(Publicacion publicacion){
