@@ -14,6 +14,7 @@ public class Conexion implements IEjecutador {
 	private Conexion(){
 		url="jdbc:sqlite:BDEspacioUpm.db";
 	}
+
 	//Singleton
 	public static Conexion getInstance(){
 		if(conexion==null)

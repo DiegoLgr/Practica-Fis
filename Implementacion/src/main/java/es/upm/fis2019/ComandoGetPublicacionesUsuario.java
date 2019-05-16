@@ -1,7 +1,10 @@
 package es.upm.fis2019;
+
+import java.util.List;
+
 public class ComandoGetPublicacionesUsuario implements IComando {
     IRecuperador usuario;
-    Publicacion[] publicaciones;
+    List<Publicacion> publicaciones;
 
     public ComandoGetPublicacionesUsuario(Usuario usuario){
         this.usuario = usuario;
@@ -11,7 +14,7 @@ public class ComandoGetPublicacionesUsuario implements IComando {
         this.publicaciones = recuperadorPublicaciones.GetPublicacionesUsuario("12/01/2019");
     }
 
-    public Publicacion[] getPublicaciones(){
+    public List<Publicacion> getPublicaciones(){
         return this.publicaciones;
     }
 }

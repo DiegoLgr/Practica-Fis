@@ -1,5 +1,8 @@
 package es.upm.fis2019;
+
+import java.util.List;
+
 public interface IRecuperador {
-	public Publicacion[] GetPublicacionesTimeline(Object PrimeraFecha);
-	public Publicacion[] GetPublicacionesUsuario(Object PrimeraFecha);
+	public List<Publicacion> GetPublicacionesTimeline(String PrimeraFecha);
+	public List<Publicacion> GetPublicacionesUsuario(String PrimeraFecha);
 }

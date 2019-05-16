@@ -1,6 +1,9 @@
 package es.upm.fis2019;
+
+import java.util.List;
+
 public interface IPidePublicacion {
-	public Publicacion[] getPublicacionesTimeline();
-	public Publicacion[] getPublicacionesPropias();
-	public Publicacion[] getPublicacionesUsuario();
+	public List<Publicacion> getPublicacionesTimeline();
+	public List<Publicacion> getPublicacionesPropias();
+	public List<Publicacion> getPublicacionesUsuario();
 }

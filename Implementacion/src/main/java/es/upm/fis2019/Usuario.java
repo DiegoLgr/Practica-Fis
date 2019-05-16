@@ -1,5 +1,7 @@
 package es.upm.fis2019;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 public class Usuario implements IUsuario, IRecuperador {
@@ -7,11 +9,13 @@ public class Usuario implements IUsuario, IRecuperador {
     private String correo;
     private String contraseña;
     private IEjecutador bd;
+    private List<Publicacion> publicaciones;
 
     public Usuario(String alias, String correo, String contraseña) {
         this.alias = alias;
         this.correo = correo;
         this.contraseña = contraseña;
+        publicaciones=null;
     }
 
     @Override
@@ -21,13 +25,25 @@ public class Usuario implements IUsuario, IRecuperador {
     public String getCorreo() { return correo; }
 
     @Override
-    public Publicacion[] GetPublicacionesTimeline(Object PrimeraFecha) {
+    public List<Publicacion> GetPublicacionesTimeline(String PrimeraFecha) {
         return null;
     }
 
     @Override
-    public Publicacion[] GetPublicacionesUsuario(Object PrimeraFecha) {
-        Publicacion[] publicaciones = new Publicacion[6];
+    public List<Publicacion> GetPublicacionesUsuario(String PrimeraFecha) {
+
+        ResultSet rs=getPublicacionesUsuarioBd();
+        // loop through the result set
+           try {
+               while (rs.next()){
+                   System.out.println(rs.getString(1));
+               }
+           }catch (SQLException e){
+               System.err.println(e.getMessage());
+           }
+
+        return new ArrayList<Publicacion>();
+        /*Publicacion[] publicaciones = new Publicacion[6];
 
         publicaciones[0] = new PublicacionTexto("1", 1, 1, "EN verdad Diego mola más");
         publicaciones[1] = new PublicacionEnlace("2", 4, 1, "www.Publicacion.enlace.es");
@@ -36,12 +52,27 @@ public class Usuario implements IUsuario, IRecuperador {
         publicaciones[5] = new PublicacionTexto("5", 100000, 1, "Colita");
         publicaciones[4] = new PublicacionTexto("3", 100000, 1, "vez de SVN");
         return publicaciones;
+        */
     }
 
-    //private ArrayList
+    private ResultSet getPublicacionesUsuarioBd(){
+        Conexion c=Conexion.getInstance();
+
+        String url="select p_id,likes,dislikes,fecha,contenido,tipo " +
+                "from publica inner join publicacion on publicacion.id=publica.p_id " +
+                "where u_id="+"\""+this.alias+"\"";
+        c.conectar();
+        ResultSet result= c.ejecutarQuery(url);
+        c.desconectar();
+        return result;
+    }
 
     public IRecuperador asIrecuperador(){
         return this;
+    }
+
+    public static void main(String[] args) {
+
     }
 
 }
