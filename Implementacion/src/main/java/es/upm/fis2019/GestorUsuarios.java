@@ -16,10 +16,15 @@ public class GestorUsuarios implements ICreador,IBuscador{
         accesobd.desconectar();
     }
 
-    @Override
+    @Override //No hay que que implementarlo
     public IUsuario Buscar(String alias) {
         return null;
     }
+
+
+
+
+
 
     public static void main(String[] args) {
         GestorUsuarios g=new GestorUsuarios();

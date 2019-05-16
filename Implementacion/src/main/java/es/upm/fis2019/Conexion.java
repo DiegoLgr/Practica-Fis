@@ -1,5 +1,4 @@
 package es.upm.fis2019;
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Conexion implements IEjecutador {
@@ -7,12 +6,13 @@ public class Conexion implements IEjecutador {
 	private String User;
 	private String Mode;
 	private String Pssw;
-	private Connection c;
-	private static Conexion conexion;
+	private static Conexion conexion; //Variable del singleton
+	private Connection c; //variable con el conector a la Base de datos
+
 
 	//Constructor Privado
 	private Conexion(){
-
+		url="jdbc:sqlite:BDEspacioUpm.db";
 	}
 	//Singleton
 	public static Conexion getInstance(){
@@ -21,6 +21,7 @@ public class Conexion implements IEjecutador {
 
 		return conexion;
 	}
+
 
 
 	//metodo para iniciar conexion a bd
@@ -45,6 +46,7 @@ public class Conexion implements IEjecutador {
 		}
 	}
 
+	//metodo para ejecutar querys que no devuelvan nada
 	public void ejecutar(String query){
 		try {
 			Statement st = c.createStatement();
@@ -53,6 +55,8 @@ public class Conexion implements IEjecutador {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	//metodo para ejecutar querys que devuelvan
 	public void ejecutarQuery(String query) {
 		/*
 		ResultSet rs;

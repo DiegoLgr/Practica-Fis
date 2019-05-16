@@ -1,28 +1,19 @@
 package es.upm.fis2019;
 
 public class Usuario implements IUsuario, IRecuperador {
-    String id;
-    String alias;
-    String correo;
-    String contraseña;
-    IEjecutador bd;
+    private String alias;
+    private String correo;
+    private String contraseña;
+    private IEjecutador bd;
 
     public Usuario(String alias, String correo, String contraseña) {
         this.alias = alias;
         this.correo = correo;
         this.contraseña = contraseña;
-        this.id = "1"; // Si se implementa, hay crear el usuario en la db y luego pedir el id que le da o algo asi.
     }
 
     @Override
-    public String getId(){
-        return this.id;
-    }
-
-    @Override
-    public String getAlias() {
-        return null;
-    }
+    public String getAlias() { return null; }
 
     @Override
     public String getCorreo() {

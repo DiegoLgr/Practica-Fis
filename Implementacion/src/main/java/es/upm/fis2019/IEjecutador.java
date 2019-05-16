@@ -7,5 +7,4 @@ public interface IEjecutador {
 	public void ejecutarQuery(String query);
 	public Boolean conectar();
 	public Boolean desconectar();
-
 }
