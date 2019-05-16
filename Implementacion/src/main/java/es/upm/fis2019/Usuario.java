@@ -1,5 +1,7 @@
 package es.upm.fis2019;
 
+import java.util.*;
+
 public class Usuario implements IUsuario, IRecuperador {
     private String alias;
     private String correo;
@@ -13,12 +15,10 @@ public class Usuario implements IUsuario, IRecuperador {
     }
 
     @Override
-    public String getAlias() { return null; }
+    public String getAlias() { return alias; }
 
     @Override
-    public String getCorreo() {
-        return null;
-    }
+    public String getCorreo() { return correo; }
 
     @Override
     public Publicacion[] GetPublicacionesTimeline(Object PrimeraFecha) {
@@ -27,6 +27,7 @@ public class Usuario implements IUsuario, IRecuperador {
 
     @Override
     public Publicacion[] GetPublicacionesUsuario(Object PrimeraFecha) {
+
         PublicacionTexto[] publicaciones = new PublicacionTexto[6];
 
         publicaciones[0] = new PublicacionTexto("1", 1, 1, "Primera publicación");
@@ -38,7 +39,10 @@ public class Usuario implements IUsuario, IRecuperador {
         return publicaciones;
     }
 
+    //private ArrayList
+
     public IRecuperador asIrecuperador(){
         return this;
     }
+
 }

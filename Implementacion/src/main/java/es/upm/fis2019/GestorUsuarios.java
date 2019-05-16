@@ -9,8 +9,8 @@ public class GestorUsuarios implements ICreador,IBuscador{
 
     @Override
     public void Crear(String alias, String correo, String pssw){
-       // String query="Insert into usuario values("+alias +","+correo +","+pssw+");"  ;
-        String query="Insert into usuario values(\"c\",\"cc\",\"ccc\");";
+        String query="Insert into usuario values("+alias +","+correo +","+pssw+");"  ;
+
         accesobd.conectar();
         accesobd.ejecutar(query);
         accesobd.desconectar();
@@ -20,7 +20,6 @@ public class GestorUsuarios implements ICreador,IBuscador{
     public IUsuario Buscar(String alias) {
         return null;
     }
-
 
 
 

@@ -57,20 +57,17 @@ public class Conexion implements IEjecutador {
 	}
 
 	//metodo para ejecutar querys que devuelvan
-	public void ejecutarQuery(String query) {
-		/*
-		ResultSet rs;
+	public ResultSet ejecutarQuery(String query) {
+
+		ResultSet rs=null;
 		try {
 			Statement st = c.createStatement();
 			rs = st.executeQuery(query);
-			return rs;
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
-			return rs;
 		}
-	*/
+		return rs;
 	}
-
 
 	public static void main(String[] args) {
 		Conexion c=Conexion.getInstance();
