@@ -1,6 +1,6 @@
 package es.upm.fis2019;
 
-public class Usuario implements IUsuario, IRecuperador {
+public class Usuario implements IUsuario, IRecuperador, IPublicador {
     String id;
     String alias;
     String correo;
@@ -48,5 +48,21 @@ public class Usuario implements IUsuario, IRecuperador {
 
     public IRecuperador asIrecuperador(){
         return this;
+    }
+
+    @Override
+    public void publicar(PublicacionTexto texto) {
+        //Insertar aqui el codigo correspondiente para realizar la publicacion.
+        System.out.println("Se ha publicado una nueva publicacion.");
+    }
+
+    @Override
+    public void publicar(PublicacionEnlace link) {
+
+    }
+
+    @Override //No hay que implementarlo
+    public void publicar(PublicacionReferenciable ref) {
+
     }
 }
