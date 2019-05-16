@@ -21,11 +21,14 @@ public class App {
 		System.out.println("~~~ Publicaciones ~~~");
 		TestPublicacion.testGetLikes();
 		TestPublicacion.testGetDislikes();
-		
+
 		System.out.println("~~~ Comentario ~~~");
 		TestComentario.testGetFecha();
 		TestComentario.testGetId();
 		TestComentario.testGetText();
 		TestComentario.testGetRespuesta();
+
+		System.out.println("~~~ ControladorUsuario ~~~");
+		TestControladorUsuario.testGetPublicacionesPropias();
 	}
 }
