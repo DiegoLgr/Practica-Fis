@@ -1,6 +1,6 @@
 package es.upm.fis2019;
 
-public abstract class Publicacion implements IPublicacion {
+public abstract class Publicacion implements IPublicacion,ILikeable {
     // TODO: Poner las fechas de alguna manera que funcionen
     String id;
     int likes;
@@ -13,4 +13,5 @@ public abstract class Publicacion implements IPublicacion {
         this.likes = likes;
         this.dislikes = dislikes;
     }
+
 }
