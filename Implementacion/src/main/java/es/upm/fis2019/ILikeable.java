@@ -1,5 +1,5 @@
 package es.upm.fis2019;
 public interface ILikeable {
-	public void Likear(IUsuario user);
-	public void Dislikear(IUsuario user);
+	public void Likear(IUsuario usuario);
+	public void Dislikear(IUsuario usuario);
 }
