@@ -38,4 +38,16 @@ public abstract class Publicacion implements IPublicacion,ILikeable {
     public String getFecha() {
         return fecha;
     }
+
+    @Override
+    public void Likear(IUsuario user) {
+        this.likes++;
+        //Añadir el usuario a una lista de usuarios que han dado like
+    }
+
+    @Override
+    public void Dislikear(IUsuario user) {
+        this.dislikes++;
+        //Añadir el usuario a una lista de usuarios que han dado dislike
+    }
 }
