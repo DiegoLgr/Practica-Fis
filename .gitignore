@@ -1,8 +1,13 @@
-
-*.iml
+<<<<<<< HEAD
 
 Implementacion/\.idea/
 
+*.iml
+
 *.class
+=======
 
 \.idea/
+
+*.class
+>>>>>>> Fran
