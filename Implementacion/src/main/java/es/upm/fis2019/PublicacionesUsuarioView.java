@@ -10,15 +10,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.util.*;
 
-public class PublicacionesUsuarioView {
-    IPidePublicacion gestorPublicaciones;
-    JPanel panel;
-    PublicacionesUsuarioView(IPidePublicacion gestorPublicaciones, JPanel panel){
+public class PublicacionesUsuarioView extends JPanel{
+    private IPidePublicacion gestorPublicaciones;
+
+    PublicacionesUsuarioView(IPidePublicacion gestorPublicaciones){
         this.gestorPublicaciones = gestorPublicaciones;
-        this.panel = panel;
     }
     public void displayPublicacionesPropias() {
-        this.panel.removeAll();
+        removeAll();
         List<Publicacion> publicaciones = getPublicaciones();
         /*
         for (int i=0; i<publicaciones.length; i++){
@@ -26,7 +25,7 @@ public class PublicacionesUsuarioView {
             publicacion.setBounds(10, 10+25*i, 500, 25);
             this.panel.add(publicacion);
         }*/
-        panel.updateUI();
+        updateUI();
     }
     private List<Publicacion> getPublicaciones(){
         java.util.List<Publicacion> publicaciones;
