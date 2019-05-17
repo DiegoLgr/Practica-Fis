@@ -19,7 +19,7 @@ public class PublicacionesUsuarioView {
     }
     public void displayPublicacionesPropias() {
         this.panel.removeAll();
-        List<Publicacion> publicaciones = getPublicaciones();
+        List<IPublicacion> publicaciones = getPublicaciones();
         /*
         for (int i=0; i<publicaciones.length; i++){
             JLabel publicacion = new JLabel(publicaciones[i].getContenido());
@@ -28,8 +28,8 @@ public class PublicacionesUsuarioView {
         }*/
         panel.updateUI();
     }
-    private List<Publicacion> getPublicaciones(){
-        java.util.List<Publicacion> publicaciones;
+    private List<IPublicacion> getPublicaciones(){
+        java.util.List<IPublicacion> publicaciones;
         publicaciones = this.gestorPublicaciones.getPublicacionesPropias();
         return publicaciones;
     }

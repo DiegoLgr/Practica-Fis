@@ -24,7 +24,7 @@ public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublic
 	    return null;
 	};
 
-	public List<Publicacion> getPublicacionesPropias(){
+	public List<IPublicacion> getPublicacionesPropias(){
 		ComandoGetPublicacionesUsuario comandoGetPublicacionesUsuario = new ComandoGetPublicacionesUsuario(this.sesion.getUsuario());
 		comandoGetPublicacionesUsuario.ejecutar();
 		return comandoGetPublicacionesUsuario.getPublicaciones();
