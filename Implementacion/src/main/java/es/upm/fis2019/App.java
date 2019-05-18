@@ -23,11 +23,12 @@ public class App {
 		TestPublicacion.testGetDislikes();
 
 		System.out.println("~~~ Comentario ~~~");
+	/*
 		TestComentario.testGetFecha();
 		TestComentario.testGetId();
 		TestComentario.testGetText();
 		TestComentario.testGetRespuesta();
-
+	 */
 		System.out.println("~~~ ControladorUsuario ~~~");
 		//TestControladorUsuario.testGetPublicacionesPropias();
 		//TestControladorUsuario.TestPublicar();

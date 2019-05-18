@@ -22,8 +22,4 @@ public class PublicacionEnlace extends Publicacion {
         return contenido;
     }
 
-    @Override
-    public Comentario[] consultarComentarios() {
-        return new Comentario[0];
-    }
 }

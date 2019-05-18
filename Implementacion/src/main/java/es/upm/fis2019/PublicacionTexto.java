@@ -21,9 +21,4 @@ public class PublicacionTexto extends Publicacion{
        // String respresentaciónContenido = this.contenido + "    Likes: " +this.likes + "     Dislikes: " + this.dislikes;
         return contenido;
    }
-
-    @Override
-    public Comentario[] consultarComentarios() {
-        return new Comentario[0];
-    }
 }
