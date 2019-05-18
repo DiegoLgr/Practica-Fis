@@ -1,32 +1,24 @@
 package es.upm.fis2019;
 
-public class Usuario implements IUsuario, IRecuperador, IPublicador {
-    String id;
-    String alias;
-    String correo;
-    String contraseña;
+import java.util.*;
+
+public class Usuario implements IUsuario, IRecuperador {
+    private String alias;
+    private String correo;
+    private String contraseña;
+    private IEjecutador bd;
 
     public Usuario(String alias, String correo, String contraseña) {
         this.alias = alias;
         this.correo = correo;
         this.contraseña = contraseña;
-        this.id = "1"; // Si se implementa, hay crear el usuario en la db y luego pedir el id que le da o algo asi.
     }
 
     @Override
-    public String getId(){
-        return this.id;
-    }
+    public String getAlias() { return alias; }
 
     @Override
-    public String getAlias() {
-        return null;
-    }
-
-    @Override
-    public String getCorreo() {
-        return null;
-    }
+    public String getCorreo() { return correo; }
 
     @Override
     public Publicacion[] GetPublicacionesTimeline(Object PrimeraFecha) {
@@ -46,23 +38,9 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
         return publicaciones;
     }
 
+    //private ArrayList
+
     public IRecuperador asIrecuperador(){
         return this;
-    }
-
-    @Override
-    public void publicar(PublicacionTexto texto) {
-        //Insertar aqui el codigo correspondiente para realizar la publicacion.
-        System.out.println("Se ha publicado una nueva publicacion.");
-    }
-
-    @Override
-    public void publicar(PublicacionEnlace link) {
-
-    }
-
-    @Override //No hay que implementarlo
-    public void publicar(PublicacionReferenciable ref) {
-
     }
 }

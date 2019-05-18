@@ -1,13 +1,13 @@
 package es.upm.fis2019;
 public class ComandoGetPublicacionesUsuario implements IComando {
-    Usuario usuario;
+    IRecuperador usuario;
     Publicacion[] publicaciones;
 
     public ComandoGetPublicacionesUsuario(Usuario usuario){
         this.usuario = usuario;
     }
     public void ejecutar(){
-        IRecuperador recuperadorPublicaciones = this.usuario.asIrecuperador();
+        IRecuperador recuperadorPublicaciones = usuario;
         this.publicaciones = recuperadorPublicaciones.GetPublicacionesUsuario("12/01/2019");
     }
 
