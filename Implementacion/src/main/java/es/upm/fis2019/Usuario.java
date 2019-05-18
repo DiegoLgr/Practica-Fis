@@ -16,6 +16,7 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
         this.correo = correo;
         this.contraseña = contraseña;
         publicaciones=new ArrayList<IPublicacion>();
+
     }
 
     @Override
@@ -82,8 +83,9 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
 
     @Override
     public void publicar(PublicacionTexto texto) {
+        accesobd=Conexion.getInstance();
         String query="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
-                "values("+texto.getId() +","+texto.getLikes() +","+texto.getDislikes()+","+texto.getContenido()+",texto);";
+                "values("+"\""+texto.getId() +"\",\""+texto.getLikes() +"\",\""+texto.getDislikes()+"\",\""+texto.getContenido()+"\",\"texto\");";
 
         accesobd.conectar();
         accesobd.ejecutar(query);
@@ -92,8 +94,9 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
 
     @Override
     public void publicar(PublicacionEnlace link) {
+        accesobd=Conexion.getInstance();
         String query="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
-                        "values("+link.getId() +","+link.getLikes() +","+link.getDislikes()+","+link.getContenido()+",enlace);";
+                "values("+"\""+link.getId() +"\",\""+link.getLikes() +"\",\""+link.getDislikes()+"\",\""+link.getContenido()+"\",\"enlace\");";
 
         accesobd.conectar();
         accesobd.ejecutar(query);
