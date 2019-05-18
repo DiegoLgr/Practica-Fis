@@ -19,6 +19,11 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable {
         return id;
     }
 
+    //@Override
+    public void AniadirComentario(Comentario comentario){
+                                                                                         //Realizar el método
+    }
+
     @Override
     public Comentario[] consultarComentarios() {
         return new Comentario[0];
