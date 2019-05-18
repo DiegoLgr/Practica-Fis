@@ -6,7 +6,7 @@ public class ComandoGetPublicacionesUsuario implements IComando {
     private IRecuperador usuario;
     private List<IPublicacion> publicaciones;
 
-    public ComandoGetPublicacionesUsuario(Usuario usuario){
+    public ComandoGetPublicacionesUsuario(IRecuperador usuario){
         this.usuario = usuario;
     }
     public void ejecutar(){

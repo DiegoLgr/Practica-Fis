@@ -29,7 +29,7 @@ public class App {
 		TestComentario.testGetRespuesta();
 
 		System.out.println("~~~ ControladorUsuario ~~~");
-		TestControladorUsuario.testGetPublicacionesPropias();
+		//TestControladorUsuario.testGetPublicacionesPropias();
 		//TestControladorUsuario.TestPublicar();
 	}
 }
