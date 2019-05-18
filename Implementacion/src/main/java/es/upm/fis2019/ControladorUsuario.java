@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublica, IPidePublicacion {
     Sesion sesion;
+    private int idpublicacion = 0;
 	public ControladorUsuario(Sesion sesion){
 		this.sesion = sesion;
 	}
@@ -17,10 +18,13 @@ public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublic
 	public Boolean eliminarUsuario(){
 		return true;
 	};
-	public Boolean publicar(Object Contenido){
-		return null;
-	};
-	public List<Publicacion> getPublicacionesTimeline(){
+	public Boolean publicar(String Contenido, String Tipo){
+		idpublicacion++;
+		ComandoPublicar comandoPublicar = new ComandoPublicar(Contenido, Integer.toString(idpublicacion), Tipo);
+		comandoPublicar.ejecutar();
+		return true;
+	}
+	public Publicacion[] getPublicacionesTimeline(){
 	    return null;
 	};
 
