@@ -8,7 +8,7 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
     private String alias;
     private String correo;
     private String contraseña;
-    private IEjecutador bd;
+    private IEjecutador accesobd;
     private List<IPublicacion> publicaciones;
 
     public Usuario(String alias, String correo, String contraseña) {
@@ -63,30 +63,40 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
                System.err.println(e.getMessage());
            }
 
-        bd.desconectar();
+        accesobd.desconectar();
         return publicaciones;
 
     }
 
     //Metodo para obtener el resultSet de la BD
     private ResultSet getPublicacionesUsuarioBd(){
-        bd=Conexion.getInstance();
+        accesobd=Conexion.getInstance();
 
         String url="select p_id,likes,dislikes,fecha,contenido,tipo " +
                 "from publica inner join publicacion on publicacion.id=publica.p_id " +
                 "where u_id="+"\""+this.alias+"\"";
-        bd.conectar();
-        ResultSet result= bd.ejecutarQuery(url);
+        accesobd.conectar();
+        ResultSet result= accesobd.ejecutarQuery(url);
         return result;
     }
 
     @Override
     public void publicar(PublicacionTexto texto) {
+        String query="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
+                "values("+texto.getId() +","+texto.getLikes() +","+texto.getDislikes()+","+texto.getContenido()+",texto);";
 
+        accesobd.conectar();
+        accesobd.ejecutar(query);
+        accesobd.desconectar();
     }
 
     @Override
     public void publicar(PublicacionEnlace link) {
+        String query="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
+                        "values("+link.getId() +","+link.getLikes() +","+link.getDislikes()+","+link.getContenido()+",enlace);";
 
+        accesobd.conectar();
+        accesobd.ejecutar(query);
+        accesobd.desconectar();
     }
 }

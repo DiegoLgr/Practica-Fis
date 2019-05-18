@@ -16,7 +16,7 @@ public class ComandoPublicar implements IComando {
         switch (Tipo){
             case "Texto": publicacion.publicar(new PublicacionTexto(ID,0,0, Contenido)); break;
             case "Enlace": publicacion.publicar(new PublicacionEnlace(ID,0,0, Contenido)); break;
-            case "Referencia": publicacion.publicar(new PublicacionReferencia()); break;
+            //case "Referencia": publicacion.publicar(new PublicacionReferencia()); break;
             default: publicacion.publicar(new PublicacionTexto(ID,0,0, Contenido)); break;
         }
 

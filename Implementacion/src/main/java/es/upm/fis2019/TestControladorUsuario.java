@@ -15,6 +15,6 @@ public class TestControladorUsuario {
         sesion.setUsuario(new Usuario("Usiario", "Prueba@usuario.com", "123"));
         ControladorUsuario controladorUsuario = new ControladorUsuario(sesion);
         controladorUsuario.publicar("nada", "Texto");
-    }
+    }*/
 }
 }
