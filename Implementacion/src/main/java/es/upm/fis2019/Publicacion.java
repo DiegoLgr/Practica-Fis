@@ -1,6 +1,6 @@
 package es.upm.fis2019;
 
-public abstract class Publicacion implements IPublicacion,ILikeable {
+public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable {
     // TODO: Poner las fechas de alguna manera que funcionen
     private String id;
     private int likes;
@@ -53,6 +53,11 @@ public abstract class Publicacion implements IPublicacion,ILikeable {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    @Override
+    public void Borrar(){
+
     }
 
     public String toString(){

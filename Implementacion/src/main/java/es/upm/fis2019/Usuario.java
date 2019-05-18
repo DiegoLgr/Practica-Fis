@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class Usuario implements IUsuario, IRecuperador {
+public class Usuario implements IUsuario, IRecuperador, IPublicador {
     private String alias;
     private String correo;
     private String contraseña;
@@ -80,4 +80,13 @@ public class Usuario implements IUsuario, IRecuperador {
         return result;
     }
 
+    @Override
+    public void publicar(PublicacionTexto texto) {
+
+    }
+
+    @Override
+    public void publicar(PublicacionEnlace link) {
+
+    }
 }

@@ -2,10 +2,14 @@ package es.upm.fis2019;
 
 public class PublicacionTexto extends Publicacion{
    private String contenido;
-    public PublicacionTexto(String id, int likes, int dislikes, String contenido) {
+
+    //Constructor sin fecha para cuando se carga por primera vez
+   public PublicacionTexto(String id, int likes, int dislikes, String contenido) {
         super(id, likes, dislikes);
         this.contenido = contenido;
     }
+
+    //Constructor con fecha para cuando se carga desde bd
     public PublicacionTexto(String id, int likes, int dislikes,String fecha, String contenido) {
         super(id, likes, dislikes);
         this.contenido = contenido;
@@ -13,11 +17,10 @@ public class PublicacionTexto extends Publicacion{
     }
 
 
-
     public String getContenido() {
        // String respresentaciónContenido = this.contenido + "    Likes: " +this.likes + "     Dislikes: " + this.dislikes;
-        return null;
-    }
+        return contenido;
+   }
 
     @Override
     public Comentario[] consultarComentarios() {
