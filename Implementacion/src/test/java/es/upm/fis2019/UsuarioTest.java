@@ -31,7 +31,7 @@ public class UsuarioTest {
     @Test
     public void getPublicacionesUsuario() {
         IComando com=new ComandoGetPublicacionesUsuario(new Usuario("a","fgag","asgasg"));
-
         com.ejecutar();
     }
+
 }

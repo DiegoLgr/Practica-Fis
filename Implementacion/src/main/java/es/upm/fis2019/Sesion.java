@@ -1,21 +1,23 @@
 package es.upm.fis2019;
 
 public class Sesion {
-    private IUsuario usuario;
+    private Usuario usuario;
     private static Sesion sesion;
 
-    public Sesion(IUsuario user){
+    public Sesion(Usuario user){
         usuario = user;
     }
 
     public static Sesion getInstance(){
+        if (sesion==null)
+            sesion=new Sesion(new Usuario("a","a","a"));
         return sesion;
     }
 
     public void setUsuario(Usuario usuario){
         this.usuario = usuario;
     }
-    public IUsuario getUsuario(){
+    public Usuario getUsuario(){
         return this.usuario;
     }
 }
