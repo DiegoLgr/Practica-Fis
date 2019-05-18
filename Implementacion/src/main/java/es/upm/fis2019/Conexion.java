@@ -14,6 +14,7 @@ public class Conexion implements IEjecutador {
 	private Conexion(){
 		url="jdbc:sqlite:BDEspacioUpm.db";
 	}
+
 	//Singleton
 	public static Conexion getInstance(){
 		if(conexion==null)
@@ -39,6 +40,7 @@ public class Conexion implements IEjecutador {
 	public Boolean desconectar(){
 		try {
 			c.close();
+			System.out.println("Desconectado");
 			return  true;
 		}catch (SQLException e){
 			System.err.println(e.getMessage());

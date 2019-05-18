@@ -6,11 +6,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ConexionTest {
-    Conexion c;
+public class UsuarioTest {
+
     @Before
     public void setUp() throws Exception {
-        c=Conexion.getInstance();
     }
 
     @After
@@ -18,23 +17,21 @@ public class ConexionTest {
     }
 
     @Test
-    public void conectar() {
+    public void getAlias() {
     }
 
     @Test
-    public void desconectar() {
+    public void getCorreo() {
     }
 
     @Test
-    public void ejecutar() {
+    public void getPublicacionesTimeline() {
     }
 
     @Test
-    public void ejecutarQuery() {
-        c.conectar();
+    public void getPublicacionesUsuario() {
+        IComando com=new ComandoGetPublicacionesUsuario(new Usuario("a","fgag","asgasg"));
 
-
-
-        c.desconectar();
+        com.ejecutar();
     }
 }

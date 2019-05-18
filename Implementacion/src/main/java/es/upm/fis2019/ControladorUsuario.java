@@ -1,4 +1,7 @@
 package es.upm.fis2019;
+
+import java.util.List;
+
 public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublica, IPidePublicacion {
     Sesion sesion;
     private int idpublicacion = 0;
@@ -25,13 +28,13 @@ public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublic
 	    return null;
 	};
 
-	public Publicacion[] getPublicacionesPropias(){
+	public List<IPublicacion> getPublicacionesPropias(){
 		ComandoGetPublicacionesUsuario comandoGetPublicacionesUsuario = new ComandoGetPublicacionesUsuario(this.sesion.getUsuario());
 		comandoGetPublicacionesUsuario.ejecutar();
 		return comandoGetPublicacionesUsuario.getPublicaciones();
 	};
 
-	public Publicacion[] getPublicacionesUsuario(){
+	public List<Publicacion> getPublicacionesUsuario(){
 	    return null;
 	};
 }

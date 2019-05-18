@@ -2,8 +2,8 @@ package es.upm.fis2019;
 
 public class App {
 	public static void main(String[] args) {
-		//lanzarApp();
-		runTests();
+		lanzarApp();
+		//runTests();
 	}
 	private static void lanzarApp(){
 		Sesion sesion = new Sesion(new Usuario("a","a","a"));
