@@ -84,22 +84,30 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
     @Override
     public void publicar(PublicacionTexto texto) {
         accesobd=Conexion.getInstance();
-        String query="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
+        String query1="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
                 "values("+"\""+texto.getId() +"\",\""+texto.getLikes() +"\",\""+texto.getDislikes()+"\",\""+texto.getContenido()+"\",\"texto\");";
 
+        String query2= "INSERT INTO publica\n" +
+                        "VALUES (\""+this.alias+"\",\""+texto.getId()+"\");";
+
         accesobd.conectar();
-        accesobd.ejecutar(query);
+        accesobd.ejecutar(query1);
+        accesobd.ejecutar(query2);
         accesobd.desconectar();
     }
 
     @Override
     public void publicar(PublicacionEnlace link) {
         accesobd=Conexion.getInstance();
-        String query="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
+        String query1="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
                 "values("+"\""+link.getId() +"\",\""+link.getLikes() +"\",\""+link.getDislikes()+"\",\""+link.getContenido()+"\",\"enlace\");";
 
+        String query2= "INSERT INTO publica\n" +
+                "VALUES (\""+this.alias+"\",\""+link.getId()+"\");";
+
         accesobd.conectar();
-        accesobd.ejecutar(query);
+        accesobd.ejecutar(query1);
+        accesobd.ejecutar(query2);
         accesobd.desconectar();
     }
 }
