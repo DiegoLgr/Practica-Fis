@@ -1,2 +1,17 @@
+<<<<<<< HEAD
+
+Implementacion/\.idea/
+
+*.iml
+
+*.class
+=======
 
 \.idea/
+
+*.class
+>>>>>>> Fran
+
+Implementacion/out/production/main/META-INF/main\.kotlin_module~Diego
+
+Implementacion/out/production/main/META-INF/main\.kotlin_module~HEAD
