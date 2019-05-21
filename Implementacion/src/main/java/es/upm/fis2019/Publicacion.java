@@ -54,20 +54,32 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
         try {
             while (rs.next()){
 
+
                 String idComentario = rs.getString(1);
                 String texto = rs.getString(2);
                 String fecha = rs.getString(3);
                 String respuesta = rs.getString(4);
                 String autor = rs.getString(5);
 
+                if(!ExisteComentarioEnLista(idComentario))
+                    comentarios.add(new Comentario(idComentario,texto,fecha,respuesta,autor));
+/*
                 if(!this.comentarios.contains(new Comentario(idComentario,texto,fecha,respuesta,autor))){
                     comentarios.add(new Comentario(idComentario,texto,fecha,respuesta,autor));
                 }
-
+*/
             }
         }catch (SQLException e){
             System.err.println(e.getMessage());
         }
+    }
+
+    private boolean ExisteComentarioEnLista(String id){
+        boolean existe = false;
+        for(IComentario comentario: this.comentarios){
+            if(comentario.getId() == id) existe = true;
+        }
+        return existe;
     }
     @Override
     public int getLikes() {
