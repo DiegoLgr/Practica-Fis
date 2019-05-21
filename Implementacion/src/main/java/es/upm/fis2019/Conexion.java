@@ -40,6 +40,7 @@ public class Conexion implements IEjecutador {
 	public Boolean desconectar(){
 		try {
 			c.close();
+			System.out.println("Desconectado");
 			return  true;
 		}catch (SQLException e){
 			System.err.println(e.getMessage());

@@ -4,6 +4,8 @@ public class ControladorPublicaciones implements IComenta, IBorraPublicacion, IL
 		return true;
 	};
 	public Boolean borrarPublicacion(Publicacion publicacion){
+
+
 		return true;
 	};
 	public Boolean likear(Publicacion publicacion){
