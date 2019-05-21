@@ -34,4 +34,9 @@ public class UsuarioTest {
         com.ejecutar();
     }
 
+    @Test
+    public void Publicar() {
+        IComando com = new ComandoPublicar("Esta es de prueba","x","Enlace");
+        com.ejecutar();
+    }
 }

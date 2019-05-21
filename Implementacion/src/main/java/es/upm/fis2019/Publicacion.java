@@ -1,5 +1,9 @@
 package es.upm.fis2019;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +13,15 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     private int dislikes;
     private String fecha;
     private List<IComentario> comentarios;
+    private List<IUsuario> UsuariosLikes, UsuariosDislike;
     private IEjecutador accesobd;
 
     public Publicacion(String id, int likes, int dislikes) {
         this.id = id;
         this.likes = likes;
         this.dislikes = dislikes;
+        UsuariosLikes = new ArrayList<>();
+        UsuariosDislike = new ArrayList<>();
         this.fecha="";
         this.comentarios=new ArrayList<IComentario>();
         this.accesobd=Conexion.getInstance();
@@ -25,11 +32,55 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
         return id;
     }
 
+    //@Override
+    public void AniadirComentario(Comentario comentario){
+                                                                                         //Realizar el método
+    }
+
     @Override
     public List<IComentario> getComentarios() {
+        String query = "SELECT c_id, texto, fecha, respuesta, u_id\n" +
+                "FROM comenta INNER JOIN comentario ON comentario.id = comenta.c_id\n" +
+                "WHERE p_id = \""+this.id+"\";";
+
+        accesobd.conectar();
+        ResultSet a = accesobd.ejecutarQuery(query);
+        ObtenerListaDeComentarios(a); //Aquí trabajamos con los datos obtenidos
+        accesobd.desconectar();
         return comentarios;
     }
 
+    private void ObtenerListaDeComentarios(ResultSet rs){
+        try {
+            while (rs.next()){
+
+
+                String idComentario = rs.getString(1);
+                String texto = rs.getString(2);
+                String fecha = rs.getString(3);
+                String respuesta = rs.getString(4);
+                String autor = rs.getString(5);
+
+                if(!ExisteComentarioEnLista(idComentario))
+                    comentarios.add(new Comentario(idComentario,texto,fecha,respuesta,autor));
+/*
+                if(!this.comentarios.contains(new Comentario(idComentario,texto,fecha,respuesta,autor))){
+                    comentarios.add(new Comentario(idComentario,texto,fecha,respuesta,autor));
+                }
+*/
+            }
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private boolean ExisteComentarioEnLista(String id){
+        boolean existe = false;
+        for(IComentario comentario: this.comentarios){
+            if(comentario.getId() == id) existe = true;
+        }
+        return existe;
+    }
     @Override
     public int getLikes() {
         return likes;
@@ -54,13 +105,35 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     @Override
     public void Likear(IUsuario user) {
         this.likes++;
-        //Añadir el usuario a una lista de usuarios que han dado like
+        UsuariosLikes.add(user); //Se aniade el usuario que ha dado like a una lista de usuarios que dan like
+
+        String query = "UPDATE publicacion\n" +
+                        "SET likes = 1 + (\n" +
+                                "SELECT likes\n" +
+                                "FROM publicacion\n"+
+                                "WHERE id = \"" + this.id + "\"" +
+                        ")\n" +
+                        "WHERE id = \"" + this.id + "\";";
+        accesobd.conectar();
+        accesobd.ejecutar(query);
+        accesobd.desconectar();
     }
 
     @Override
     public void Dislikear(IUsuario user) {
         this.dislikes++;
-        //Añadir el usuario a una lista de usuarios que han dado dislike
+        UsuariosDislike.add(user);//Añadir el usuario a una lista de usuarios que han dado dislike
+
+        String query = "UPDATE publicacion\n" +
+                "SET dislikes = 1 + (\n" +
+                    "SELECT dislikes\n" +
+                    "FROM publicacion\n"+
+                    "WHERE id = \"" + this.id + "\"" +
+                ")\n" +
+                "WHERE id = \"" + this.id + "\";";
+        accesobd.conectar();
+        accesobd.ejecutar(query);
+        accesobd.desconectar();
     }
 
     @Override
@@ -70,6 +143,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
 
     @Override
     public void Comentar(String id,String txt){
+
         //Alias del usuario que hace el comentario
         String aux=Sesion.getInstance().getUsuario().getAlias();
         //Insercion en tablas comentario y comenta
@@ -91,9 +165,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     }
 
     public static void main(String[] args) {
-        Publicacion a=new PublicacionEnlace("a",3,4,"asd");
-        a.Comentar("c","askjvljylvgg");
-       System.out.println(a.getComentarios().toString());
+
     }
 
 }

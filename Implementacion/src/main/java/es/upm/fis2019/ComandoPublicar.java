@@ -12,7 +12,7 @@ public class ComandoPublicar implements IComando {
 
     @Override
     public void ejecutar() {
-        IPublicador publicacion = new Usuario("","",""); //Insertar usuario correctamente
+        IPublicador publicacion = Sesion.getInstance().getUsuario();
         switch (Tipo){
             case "Texto": publicacion.publicar(new PublicacionTexto(ID,0,0, Contenido)); break;
             case "Enlace": publicacion.publicar(new PublicacionEnlace(ID,0,0, Contenido)); break;
