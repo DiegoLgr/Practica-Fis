@@ -2,11 +2,11 @@ package es.upm.fis2019;
 
 public class App {
 	public static void main(String[] args) {
-		//lanzarApp();
-		runTests();
+		lanzarApp();
+		//runTests();
 	}
 	private static void lanzarApp(){
-		Sesion sesion = new Sesion();
+		Sesion sesion = new Sesion(new Usuario("a","a","a"));
 		sesion.setUsuario(new Usuario("usuarioPrueba", "prueba@upm.com", "123")); // Esto hace lo que debieria hacer el login.
 
 		ControladorGestorUsuarios controladorGestorUsuarios = new ControladorGestorUsuarios();
@@ -23,12 +23,14 @@ public class App {
 		TestPublicacion.testGetDislikes();
 
 		System.out.println("~~~ Comentario ~~~");
+	/*
 		TestComentario.testGetFecha();
 		TestComentario.testGetId();
 		TestComentario.testGetText();
 		TestComentario.testGetRespuesta();
-
+	 */
 		System.out.println("~~~ ControladorUsuario ~~~");
-		TestControladorUsuario.testGetPublicacionesPropias();
+		//TestControladorUsuario.testGetPublicacionesPropias();
+		//TestControladorUsuario.TestPublicar();
 	}
 }

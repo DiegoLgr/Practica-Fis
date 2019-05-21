@@ -1,7 +1,6 @@
 package es.upm.fis2019;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class ManagerGui {
     private ControladorGestorUsuarios controladorGestorUsuarios;
@@ -13,19 +12,23 @@ public class ManagerGui {
     }
 
     public void run(){
-        JFrame frame = new JFrame("Demo application");
-        frame.setSize(600, 250);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        PublicacionesUsuarioView vistaPublicacionesPropias = new PublicacionesUsuarioView(this.controladorUsuario, new PublicationView());
+        LoginView framel=new LoginView(controladorUsuario, vistaPublicacionesPropias);
 
-        JPanel panel = new JPanel();
-        frame.add(panel);
 
-        frame.setVisible(true);
+//        JFrame frame = new JFrame("Demo application");
+//        frame.setSize(600, 250);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        JPanel panel = new JPanel();
+//        frame.add(panel);
+//
+//        frame.setVisible(true);
+//
+//        PublicacionesUsuarioView vistaPublicacionesPropias = new PublicacionesUsuarioView(this.controladorUsuario, panel);
+//        LoginView login = new LoginView(this.controladorUsuario, vistaPublicacionesPropias);
 
-        PublicacionesUsuarioView vistaPublicacionesPropias = new PublicacionesUsuarioView(this.controladorUsuario, panel);
-        LoginView login = new LoginView(this.controladorUsuario, vistaPublicacionesPropias, panel, frame);
-
-        login.displayLogin();
+//        login.displayLogin();
     }
 }
 
