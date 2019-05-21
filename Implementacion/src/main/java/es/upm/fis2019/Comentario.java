@@ -25,6 +25,7 @@ public class Comentario implements IComentario{
     public String getId() {
         return id;
     }
+    //Vox
 
     @Override
     public String getTexto() {
