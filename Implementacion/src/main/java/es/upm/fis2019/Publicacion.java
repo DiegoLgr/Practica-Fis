@@ -96,7 +96,11 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
 
     @Override
     public void Borrar(){
+        String query="delete from publicacion where id = '"+this.id+"';"  ;
 
+        accesobd.conectar();
+        accesobd.ejecutar(query);
+        accesobd.desconectar();
     }
 
     @Override
