@@ -7,7 +7,7 @@ public class ComandoDislikearPublicacion implements IComando {
     public void ejecutar() {
 
         ILikeable dislikear = this.publicacion;
-        dislikear.Dislikear(new Usuario("aa","aa","aa"));//hay que poner el singletone
+        dislikear.Dislikear(Sesion.getInstance().getUsuario());
 
     }
 }

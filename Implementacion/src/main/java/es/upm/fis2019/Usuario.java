@@ -8,7 +8,7 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
     private String alias;
     private String correo;
     private String contraseña;
-    private IEjecutador bd;
+    private IEjecutador accesobd;
     private List<IPublicacion> publicaciones;
 
     public Usuario(String alias, String correo, String contraseña) {
@@ -16,6 +16,7 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
         this.correo = correo;
         this.contraseña = contraseña;
         publicaciones=new ArrayList<IPublicacion>();
+
     }
 
     @Override
@@ -63,30 +64,51 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
                System.err.println(e.getMessage());
            }
 
-        bd.desconectar();
+        accesobd.desconectar();
         return publicaciones;
 
     }
 
     //Metodo para obtener el resultSet de la BD
     private ResultSet getPublicacionesUsuarioBd(){
-        bd=Conexion.getInstance();
+        accesobd=Conexion.getInstance();
 
         String url="select p_id,likes,dislikes,fecha,contenido,tipo " +
                 "from publica inner join publicacion on publicacion.id=publica.p_id " +
                 "where u_id="+"\""+this.alias+"\"";
-        bd.conectar();
-        ResultSet result= bd.ejecutarQuery(url);
+        accesobd.conectar();
+        ResultSet result= accesobd.ejecutarQuery(url);
+        accesobd.desconectar();
         return result;
     }
 
     @Override
     public void publicar(PublicacionTexto texto) {
+        accesobd=Conexion.getInstance();
+        String query1="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
+                "values("+"\""+texto.getId() +"\",\""+texto.getLikes() +"\",\""+texto.getDislikes()+"\",\""+texto.getContenido()+"\",\"texto\");";
 
+        String query2= "INSERT INTO publica\n" +
+                        "VALUES (\""+this.alias+"\",\""+texto.getId()+"\");";
+
+        accesobd.conectar();
+        accesobd.ejecutar(query1);
+        accesobd.ejecutar(query2);
+        accesobd.desconectar();
     }
 
     @Override
     public void publicar(PublicacionEnlace link) {
+        accesobd=Conexion.getInstance();
+        String query1="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
+                "values("+"\""+link.getId() +"\",\""+link.getLikes() +"\",\""+link.getDislikes()+"\",\""+link.getContenido()+"\",\"enlace\");";
 
+        String query2= "INSERT INTO publica\n" +
+                "VALUES (\""+this.alias+"\",\""+link.getId()+"\");";
+
+        accesobd.conectar();
+        accesobd.ejecutar(query1);
+        accesobd.ejecutar(query2);
+        accesobd.desconectar();
     }
 }
