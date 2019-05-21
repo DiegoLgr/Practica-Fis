@@ -8,6 +8,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     private int likes;
     private int dislikes;
     private String fecha;
+    private Contenido c;
     private List<IComentario> comentarios;
     private List<IUsuario> UsuariosLikes, UsuariosDislike;
     private IEjecutador accesobd;
@@ -36,7 +37,6 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     @Override
     public List<IComentario> getComentarios() {
         return comentarios;
-        
     }
 
     @Override
