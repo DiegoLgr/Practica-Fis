@@ -32,7 +32,7 @@ public class LoginView extends JFrame implements ActionListener{
         setLocationAndSize();
         addComponentToContainer();
         addActionEvent();
-
+        setView();
     }
 
     public String getTitle(){
@@ -70,6 +70,15 @@ public class LoginView extends JFrame implements ActionListener{
         cancelButton.addActionListener(this);
         showPassword.addActionListener(this);
     }
+
+    private void setView(){
+        setTitle(getTitle());
+        setVisible(true);
+        setBounds(10,10,370,500);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == loginButton) {
@@ -86,6 +95,7 @@ public class LoginView extends JFrame implements ActionListener{
             if (userText.equalsIgnoreCase("a") && pwdText.equalsIgnoreCase("a")) {
                 JOptionPane.showMessageDialog(this, "Login Successful");
                 this.publicacionesUsuarioView.displayPublicacionesPropias();
+                setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }

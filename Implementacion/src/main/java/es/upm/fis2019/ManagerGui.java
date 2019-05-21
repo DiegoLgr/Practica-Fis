@@ -12,13 +12,8 @@ public class ManagerGui {
     }
 
     public void run(){
-        PublicacionesUsuarioView vistaPublicacionesPropias = new PublicacionesUsuarioView(this.controladorUsuario);
+        PublicacionesUsuarioView vistaPublicacionesPropias = new PublicacionesUsuarioView(this.controladorUsuario, new PublicationView());
         LoginView framel=new LoginView(controladorUsuario, vistaPublicacionesPropias);
-        framel.setTitle(framel.getTitle());
-        framel.setVisible(true);
-        framel.setBounds(10,10,370,600);
-        framel.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        framel.setResizable(false);
 
 
 //        JFrame frame = new JFrame("Demo application");
