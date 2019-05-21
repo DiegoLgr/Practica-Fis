@@ -3,6 +3,7 @@ public class ComandoBuscarUsuario implements IComando {
     IUsuario usuario;
     String id;
     public ComandoBuscarUsuario(String id ) {
+         this.id=id;
 
     }
 

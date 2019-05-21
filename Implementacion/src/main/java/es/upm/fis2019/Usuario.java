@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable {
+public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable, IVerificable{
     private String alias;
     private String correo;
     private String contraseña;
@@ -110,5 +110,20 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable {
         accesobd.ejecutar(query1);
         accesobd.ejecutar(query2);
         accesobd.desconectar();
+    }
+
+    @Override
+    public void CambiarAlias(String alias) {
+        System.out.println("LOCO FUNCIONA");
+    }
+
+    @Override
+    public void RestaurarContrasena() {
+
+    }
+
+    @Override
+    public void VerificarCredenciales(String credencial, String pssw) {
+
     }
 }
