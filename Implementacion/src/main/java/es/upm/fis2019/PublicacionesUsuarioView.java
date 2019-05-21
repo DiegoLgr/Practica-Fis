@@ -25,6 +25,7 @@ public class PublicacionesUsuarioView extends JFrame {
         //this.getContentPane().add(publicationView);
         addButtons();
         addPublications();
+        navegation();
         setView();
     }
 
@@ -36,6 +37,8 @@ public class PublicacionesUsuarioView extends JFrame {
             ctes.gridy=0;
             ctes.gridwidth=2;
             ctes.gridheight=1;
+            ctes.weighty = 1.0;
+            ctes.weightx = 1.0;
             this.getContentPane().add(button,ctes);
         }
     }
@@ -46,7 +49,21 @@ public class PublicacionesUsuarioView extends JFrame {
             ctes.gridy=i+1;
             ctes.gridwidth=6;
             ctes.gridheight=1;
+            ctes.weighty = 1.0;
+            ctes.fill = GridBagConstraints.BOTH;
             this.getContentPane().add(new PublicationView(), ctes);
+            reset();
+        }
+    }
+
+    private void navegation(){
+        for(int i =0; i<2; i++){
+            ctes.gridx=3*i;
+            ctes.gridy=7;
+            ctes.gridwidth=3;
+            ctes.gridheight=1;
+            this.getContentPane().add(new JButton(), ctes);
+            reset();
         }
     }
 

@@ -7,10 +7,10 @@ import java.awt.*;
 public class PublicationView extends JPanel {
 
     private String text = "Lorem ipsum dolor sit amet consectetur adipiscing elit, volutpat fames quam aliquet ac cras, curae varius vestibulum proin eleifend tempor. ";
-    private JLabel label = new JLabel("<html>"+text+"<html>");
+    private JLabel label = new JLabel("<html><h2>"+text+"<h2><html>");
     private JButton like = new JButton("LIKE");
     private JButton dislike = new JButton("DISLIKE");
-    private JButton comment = new JButton("COMMENT");
+    private JButton comment = new JButton("OPTION");
 
     private GridBagConstraints ctes = new GridBagConstraints();
 
