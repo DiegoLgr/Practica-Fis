@@ -128,6 +128,8 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     public static void main(String[] args) {
         Publicacion a=new PublicacionEnlace("a",3,4,"asd");
         a.Comentar("c","askjvljylvgg");
+        a.Borrar();
+
        System.out.println(a.getComentarios().toString());
     }
 
