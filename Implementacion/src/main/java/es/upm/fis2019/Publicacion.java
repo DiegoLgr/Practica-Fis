@@ -8,13 +8,17 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     private int likes;
     private int dislikes;
     private String fecha;
+    private Contenido c;
     private List<IComentario> comentarios;
+    private List<IUsuario> UsuariosLikes, UsuariosDislike;
     private IEjecutador accesobd;
 
     public Publicacion(String id, int likes, int dislikes) {
         this.id = id;
         this.likes = likes;
         this.dislikes = dislikes;
+        UsuariosLikes = new ArrayList<>();
+        UsuariosDislike = new ArrayList<>();
         this.fecha="";
         this.comentarios=new ArrayList<IComentario>();
         this.accesobd=Conexion.getInstance();
@@ -23,6 +27,11 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     @Override
     public String getId(){
         return id;
+    }
+
+    //@Override
+    public void AniadirComentario(Comentario comentario){
+                                                                                         //Realizar el método
     }
 
     @Override
@@ -54,13 +63,35 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     @Override
     public void Likear(IUsuario user) {
         this.likes++;
-        //Añadir el usuario a una lista de usuarios que han dado like
+        UsuariosLikes.add(user); //Se aniade el usuario que ha dado like a una lista de usuarios que dan like
+
+        String query = "UPDATE publicacion\n" +
+                        "SET likes = 1 + (\n" +
+                                "SELECT likes\n" +
+                                "FROM publicacion\n"+
+                                "WHERE id = \"" + this.id + "\"" +
+                        ")\n" +
+                        "WHERE id = \"" + this.id + "\";";
+        accesobd.conectar();
+        accesobd.ejecutar(query);
+        accesobd.desconectar();
     }
 
     @Override
     public void Dislikear(IUsuario user) {
         this.dislikes++;
-        //Añadir el usuario a una lista de usuarios que han dado dislike
+        UsuariosDislike.add(user);//Añadir el usuario a una lista de usuarios que han dado dislike
+
+        String query = "UPDATE publicacion\n" +
+                "SET dislikes = 1 + (\n" +
+                    "SELECT dislikes\n" +
+                    "FROM publicacion\n"+
+                    "WHERE id = \"" + this.id + "\"" +
+                ")\n" +
+                "WHERE id = \"" + this.id + "\";";
+        accesobd.conectar();
+        accesobd.ejecutar(query);
+        accesobd.desconectar();
     }
 
     @Override

@@ -2,6 +2,7 @@ package es.upm.fis2019;
 
 public class PublicacionEnlace extends Publicacion {
     private String contenido;
+    private IEnlace c;
 
     //Constructor sin fecha para cuando se carga por primera vez
     public PublicacionEnlace(String id, int likes, int dislikes, String contenido) {

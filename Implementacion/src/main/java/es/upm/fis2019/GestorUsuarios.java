@@ -9,7 +9,7 @@ public class GestorUsuarios implements ICreador,IBuscador{
 
     @Override
     public void Crear(String alias, String correo, String pssw){
-        String query="Insert into usuario values("+alias +","+correo +","+pssw+");"  ;
+        String query="Insert into usuario values('"+alias +"','"+correo +"','"+pssw+"');"  ;
 
         accesobd.conectar();
         accesobd.ejecutar(query);
@@ -27,6 +27,6 @@ public class GestorUsuarios implements ICreador,IBuscador{
 
     public static void main(String[] args) {
         GestorUsuarios g=new GestorUsuarios();
-        g.Crear("ca","ca","ca");
+        g.Crear("cffa","csgja","csta");
     }
 }
