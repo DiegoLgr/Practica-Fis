@@ -1,5 +1,6 @@
 package es.upm.fis2019;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.JButton;
@@ -9,16 +10,20 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.util.*;
+import java.util.List;
 
-public class PublicacionesUsuarioView {
-    IPidePublicacion gestorPublicaciones;
-    JPanel panel;
-    PublicacionesUsuarioView(IPidePublicacion gestorPublicaciones, JPanel panel){
+public class PublicacionesUsuarioView extends JFrame {
+    private IPidePublicacion gestorPublicaciones;
+    private PublicationView publicationView;
+
+    public PublicacionesUsuarioView(IPidePublicacion gestorPublicaciones, PublicationView publicationView){
         this.gestorPublicaciones = gestorPublicaciones;
-        this.panel = panel;
+        this.publicationView = publicationView;
+        setView();
     }
+
     public void displayPublicacionesPropias() {
-        this.panel.removeAll();
+        this.publicationView.removeAll();
         List<IPublicacion> publicaciones = getPublicaciones();
         /*
         for (int i=0; i<publicaciones.length; i++){
@@ -26,8 +31,17 @@ public class PublicacionesUsuarioView {
             publicacion.setBounds(10, 10+25*i, 500, 25);
             this.panel.add(publicacion);
         }*/
-        panel.updateUI();
+//        publicationView.updateUI();
     }
+
+    private void setView(){
+        setTitle(getTitle());
+        setVisible(true);
+        setBounds(10,10,700,700);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+    }
+
     private List<IPublicacion> getPublicaciones(){
         java.util.List<IPublicacion> publicaciones;
         publicaciones = this.gestorPublicaciones.getPublicacionesPropias();

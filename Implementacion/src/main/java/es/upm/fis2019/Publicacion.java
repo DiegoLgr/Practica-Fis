@@ -3,13 +3,12 @@ package es.upm.fis2019;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable {
-    // TODO: Poner las fechas de alguna manera que funcionen
+public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IComentable {
     private String id;
     private int likes;
     private int dislikes;
-    private Comentario[] comentarios;
     private String fecha;
+    private List<IComentario> comentarios;
     private List<IUsuario> UsuariosLikes, UsuariosDislike;
     private IEjecutador accesobd;
 
@@ -17,11 +16,13 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable {
         this.id = id;
         this.likes = likes;
         this.dislikes = dislikes;
-        comentarios=null;
         UsuariosLikes = new ArrayList<>();
         UsuariosDislike = new ArrayList<>();
-        accesobd = Conexion.getInstance();
+        this.fecha="";
+        this.comentarios=new ArrayList<IComentario>();
+        this.accesobd=Conexion.getInstance();
     }
+
     @Override
     public String getId(){
         return id;
@@ -33,8 +34,9 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable {
     }
 
     @Override
-    public Comentario[] consultarComentarios() {
-        return new Comentario[0];
+    public List<IComentario> getComentarios() {
+        return comentarios;
+        
     }
 
     @Override
@@ -51,6 +53,12 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable {
     public String getFecha() {
         return fecha;
     }
+
+    //Se necesita para evitar poner 2 constructores en publicacion padre
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
 
     @Override
     public void Likear(IUsuario user) {
@@ -86,17 +94,38 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable {
         accesobd.desconectar();
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
     @Override
     public void Borrar(){
 
     }
 
+    @Override
+    public void Comentar(String id,String txt){
+        //Alias del usuario que hace el comentario
+        String aux=Sesion.getInstance().getUsuario().getAlias();
+        //Insercion en tablas comentario y comenta
+        String tablaComentario="Insert into comentario(id,texto) values("+"\""+id+"\""+","+"\""+txt+"\""+");";
+        String tablaComenta="insert into comenta values(\""+this.id+"\",\""+aux+"\",\""+id+"\");";
+
+        accesobd.conectar();
+        accesobd.ejecutar(tablaComentario);
+        accesobd.ejecutar(tablaComenta);
+        accesobd.desconectar();
+
+        comentarios.add(new Comentario(id,txt));
+    }
+
+
     public String toString(){
         String aux="id:"+this.id+" likes:"+this.likes+" dislikes:"+this.dislikes+" fecha:"+this.fecha+"\n";
         return aux;
     }
+
+    public static void main(String[] args) {
+        Publicacion a=new PublicacionEnlace("a",3,4,"asd");
+        a.Comentar("c","askjvljylvgg");
+       System.out.println(a.getComentarios().toString());
+    }
+
 }
+

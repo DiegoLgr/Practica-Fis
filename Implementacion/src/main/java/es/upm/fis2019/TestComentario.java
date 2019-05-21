@@ -1,7 +1,7 @@
 package es.upm.fis2019;
 
 public class TestComentario {
-
+/*
     public static void testGetId(){
         Comentario comentario =new Comentario("1","Un comentario","12-01-05","Y una respuesta al cometario");
         IComentario comentarioVista = comentario;
@@ -28,4 +28,6 @@ public class TestComentario {
 
         System.out.println("Answer for comment should be y una respuesta al comentario: " + comentarioVista.getRespuesta());
     }
+
+ */
 }
