@@ -1,0 +1,8 @@
+
+*.xml
+
+*.class
+
+*.iml
+
+Implementacion/\.idea/
