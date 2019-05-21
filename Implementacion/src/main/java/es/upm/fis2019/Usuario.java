@@ -4,11 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class Usuario implements IUsuario, IRecuperador, IPublicador {
+public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable, IVerificable{
     private String alias;
     private String correo;
     private String contraseña;
-    private IEjecutador bd;
+    private IEjecutador accesobd;
     private List<IPublicacion> publicaciones;
 
     public Usuario(String alias, String correo, String contraseña) {
@@ -16,6 +16,7 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
         this.correo = correo;
         this.contraseña = contraseña;
         publicaciones=new ArrayList<IPublicacion>();
+
     }
 
     @Override
@@ -30,7 +31,8 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
     public List<IPublicacion> GetPublicacionesTimeline(String PrimeraFecha) {
         return null;
     }
-
+    @Override
+    public void Borrar(){}
     @Override
     public List<IPublicacion> GetPublicacionesUsuario(String PrimeraFecha) {
 
@@ -63,30 +65,65 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
                System.err.println(e.getMessage());
            }
 
-        bd.desconectar();
+        accesobd.desconectar();
         return publicaciones;
 
     }
 
     //Metodo para obtener el resultSet de la BD
     private ResultSet getPublicacionesUsuarioBd(){
-        bd=Conexion.getInstance();
+        accesobd=Conexion.getInstance();
 
         String url="select p_id,likes,dislikes,fecha,contenido,tipo " +
                 "from publica inner join publicacion on publicacion.id=publica.p_id " +
                 "where u_id="+"\""+this.alias+"\"";
-        bd.conectar();
-        ResultSet result= bd.ejecutarQuery(url);
+        accesobd.conectar();
+        ResultSet result= accesobd.ejecutarQuery(url);
         return result;
     }
 
     @Override
     public void publicar(PublicacionTexto texto) {
+        accesobd=Conexion.getInstance();
+        String query1="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
+                "values("+"\""+texto.getId() +"\",\""+texto.getLikes() +"\",\""+texto.getDislikes()+"\",\""+texto.getContenido()+"\",\"texto\");";
 
+        String query2= "INSERT INTO publica\n" +
+                        "VALUES (\""+this.alias+"\",\""+texto.getId()+"\");";
+
+        accesobd.conectar();
+        accesobd.ejecutar(query1);
+        accesobd.ejecutar(query2);
+        accesobd.desconectar();
     }
 
     @Override
     public void publicar(PublicacionEnlace link) {
+        accesobd=Conexion.getInstance();
+        String query1="Insert into publicacion(id,likes,dislikes,contenido,tipo)\n" +
+                "values("+"\""+link.getId() +"\",\""+link.getLikes() +"\",\""+link.getDislikes()+"\",\""+link.getContenido()+"\",\"enlace\");";
+
+        String query2= "INSERT INTO publica\n" +
+                "VALUES (\""+this.alias+"\",\""+link.getId()+"\");";
+
+        accesobd.conectar();
+        accesobd.ejecutar(query1);
+        accesobd.ejecutar(query2);
+        accesobd.desconectar();
+    }
+
+    @Override
+    public void CambiarAlias(String alias) {
+        System.out.println("LOCO FUNCIONA");
+    }
+
+    @Override
+    public void RestaurarContrasena() {
+
+    }
+
+    @Override
+    public void VerificarCredenciales(String credencial, String pssw) {
 
     }
 }
