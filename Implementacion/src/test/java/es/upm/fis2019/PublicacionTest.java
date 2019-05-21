@@ -32,5 +32,9 @@ public class PublicacionTest {
 
     @Test
     public void comentar() {
+        Publicacion a=new PublicacionEnlace("a",3,4,"asd");
+        IComando comando = new ComandoComentarPublicacion(a,"I am ROOT");
+        comando.ejecutar();
+        System.out.println(a.getComentarios().toString());
     }
 }
