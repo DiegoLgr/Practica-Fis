@@ -36,7 +36,7 @@ public class UsuarioTest {
 
     @Test
     public void Publicar() {
-        IComando com = new ComandoPublicar("Esta es de prueba","x","Enlace");
+        IComando com = new ComandoPublicar("Esta es du prueba","u","Enlace");
         com.ejecutar();
     }
 }

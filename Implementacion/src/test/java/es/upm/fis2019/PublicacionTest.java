@@ -14,7 +14,7 @@ public class PublicacionTest {
 
     @Test
     public void likear() {
-        ILikeable Publicacion = new PublicacionTexto("a",0,0,null);
+        ILikeable Publicacion = new PublicacionTexto("a",0,0,new Texto(""));
         Publicacion.Likear(new Usuario("f","f","f"));
 
         //Y se muestran las publicaciones
@@ -24,7 +24,7 @@ public class PublicacionTest {
 
     @Test
     public void dislikear() {
-        ILikeable Publicacion = new PublicacionTexto("b",0,0,null);
+        ILikeable Publicacion = new PublicacionTexto("b",0,0,new Texto(""));
         Publicacion.Dislikear(new Usuario("","",""));
 
         //Y se muestran las publicaciones
