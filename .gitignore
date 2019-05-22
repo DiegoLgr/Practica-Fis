@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 
-Implementacion/\.idea/
+*.xml
+
+*.class
 
 *.iml
 
-*.class
-=======
-
-\.idea/
-
-*.class
->>>>>>> Fran
+Implementacion/\.idea/
