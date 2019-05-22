@@ -78,6 +78,7 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador {
                 "where u_id="+"\""+this.alias+"\"";
         accesobd.conectar();
         ResultSet result= accesobd.ejecutarQuery(url);
+        accesobd.desconectar();
         return result;
     }
 
