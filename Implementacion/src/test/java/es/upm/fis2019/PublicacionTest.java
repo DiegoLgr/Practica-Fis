@@ -8,8 +8,8 @@ public class PublicacionTest {
 
     @Test
     public void getComentarios() {
-        Publicacion a=new PublicacionEnlace("a",3,4,"asd");
-
+        Publicacion a=new PublicacionEnlace("a",3,4,new Enlace("asd"));
+        System.out.println(a.getComentarios());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class PublicacionTest {
 
     @Test
     public void comentar() {
-        Publicacion a=new PublicacionEnlace("a",3,4,"asd");
+        Publicacion a=new PublicacionEnlace("a",3,4,new Enlace("asd"));
         IComando comando = new ComandoComentarPublicacion(a,"PaTaTa mal escrito");
         comando.ejecutar();
         System.out.println(a.getComentarios().toString());

@@ -12,7 +12,6 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     private int likes;
     private int dislikes;
     private String fecha;
-    private Contenido c;
     private List<IComentario> comentarios;
     private List<IUsuario> UsuariosLikes, UsuariosDislike;
     private IEjecutador accesobd;
@@ -160,7 +159,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
         accesobd.ejecutar(tablaComenta);
         accesobd.desconectar();
 
-        comentarios.add(new Comentario(id,txt));
+        comentarios.add(new Comentario(id,txt,Sesion.getInstance().getUsuario().getAlias()));
     }
 
 
@@ -170,7 +169,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     }
 
     public static void main(String[] args) {
-        Publicacion a=new PublicacionEnlace("a",3,4,"asd");
+        Publicacion a=new PublicacionEnlace("a",3,4,new Enlace("asd"));
         a.Comentar("c","askjvljylvgg");
         a.Borrar();
 
