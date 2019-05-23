@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.*;
+
 import static org.junit.Assert.*;
 
 public class TestUsuariosCajaNegra {
@@ -40,6 +42,11 @@ public class TestUsuariosCajaNegra {
 
     @Test
     public void getPublicacionesUsuario() {
+        List<IPublicacion> p=new ArrayList<>();
+
+        p.add(new PublicacionTexto("Gran Prix no es de ajedrez",0,0,new Texto("dddddddddd")));
+        p.add(new PublicacionEnlace("Patata Caliente",0,0,new Enlace("https://github.com/DiegoLgr/Practica-Fis/tree/master")));
+
     }
 
     @Test
