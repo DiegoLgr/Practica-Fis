@@ -1,36 +1,30 @@
-package es.upm.fis2019;
+package es.upm.fis2019.GUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PublicationView extends JPanel {
+public class ComentarioGUI extends JPanel implements ActionListener{
 
-    private String text = "Lorem ipsum dolor sit amet consectetur adipiscing elit, volutpat fames quam aliquet ac cras, curae varius vestibulum proin eleifend tempor. ";
-    private JLabel label = new JLabel("<html><h2>"+text+"<h2><html>");
-    private JButton like = new JButton("LIKE");
-    private JButton dislike = new JButton("DISLIKE");
-    private JButton comment = new JButton("OPTION");
+    private JButton answer = new JButton("RESPONDER");
+    private JLabel label;
 
     private GridBagConstraints ctes = new GridBagConstraints();
 
-    public PublicationView(){
-        //TODO Set text with constructor
+    public ComentarioGUI(String text){
+        this.label = new JLabel("<html><h4>"+text+"<h4><html>");
         addComponents();
         setVisible(true);
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     private void addComponents(){
 
         setLayout(new GridBagLayout());
         addLabel(label);
-        addButton(like,0);
-        addButton(dislike,1);
-        addButton(comment,2);
+        addButton(answer);
+        addActionEvent();
         setBorder(new EmptyBorder(5,5,5,5));
     }
 
@@ -46,9 +40,9 @@ public class PublicationView extends JPanel {
         reset();
     }
 
-    private void addButton(JButton button, int i){
+    private void addButton(JButton button){
         ctes.gridx = 2;
-        ctes.gridy = i;
+        ctes.gridy = 1;
         ctes.gridwidth = 1;
         ctes.gridheight = 1;
         ctes.weighty = 1.0;
@@ -62,4 +56,16 @@ public class PublicationView extends JPanel {
         ctes.weighty = 0.0;
     }
 
+    private void addActionEvent()
+    {
+        answer.addActionListener(this);
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==answer){
+            WriteGUI writeGUI = new WriteGUI();
+        }
+    }
 }

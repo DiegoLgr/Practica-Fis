@@ -1,5 +1,7 @@
 package es.upm.fis2019;
 
+import es.upm.fis2019.GUI.ManagerGUI;
+
 public class App {
 	public static void main(String[] args) {
 		lanzarApp();
@@ -14,7 +16,7 @@ public class App {
 		ControladorComentario controladorComentario = new ControladorComentario();
 		ControladorPublicaciones controladorPublicaciones = new ControladorPublicaciones();
 
-		ManagerGui gui = new ManagerGui(controladorGestorUsuarios, controladorUsuario);
+		ManagerGUI gui = new ManagerGUI(controladorGestorUsuarios, controladorUsuario);
 		gui.run();
 	}
 	private static void runTests(){
