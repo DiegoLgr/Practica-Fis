@@ -22,7 +22,7 @@ public class App {
 		TestPublicacion.testGetLikes();
 		TestPublicacion.testGetDislikes();
 
-		
+
 		System.out.println("~~~ Comentario ~~~");
 	/*
 		TestComentario.testGetFecha();
