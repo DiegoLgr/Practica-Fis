@@ -11,7 +11,7 @@ public class ComandoGetPublicacionesUsuario implements IComando {
     }
     public void ejecutar(){
         IRecuperador recuperadorPublicaciones = usuario;
-        this.publicaciones = recuperadorPublicaciones.GetPublicacionesUsuario("12/01/2019");
+        this.publicaciones = recuperadorPublicaciones.GetPublicacionesUsuario();
         System.out.println(publicaciones.toString());
     }
 

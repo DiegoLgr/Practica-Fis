@@ -37,7 +37,11 @@ public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublic
 		return true;
 	}
 	public List<IPublicacion> getPublicacionesTimeline(){
-	    return null;
+	    ComandoGetPublicacionesTimeline comandoGetPublicacionesTimeline =
+				new ComandoGetPublicacionesTimeline(sesion.getUsuario());
+	    comandoGetPublicacionesTimeline.ejecutar();
+	    return comandoGetPublicacionesTimeline.getTimeline();
+
 	}
 
 	public List<IPublicacion> getPublicacionesPropias(){

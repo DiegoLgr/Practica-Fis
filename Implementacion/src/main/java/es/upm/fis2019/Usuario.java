@@ -28,13 +28,63 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable, 
 
     //metodos que procesan el result set y crean la lista de publicaciones de el
     @Override
-    public List<IPublicacion> GetPublicacionesTimeline(String PrimeraFecha) {
-        return null;
+    public List<IPublicacion> GetPublicacionesTimeline() {
+        accesobd=Conexion.getInstance();
+        ArrayList<IPublicacion> publicaciones;
+        String query = "SELECT u_id as Usuario, p_id as Publicacion, likes, dislikes, fecha, contenido, tipo\n" +
+                "FROM\n" +
+                "\t(Select p_id, u_id\n" +
+                "\tFROM publica INNER JOIN (SELECT alias2\n" +
+                "\tFROM sigue\n" +
+                "\tWHERE alias1 = \""+this.alias+"\") ON u_id = alias2) AS pU\n" +
+                "\tINNER JOIN publicacion ON p_id = id\n" +
+                "ORDER BY fecha DESC;";
+        accesobd.conectar();
+        ResultSet result= accesobd.ejecutarQuery(query);
+        publicaciones = ObtTimeline(result);
+        accesobd.desconectar();
+        return publicaciones;
     }
+
+    private ArrayList<IPublicacion> ObtTimeline(ResultSet rs){
+        ArrayList<IPublicacion> publicaciones = new ArrayList<>();
+
+        try {
+            while (rs.next()){
+                String Autor = rs.getString(1);
+                String IdPubli = rs.getString(2);
+                String contenido = rs.getString(6);
+                int likes = rs.getInt(3);
+                int dislikes = rs.getInt(4);
+                String fecha = rs.getString(5);
+                String tipo = rs.getString(7);
+
+                switch (tipo){
+                    case ("texto"):
+                        //publicaciones.add(new PublicacionTexto());
+                        break;
+
+                    case ("enlace"):
+                        //publicaciones.add(new PublicacionEnlace());
+                        break;
+
+                    default:
+                        //publicaciones.add(new PublicacionTexto());
+                        break;
+                }
+
+            }
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
+
+        return publicaciones;
+    }
+
     @Override
     public void Borrar(){}
     @Override
-    public List<IPublicacion> GetPublicacionesUsuario(String PrimeraFecha) {
+    public List<IPublicacion> GetPublicacionesUsuario() {
 
         ResultSet rs=getPublicacionesUsuarioBd();
         // loop through the result set
