@@ -1,4 +1,6 @@
-package es.upm.fis2019;
+package es.upm.fis2019.GUI;
+import es.upm.fis2019.ControladorUsuario;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,11 +8,10 @@ import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class LoginView extends JFrame implements ActionListener{
+public class LoginGUI extends JFrame implements ActionListener{
 
     private Container container = getContentPane();
     private JLabel titleLabel=new JLabel("LOGIN");
@@ -23,11 +24,11 @@ public class LoginView extends JFrame implements ActionListener{
     private JCheckBox showPassword=new JCheckBox("Show password");
     private String title = "Login";
     private ControladorUsuario controladorUsuario;
-    private PublicacionesUsuarioView publicacionesUsuarioView;
+    private PublicacionesUsuarioGUI publicacionesUsuarioGUI;
 
-    public LoginView(ControladorUsuario controladorUsuario, PublicacionesUsuarioView publicacionesUsuarioView){
+    public LoginGUI(ControladorUsuario controladorUsuario, PublicacionesUsuarioGUI publicacionesUsuarioGUI){
         this.controladorUsuario=controladorUsuario;
-        this.publicacionesUsuarioView=publicacionesUsuarioView;
+        this.publicacionesUsuarioGUI = publicacionesUsuarioGUI;
         setLayoutManager();
         setLocationAndSize();
         addComponentToContainer();
@@ -65,7 +66,6 @@ public class LoginView extends JFrame implements ActionListener{
 
     private void addActionEvent()
     {
-        //adding Action listener to components
         loginButton.addActionListener(this);
         cancelButton.addActionListener(this);
         showPassword.addActionListener(this);
@@ -75,7 +75,7 @@ public class LoginView extends JFrame implements ActionListener{
         setTitle(getTitle());
         setVisible(true);
         setBounds(10,10,370,500);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setResizable(false);
     }
 
@@ -95,7 +95,7 @@ public class LoginView extends JFrame implements ActionListener{
             if (userText.equalsIgnoreCase("a") && pwdText.equalsIgnoreCase("a")) {
 
                 JOptionPane.showMessageDialog(this, "Login Successful");
-                this.publicacionesUsuarioView.displayPublicacionesPropias();
+                this.publicacionesUsuarioGUI.displayPublicacionesPropias();
                 setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
@@ -118,13 +118,13 @@ public class LoginView extends JFrame implements ActionListener{
     }
 }
 
-//public class LoginView {
+//public class LoginGUI {
 //    JPanel panel;
 //    JFrame frame;
 //    IAutentica usuario;
-//    PublicacionesUsuarioView vistaPublicaciones;
+//    PublicacionesUsuarioGUI vistaPublicaciones;
 //
-//    LoginView(IAutentica usuario, PublicacionesUsuarioView vistaPublicaciones, JPanel panel, JFrame frame){
+//    LoginGUI(IAutentica usuario, PublicacionesUsuarioGUI vistaPublicaciones, JPanel panel, JFrame frame){
 //        this.panel = panel;
 //        this.frame = frame;
 //        this.usuario = usuario;
@@ -157,8 +157,8 @@ public class LoginView extends JFrame implements ActionListener{
 //    private class ActionLogin implements ActionListener{
 //        JFrame frame;
 //        IAutentica usuario;
-//        PublicacionesUsuarioView vistaPublicaciones;
-//        ActionLogin(IAutentica usuario, PublicacionesUsuarioView vistaPuublicaciones){
+//        PublicacionesUsuarioGUI vistaPublicaciones;
+//        ActionLogin(IAutentica usuario, PublicacionesUsuarioGUI vistaPuublicaciones){
 //            this.usuario = usuario;
 //            this.vistaPublicaciones = vistaPuublicaciones;
 //        }

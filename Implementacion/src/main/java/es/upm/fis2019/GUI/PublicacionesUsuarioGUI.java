@@ -1,23 +1,20 @@
-package es.upm.fis2019;
+package es.upm.fis2019.GUI;
+import es.upm.fis2019.IPidePublicacion;
+import es.upm.fis2019.IPublicacion;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import java.util.*;
 import java.util.List;
 
-public class PublicacionesUsuarioView extends JFrame {
+public class PublicacionesUsuarioGUI extends JFrame {
     private IPidePublicacion gestorPublicaciones;
     private GridBagConstraints ctes = new GridBagConstraints();
 
 
-    public PublicacionesUsuarioView(IPidePublicacion gestorPublicaciones){
+    public PublicacionesUsuarioGUI(IPidePublicacion gestorPublicaciones){
         this.gestorPublicaciones = gestorPublicaciones;
         this.getContentPane().setLayout(new GridBagLayout());
         //this.getContentPane().add(publicationView);
@@ -50,7 +47,7 @@ public class PublicacionesUsuarioView extends JFrame {
             ctes.gridheight=1;
             ctes.weighty = 1.0;
             ctes.fill = GridBagConstraints.BOTH;
-            this.getContentPane().add(new PublicationView(text), ctes);
+            this.getContentPane().add(new PublicationGUI(text), ctes);
             reset();
         }
     }

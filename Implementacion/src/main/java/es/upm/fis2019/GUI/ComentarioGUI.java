@@ -1,42 +1,27 @@
-package es.upm.fis2019;
+package es.upm.fis2019.GUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class PublicationView extends JPanel {
+public class ComentarioGUI extends JPanel{
 
+    private JButton answer = new JButton("RESPONDER");
     private JLabel label;
-    private String text;
-    private JButton like = new JButton("LIKE");
-    private JButton dislike = new JButton("DISLIKE");
-    private JButton option = new JButton("OPTION");
 
     private GridBagConstraints ctes = new GridBagConstraints();
 
-    public PublicationView(){
-        label = new JLabel("<html><h2>"+this.text+"<h2><html>");
-        addLabel(label);
-        setVisible(true);
-    }
-
-    public PublicationView(String text){
-        label = new JLabel("<html><h2>"+text+"<h2><html>");
+    public ComentarioGUI(String text){
+        this.label = new JLabel("<html><h4>"+text+"<h4><html>");
         addComponents();
         setVisible(true);
-    }
-
-    public void setText(String text){
-        this.text = text;
     }
 
     private void addComponents(){
 
         setLayout(new GridBagLayout());
         addLabel(label);
-        addButton(like,0);
-        addButton(dislike,1);
-        addButton(option,2);
+        addButton(answer);
         setBorder(new EmptyBorder(5,5,5,5));
     }
 
@@ -52,9 +37,9 @@ public class PublicationView extends JPanel {
         reset();
     }
 
-    private void addButton(JButton button, int i){
+    private void addButton(JButton button){
         ctes.gridx = 2;
-        ctes.gridy = i;
+        ctes.gridy = 1;
         ctes.gridwidth = 1;
         ctes.gridheight = 1;
         ctes.weighty = 1.0;
@@ -67,5 +52,6 @@ public class PublicationView extends JPanel {
         ctes.weightx = 0.0;
         ctes.weighty = 0.0;
     }
+
 
 }
