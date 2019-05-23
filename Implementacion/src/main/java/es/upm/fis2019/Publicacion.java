@@ -1,5 +1,9 @@
 package es.upm.fis2019;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +39,48 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
 
     @Override
     public List<IComentario> getComentarios() {
+        String query = "SELECT c_id, texto, fecha, respuesta, u_id\n" +
+                "FROM comenta INNER JOIN comentario ON comentario.id = comenta.c_id\n" +
+                "WHERE p_id = \""+this.id+"\";";
+
+        accesobd.conectar();
+        ResultSet a = accesobd.ejecutarQuery(query);
+        ObtenerListaDeComentarios(a); //Aquí trabajamos con los datos obtenidos
+        accesobd.desconectar();
         return comentarios;
-        
     }
 
+    private void ObtenerListaDeComentarios(ResultSet rs){
+        try {
+            while (rs.next()){
+
+
+                String idComentario = rs.getString(1);
+                String texto = rs.getString(2);
+                String fecha = rs.getString(3);
+                String respuesta = rs.getString(4);
+                String autor = rs.getString(5);
+
+                if(!ExisteComentarioEnLista(idComentario))
+                    comentarios.add(new Comentario(idComentario,texto,fecha,respuesta,autor));
+/*
+                if(!this.comentarios.contains(new Comentario(idComentario,texto,fecha,respuesta,autor))){
+                    comentarios.add(new Comentario(idComentario,texto,fecha,respuesta,autor));
+                }
+*/
+            }
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private boolean ExisteComentarioEnLista(String id){
+        boolean existe = false;
+        for(IComentario comentario: this.comentarios){
+            if(comentario.getId() == id) existe = true;
+        }
+        return existe;
+    }
     @Override
     public int getLikes() {
         return likes;
@@ -96,11 +138,16 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
 
     @Override
     public void Borrar(){
+        String query="delete from publicacion where id = '"+this.id+"';"  ;
 
+        accesobd.conectar();
+        accesobd.ejecutar(query);
+        accesobd.desconectar();
     }
 
     @Override
     public void Comentar(String id,String txt){
+
         //Alias del usuario que hace el comentario
         String aux=Sesion.getInstance().getUsuario().getAlias();
         //Insercion en tablas comentario y comenta
@@ -112,7 +159,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
         accesobd.ejecutar(tablaComenta);
         accesobd.desconectar();
 
-        comentarios.add(new Comentario(id,txt));
+        comentarios.add(new Comentario(id,txt,Sesion.getInstance().getUsuario().getAlias()));
     }
 
 
@@ -122,8 +169,10 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     }
 
     public static void main(String[] args) {
-        Publicacion a=new PublicacionEnlace("a",3,4,"asd");
+        Publicacion a=new PublicacionEnlace("a",3,4,new Enlace("asd"));
         a.Comentar("c","askjvljylvgg");
+        a.Borrar();
+
        System.out.println(a.getComentarios().toString());
     }
 

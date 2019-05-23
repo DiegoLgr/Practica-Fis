@@ -93,6 +93,7 @@ public class LoginView extends JFrame implements ActionListener{
 //                pwd += a;
 //            }
             if (userText.equalsIgnoreCase("a") && pwdText.equalsIgnoreCase("a")) {
+
                 JOptionPane.showMessageDialog(this, "Login Successful");
                 this.publicacionesUsuarioView.displayPublicacionesPropias();
                 setVisible(false);

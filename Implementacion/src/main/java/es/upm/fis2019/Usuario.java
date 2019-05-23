@@ -79,6 +79,7 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable, 
                 "where u_id="+"\""+this.alias+"\"";
         accesobd.conectar();
         ResultSet result= accesobd.ejecutarQuery(url);
+
         return result;
     }
 

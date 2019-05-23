@@ -7,13 +7,24 @@ Implementacion/\.idea/
 *.class
 =======
 
-\.idea/
+*.xml
 
 *.class
->>>>>>> Fran
 
-Implementacion/out/production/main/META-INF/main\.kotlin_module~Diego
+*.iml
 
 Implementacion/out/production/main/META-INF/main\.kotlin_module~HEAD
 
-*.xml
+<<<<<<< HEAD
+
+Implementacion/\.idea/
+
+*.iml
+
+*.class
+=======
+Implementacion/out/production/main/META-INF/main\.kotlin_module~HEAD
+
+Implementacion/out/production/main/META-INF/
+
+*.kotlin_module
