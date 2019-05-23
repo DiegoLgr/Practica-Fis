@@ -16,8 +16,10 @@ public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublic
 	public Boolean verificar(String credencial, String passw){
 		return true;
 	}
-	public Boolean cambiarAlias(String nuevoAlias){
-		return true;
+	public void cambiarAlias(String nuevoAlias){
+		ComandoCambiarAlias cambiarAlias = new ComandoCambiarAlias(nuevoAlias);
+		cambiarAlias.ejecutar();
+
 	}
 	public void eliminarUsuario(Usuario usuario){
 
