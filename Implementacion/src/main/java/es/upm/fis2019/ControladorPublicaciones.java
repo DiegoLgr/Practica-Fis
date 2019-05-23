@@ -8,6 +8,9 @@ public class ControladorPublicaciones implements IComenta, IBorraPublicacion, IL
 	}
 	public Boolean borrarPublicacion(Publicacion publicacion){
 
+		ComandoBorrarPublicacion borrarPublicacion = new ComandoBorrarPublicacion(publicacion);
+
+		borrarPublicacion.ejecutar();
 
 		return true;
 	};
