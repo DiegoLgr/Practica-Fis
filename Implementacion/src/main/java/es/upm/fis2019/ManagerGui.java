@@ -12,8 +12,8 @@ public class ManagerGui {
     }
 
     public void run(){
-        PublicacionesUsuarioView vistaPublicacionesPropias = new PublicacionesUsuarioView(this.controladorUsuario, new PublicationView());
-        LoginView framel=new LoginView(controladorUsuario, vistaPublicacionesPropias);
+        PublicacionesUsuarioView vistaPublicacionesPropias = new PublicacionesUsuarioView(this.controladorUsuario);
+        LoginView login =new LoginView(controladorUsuario, vistaPublicacionesPropias);
 
 
 //        JFrame frame = new JFrame("Demo application");

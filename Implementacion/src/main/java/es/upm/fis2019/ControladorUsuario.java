@@ -1,10 +1,13 @@
 package es.upm.fis2019;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublica, IPidePublicacion {
     private Sesion sesion;
-    private int idpublicacion = 0;
 
 	public ControladorUsuario(Sesion sesion){
 		this.sesion = Sesion.getInstance();
@@ -16,12 +19,20 @@ public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublic
 	public Boolean cambiarAlias(String nuevoAlias){
 		return true;
 	}
-	public Boolean eliminarUsuario(){
-		return true;
+	public void eliminarUsuario(Usuario usuario){
+
+		ComandoBorrarUsuario borraru= new ComandoBorrarUsuario(usuario);
+
+		borraru.ejecutar();
 	}
 	public Boolean publicar(String Contenido, String Tipo){
-		idpublicacion++;
-		ComandoPublicar comandoPublicar = new ComandoPublicar(Contenido, Integer.toString(idpublicacion), Tipo);
+
+		String pattern = "MM/dd/yyyy HH:mm:ss";
+		DateFormat df = new SimpleDateFormat(pattern);
+		Date today = Calendar.getInstance().getTime();
+		String todayAsString = df.format(today);
+
+		ComandoPublicar comandoPublicar = new ComandoPublicar(Contenido, todayAsString, Tipo);
 		comandoPublicar.ejecutar();
 		return true;
 	}
