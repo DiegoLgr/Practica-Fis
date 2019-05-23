@@ -1,7 +1,7 @@
 package es.upm.fis2019;
 public class ComandoLikearPublicacion implements IComando {
-    Publicacion publicacion;
-    public ComandoLikearPublicacion(Publicacion publicacion) {
+    ILikeable publicacion;
+    public ComandoLikearPublicacion(ILikeable publicacion) {
         this.publicacion = publicacion;
     }
 

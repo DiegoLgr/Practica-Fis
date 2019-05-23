@@ -14,13 +14,11 @@ import java.util.List;
 
 public class PublicacionesUsuarioView extends JFrame {
     private IPidePublicacion gestorPublicaciones;
-    private PublicationView publicationView;
     private GridBagConstraints ctes = new GridBagConstraints();
 
 
-    public PublicacionesUsuarioView(IPidePublicacion gestorPublicaciones, PublicationView publicationView){
+    public PublicacionesUsuarioView(IPidePublicacion gestorPublicaciones){
         this.gestorPublicaciones = gestorPublicaciones;
-        this.publicationView = publicationView;
         this.getContentPane().setLayout(new GridBagLayout());
         //this.getContentPane().add(publicationView);
         addButtons();
@@ -44,6 +42,7 @@ public class PublicacionesUsuarioView extends JFrame {
     }
 
     private void addPublications(){
+        String text = "Lorem ipsum dolor sit amet consectetur adipiscing elit, volutpat fames quam aliquet ac cras, curae varius vestibulum proin eleifend tempor. ";
         for(int i=0; i<5; i++){
             ctes.gridx=0;
             ctes.gridy=i+1;
@@ -51,7 +50,7 @@ public class PublicacionesUsuarioView extends JFrame {
             ctes.gridheight=1;
             ctes.weighty = 1.0;
             ctes.fill = GridBagConstraints.BOTH;
-            this.getContentPane().add(new PublicationView(), ctes);
+            this.getContentPane().add(new PublicationView(text), ctes);
             reset();
         }
     }
@@ -68,7 +67,6 @@ public class PublicacionesUsuarioView extends JFrame {
     }
 
     public void displayPublicacionesPropias() {
-        this.publicationView.removeAll();
         List<IPublicacion> publicaciones = getPublicaciones();
         /*
         for (int i=0; i<publicaciones.length; i++){

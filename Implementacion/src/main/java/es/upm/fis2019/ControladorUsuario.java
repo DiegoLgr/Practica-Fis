@@ -19,8 +19,11 @@ public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublic
 	public Boolean cambiarAlias(String nuevoAlias){
 		return true;
 	}
-	public Boolean eliminarUsuario(){
-		return true;
+	public void eliminarUsuario(Usuario usuario){
+
+		ComandoBorrarUsuario borraru= new ComandoBorrarUsuario(usuario);
+
+		borraru.ejecutar();
 	}
 	public Boolean publicar(String Contenido, String Tipo){
 
