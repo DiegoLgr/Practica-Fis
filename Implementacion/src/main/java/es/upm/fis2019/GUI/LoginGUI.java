@@ -95,8 +95,9 @@ public class LoginGUI extends JFrame implements ActionListener{
             if (userText.equalsIgnoreCase("a") && pwdText.equalsIgnoreCase("a")) {
 
                 JOptionPane.showMessageDialog(this, "Login Successful");
-                this.publicacionesUsuarioGUI.displayPublicacionesPropias();
-                setVisible(false);
+                //this.publicacionesUsuarioGUI.displayPublicacionesPropias();
+                //TODO Verificar el user, iniciar sesion, buscar publicaciones del usuario
+                this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
@@ -117,62 +118,3 @@ public class LoginGUI extends JFrame implements ActionListener{
         }
     }
 }
-
-//public class LoginGUI {
-//    JPanel panel;
-//    JFrame frame;
-//    IAutentica usuario;
-//    PublicacionesUsuarioGUI vistaPublicaciones;
-//
-//    LoginGUI(IAutentica usuario, PublicacionesUsuarioGUI vistaPublicaciones, JPanel panel, JFrame frame){
-//        this.panel = panel;
-//        this.frame = frame;
-//        this.usuario = usuario;
-//        this.vistaPublicaciones = vistaPublicaciones;
-//    }
-//    public void displayLogin() {
-//        panel.setLayout(null);
-//
-//        JLabel userLabel = new JLabel("User");
-//        userLabel.setBounds(10, 10, 80, 25);
-//        this.panel.add(userLabel);
-//
-//        JTextField userText = new JTextField(20);
-//        userText.setBounds(100, 10, 160, 25);
-//        this.panel.add(userText);
-//
-//        JLabel passwordLabel = new JLabel("Password");
-//        passwordLabel.setBounds(10, 40, 80, 25);
-//        this.panel.add(passwordLabel);
-//
-//        JPasswordField passwordText = new JPasswordField(20);
-//        passwordText.setBounds(100, 40, 160, 25);
-//        this.panel.add(passwordText);
-//        JButton loginButton = new JButton("login");
-//        loginButton.setBounds(10, 80, 80, 25);
-//        loginButton.addActionListener(new ActionLogin(usuario, vistaPublicaciones));
-//        this.panel.add(loginButton);
-//    }
-//
-//    private class ActionLogin implements ActionListener{
-//        JFrame frame;
-//        IAutentica usuario;
-//        PublicacionesUsuarioGUI vistaPublicaciones;
-//        ActionLogin(IAutentica usuario, PublicacionesUsuarioGUI vistaPuublicaciones){
-//            this.usuario = usuario;
-//            this.vistaPublicaciones = vistaPuublicaciones;
-//        }
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            if(this.usuario.verificar("yo", "123")){
-//                this.vistaPublicaciones.displayPublicacionesPropias();
-//            }else{
-//                JDialog d = new JDialog(frame, "Contraseña o nombre de usuario incoreecto", true);
-//                d.setLocationRelativeTo(frame);
-//                d.setVisible(true);
-//
-//            }
-//        }
-//    }
-//}
-

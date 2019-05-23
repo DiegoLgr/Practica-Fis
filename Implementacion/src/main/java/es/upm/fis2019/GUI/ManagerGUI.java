@@ -12,10 +12,10 @@ public class ManagerGUI {
         this.controladorUsuario = controladorUsuario;
     }
 
-    public void run(){
+    public void run() {
+        //TODO el constructor de PublicacionesUsuarioGUI NO va aqui, se crea en login una vez hemos establecido sesion
         PublicacionesUsuarioGUI vistaPublicacionesPropias = new PublicacionesUsuarioGUI(this.controladorUsuario);
-        LoginGUI login =new LoginGUI(controladorUsuario, vistaPublicacionesPropias);
-        WriteGUI writeGUI=new WriteGUI();
+        LoginGUI login = new LoginGUI(controladorUsuario, vistaPublicacionesPropias);
 
 
 //        JFrame frame = new JFrame("Demo application");

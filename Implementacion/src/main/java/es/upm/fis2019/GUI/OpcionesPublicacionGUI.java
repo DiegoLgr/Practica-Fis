@@ -2,8 +2,11 @@ package es.upm.fis2019.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
-public class OpcionesPublicacionGUI extends JFrame{
+public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
 
     private JButton borrar = new JButton("BORRAR");
     private JButton comentar = new JButton("COMMENT");
@@ -13,6 +16,7 @@ public class OpcionesPublicacionGUI extends JFrame{
     public OpcionesPublicacionGUI(PublicationGUI publicationGUI){
         this.text= publicationGUI.getText();
         this.getContentPane().setLayout(new GridBagLayout());
+        addActionEvent();
         addButtons();
         addPublication();
         addComments();
@@ -21,24 +25,30 @@ public class OpcionesPublicacionGUI extends JFrame{
 
     private void addButtons(){
 
-        for(int i=0;i<2;i++){
-            JButton button = new JButton("text " + i);
-            ctes.gridx=3*i;
-            ctes.gridy=0;
-            ctes.gridwidth=3;
-            ctes.gridheight=1;
-            ctes.weighty = 1.0;
-            ctes.weightx = 3.0;
-            this.getContentPane().add(button,ctes);
-            reset();
-        }
+        ctes.gridx=0;
+        ctes.gridy=0;
+        ctes.gridwidth=3;
+        ctes.gridheight=1;
+        ctes.weighty = 1.0;
+        ctes.weightx = 3.0;
+        this.getContentPane().add(borrar,ctes);
+        reset();
+
+        ctes.gridx=3;
+        ctes.gridy=0;
+        ctes.gridwidth=3;
+        ctes.gridheight=1;
+        ctes.weighty = 1.0;
+        ctes.weightx = 3.0;
+        this.getContentPane().add(comentar,ctes);
+        reset();
     }
 
     private void setView(){
         setTitle(getTitle());
         setVisible(true);
-        setBounds(720,10,500,900);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setBounds(10,10,500,900);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setResizable(true);
     }
 
@@ -74,9 +84,21 @@ public class OpcionesPublicacionGUI extends JFrame{
         ctes.weighty = 0.0;
     }
 
+    private void addActionEvent()
+    {
+        comentar.addActionListener(this);
+        borrar.addActionListener(this);
+    }
 
 
-
-
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==comentar){
+            WriteGUI writeGUI = new WriteGUI();
+        }
+        else {
+            //TODO Que borre de verdad
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+    }
 }

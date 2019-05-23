@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 public class PublicationGUI extends JPanel implements ActionListener{
 
+    //TODO añadir label likes y dislikes, commit nocturno probablemente
+
     private JLabel label;
     private String text;
     private JButton like = new JButton("LIKE");
@@ -16,9 +18,9 @@ public class PublicationGUI extends JPanel implements ActionListener{
 
     private GridBagConstraints ctes = new GridBagConstraints();
 
-    public PublicationGUI(){
-        setVisible(true);
-    }
+//    public PublicationGUI(){
+//        setVisible(true);
+//    }
 
     public PublicationGUI(String text){
         this.text=text;
@@ -86,6 +88,12 @@ public class PublicationGUI extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == option) {
             OpcionesPublicacionGUI opcionesPublicacionGUI= new OpcionesPublicacionGUI(this);
+        }
+        else if(e.getSource()==like){
+            //TODO incrementar likes
+        }
+        else{
+            //TODO incrementar dislikes
         }
     }
 }
