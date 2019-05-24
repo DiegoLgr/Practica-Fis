@@ -7,8 +7,10 @@ public class ControladorGestorUsuarios implements IRegistro, IBusca{
 	public Boolean resetearContrasena(String correo){
 		return null;
 	};
-	public IUsuario buscarUsuario(String alias){
-		return null;
-	};
+	public IUsuario buscarUsuario(String alias) {
+		ComandoBuscarUsuario comandobuscaru = new ComandoBuscarUsuario(alias);
+		comandobuscaru.ejecutar();
+		return comandobuscaru.getUsuario();
+	}
 
 }
