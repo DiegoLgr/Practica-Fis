@@ -1,18 +1,20 @@
-package es.upm.fis2019;
+package es.upm.fis2019.GUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ComentarioView extends JPanel{
+public class ComentarioGUI extends JPanel implements ActionListener{
 
     private JButton answer = new JButton("RESPONDER");
     private JLabel label;
 
     private GridBagConstraints ctes = new GridBagConstraints();
 
-    public ComentarioView(String text){
-        this.label = new JLabel("<html><h2>"+text+"<h2><html>");
+    public ComentarioGUI(String text){
+        this.label = new JLabel("<html><h4>"+text+"<h4><html>");
         addComponents();
         setVisible(true);
     }
@@ -22,6 +24,7 @@ public class ComentarioView extends JPanel{
         setLayout(new GridBagLayout());
         addLabel(label);
         addButton(answer);
+        addActionEvent();
         setBorder(new EmptyBorder(5,5,5,5));
     }
 
@@ -53,5 +56,16 @@ public class ComentarioView extends JPanel{
         ctes.weighty = 0.0;
     }
 
+    private void addActionEvent()
+    {
+        answer.addActionListener(this);
+    }
 
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==answer){
+            WriteGUI writeGUI = new WriteGUI();
+        }
+    }
 }

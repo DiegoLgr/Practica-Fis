@@ -1,33 +1,51 @@
-package es.upm.fis2019;
+package es.upm.fis2019.GUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PublicationView extends JPanel {
+public class PublicationGUI extends JPanel implements ActionListener{
+
+    //TODO añadir label likes y dislikes, commit nocturno probablemente
 
     private JLabel label;
     private String text;
     private JButton like = new JButton("LIKE");
     private JButton dislike = new JButton("DISLIKE");
     private JButton option = new JButton("OPTION");
+    private PublicacionesUsuarioGUI publicacionesUsuarioGUI;
 
     private GridBagConstraints ctes = new GridBagConstraints();
 
-    public PublicationView(){
-        label = new JLabel("<html><h2>"+this.text+"<h2><html>");
-        addLabel(label);
-        setVisible(true);
-    }
+//    public PublicationGUI(){
+//        setVisible(true);
+//    }
 
-    public PublicationView(String text){
-        label = new JLabel("<html><h2>"+text+"<h2><html>");
+    public PublicationGUI(String text, PublicacionesUsuarioGUI publicacionesUsuarioGUI){
+        this.publicacionesUsuarioGUI=publicacionesUsuarioGUI;
+        this.text=text;
+        label = new JLabel("<html><h2>"+this.text+"<h2><html>");
         addComponents();
         setVisible(true);
     }
 
+    private void addActionEvent()
+    {
+        option.addActionListener(this);
+        like.addActionListener(this);
+        dislike.addActionListener(this);
+    }
+
     public void setText(String text){
         this.text = text;
+        label = new JLabel("<html><h2>"+this.text+"<h2><html>");
+        addLabel(label);
+    }
+
+    public String getText() {
+        return text;
     }
 
     private void addComponents(){
@@ -37,6 +55,7 @@ public class PublicationView extends JPanel {
         addButton(like,0);
         addButton(dislike,1);
         addButton(option,2);
+        addActionEvent();
         setBorder(new EmptyBorder(5,5,5,5));
     }
 
@@ -67,5 +86,16 @@ public class PublicationView extends JPanel {
         ctes.weightx = 0.0;
         ctes.weighty = 0.0;
     }
-
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if (e.getSource() == option) {
+            OpcionesPublicacionGUI opcionesPublicacionGUI= new OpcionesPublicacionGUI(this, this.publicacionesUsuarioGUI);
+        }
+        else if(e.getSource()==like){
+            //TODO incrementar likes
+        }
+        else{
+            //TODO incrementar dislikes
+        }
+    }
 }
