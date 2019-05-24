@@ -31,3 +31,5 @@ Implementacion/out/production/main/META-INF/
 Implementacion/BDEspacioUpm\.db
 
 Implementacion/target/classes/META-INF/
+
+*.db
