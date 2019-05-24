@@ -72,7 +72,7 @@ public class WriteGUI extends JFrame implements ActionListener{
 
     private void setView(){
         setBounds(10,10,300,300);
-        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 

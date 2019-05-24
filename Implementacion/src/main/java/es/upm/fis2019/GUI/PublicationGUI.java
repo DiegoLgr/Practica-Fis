@@ -15,6 +15,7 @@ public class PublicationGUI extends JPanel implements ActionListener{
     private JButton like = new JButton("LIKE");
     private JButton dislike = new JButton("DISLIKE");
     private JButton option = new JButton("OPTION");
+    private PublicacionesUsuarioGUI publicacionesUsuarioGUI;
 
     private GridBagConstraints ctes = new GridBagConstraints();
 
@@ -22,7 +23,8 @@ public class PublicationGUI extends JPanel implements ActionListener{
 //        setVisible(true);
 //    }
 
-    public PublicationGUI(String text){
+    public PublicationGUI(String text, PublicacionesUsuarioGUI publicacionesUsuarioGUI){
+        this.publicacionesUsuarioGUI=publicacionesUsuarioGUI;
         this.text=text;
         label = new JLabel("<html><h2>"+this.text+"<h2><html>");
         addComponents();
@@ -87,7 +89,7 @@ public class PublicationGUI extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == option) {
-            OpcionesPublicacionGUI opcionesPublicacionGUI= new OpcionesPublicacionGUI(this);
+            OpcionesPublicacionGUI opcionesPublicacionGUI= new OpcionesPublicacionGUI(this, this.publicacionesUsuarioGUI);
         }
         else if(e.getSource()==like){
             //TODO incrementar likes

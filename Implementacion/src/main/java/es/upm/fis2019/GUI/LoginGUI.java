@@ -75,7 +75,7 @@ public class LoginGUI extends JFrame implements ActionListener{
         setTitle(getTitle());
         setVisible(true);
         setBounds(10,10,370,500);
-        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
     }
 
@@ -98,6 +98,7 @@ public class LoginGUI extends JFrame implements ActionListener{
                 //this.publicacionesUsuarioGUI.displayPublicacionesPropias();
                 //TODO Verificar el user, iniciar sesion, buscar publicaciones del usuario
                 this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+                this.publicacionesUsuarioGUI.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }

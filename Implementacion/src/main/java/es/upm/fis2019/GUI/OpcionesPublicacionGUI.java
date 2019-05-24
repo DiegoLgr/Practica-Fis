@@ -12,8 +12,10 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
     private JButton comentar = new JButton("COMMENT");
     private String text;
     private GridBagConstraints ctes = new GridBagConstraints();
+    private PublicacionesUsuarioGUI publicacionesUsuarioGUI;
 
-    public OpcionesPublicacionGUI(PublicationGUI publicationGUI){
+    public OpcionesPublicacionGUI(PublicationGUI publicationGUI, PublicacionesUsuarioGUI publicacionesUsuarioGUI){
+        this.publicacionesUsuarioGUI=publicacionesUsuarioGUI;
         this.text= publicationGUI.getText();
         this.getContentPane().setLayout(new GridBagLayout());
         addActionEvent();

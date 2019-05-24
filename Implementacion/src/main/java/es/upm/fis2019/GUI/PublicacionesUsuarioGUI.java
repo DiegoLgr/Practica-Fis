@@ -53,7 +53,7 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
             ctes.gridheight = 1;
             ctes.weighty = 1.0;
             ctes.fill = GridBagConstraints.BOTH;
-            this.getContentPane().add(new PublicationGUI(text), ctes);
+            this.getContentPane().add(new PublicationGUI(text, this), ctes);
             reset();
         }
     }
@@ -84,7 +84,7 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
 
     private void setView() {
         setTitle(getTitle());
-        setVisible(true);
+        setVisible(false);
         setBounds(10, 10, 700, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(true);
