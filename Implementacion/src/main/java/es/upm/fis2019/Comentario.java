@@ -1,27 +1,16 @@
 package es.upm.fis2019;
 
-public class Comentario implements IComentario{
-    private String id ;
-    private String texto;
-    private String fecha;
-    private String respuesta;
-    private  String Autor;
+public class Comentario implements IComentario {
+    String id;
+    String texto;
+    String fecha;
+    String respuesta;
 
-    //Constructor para crear los comentarios
-    public Comentario(String id, String texto){
-
-        this.id = id ;
+    public Comentario(String id, String texto, String fecha, String respuesta){
+        this.id = id;
         this.texto = texto;
-        this.fecha ="";
-        this.respuesta = "";
-    }
-    //Constructor para cargarlos de BD
-    public Comentario( String id,String texto,String fecha,String respuesta, String Autor){
-        this.id = id ;
-        this.texto = texto;
-        this.fecha =fecha;
+        this.fecha = fecha;
         this.respuesta = respuesta;
-        this.Autor = Autor;
     }
 
     @Override
@@ -43,12 +32,4 @@ public class Comentario implements IComentario{
     public String getRespuesta() {
         return respuesta;
     }
-
-    @Override
-    public String toString(){
-        String aux="id:"+this.id+" texto:"+this.texto+" fecha:"+this.fecha+" respuesta:"+this.respuesta;
-
-        return aux;
-    }
-
 }
