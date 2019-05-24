@@ -25,6 +25,11 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable, 
     @Override
     public String getCorreo() { return correo; }
 
+    @Override
+    public String getPassword() {
+        return this.contraseña;
+    }
+
 
     //metodos que procesan el result set y crean la lista de publicaciones de el
     @Override

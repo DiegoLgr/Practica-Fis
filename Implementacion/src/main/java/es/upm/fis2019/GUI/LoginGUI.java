@@ -1,5 +1,8 @@
 package es.upm.fis2019.GUI;
+import es.upm.fis2019.ControladorGestorUsuarios;
 import es.upm.fis2019.ControladorUsuario;
+import es.upm.fis2019.IBusca;
+import es.upm.fis2019.IUsuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,7 +95,12 @@ public class LoginGUI extends JFrame implements ActionListener{
 //            for(char a:pwdText){
 //                pwd += a;
 //            }
-            if (userText.equalsIgnoreCase("a") && pwdText.equalsIgnoreCase("a")) {
+
+            IUsuario iUsuario;
+            IBusca iBusca= new ControladorGestorUsuarios();
+            iUsuario=iBusca.buscarUsuario(userText);
+
+            if (userText.equalsIgnoreCase(iUsuario.getAlias()) && pwdText.equalsIgnoreCase(iUsuario.getPassword())) {
 
                 JOptionPane.showMessageDialog(this, "Login Successful");
                 //this.publicacionesUsuarioGUI.displayPublicacionesPropias();
