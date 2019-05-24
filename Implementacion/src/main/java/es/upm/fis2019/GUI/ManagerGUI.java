@@ -5,17 +5,14 @@ import es.upm.fis2019.ControladorUsuario;
 
 public class ManagerGUI {
     private ControladorGestorUsuarios controladorGestorUsuarios;
-    private ControladorUsuario controladorUsuario;
 
-    public ManagerGUI(ControladorGestorUsuarios controladorGestorUsuarios, ControladorUsuario controladorUsuario) {
+    public ManagerGUI(ControladorGestorUsuarios controladorGestorUsuarios) {
         this.controladorGestorUsuarios = controladorGestorUsuarios;
-        this.controladorUsuario = controladorUsuario;
     }
 
     public void run() {
         //TODO el constructor de PublicacionesUsuarioGUI NO va aqui, se crea en login una vez hemos establecido sesion
-        PublicacionesUsuarioGUI vistaPublicacionesPropias = new PublicacionesUsuarioGUI(this.controladorUsuario);
-        LoginGUI login = new LoginGUI(controladorUsuario, vistaPublicacionesPropias);
+        LoginGUI login = new LoginGUI();
 
 
 //        JFrame frame = new JFrame("Demo application");

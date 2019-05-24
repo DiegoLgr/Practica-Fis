@@ -6,11 +6,10 @@ public class Sesion {
 
     public Sesion(Usuario user){
         usuario = user;
+        sesion=this;
     }
 
     public static Sesion getInstance(){
-        if (sesion==null)
-            sesion=new Sesion(new Usuario("a","a","a"));
         return sesion;
     }
 

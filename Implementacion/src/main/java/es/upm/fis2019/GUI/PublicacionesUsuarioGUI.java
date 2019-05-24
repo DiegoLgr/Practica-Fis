@@ -2,6 +2,7 @@ package es.upm.fis2019.GUI;
 
 import es.upm.fis2019.IPidePublicacion;
 import es.upm.fis2019.IPublicacion;
+import es.upm.fis2019.Publicacion;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,16 +46,16 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
     }
 
     private void addPublications() {
+        List<IPublicacion>listPublicaciones = gestorPublicaciones.getPublicacionesPropias();
         String text = "Lorem ipsum dolor sit amet consectetur adipiscing elit, volutpat fames quam aliquet ac cras, curae varius vestibulum proin eleifend tempor. ";
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < listPublicaciones.size(); i++) {
             ctes.gridx = 0;
             ctes.gridy = i + 1;
             ctes.gridwidth = 6;
             ctes.gridheight = 1;
             ctes.weighty = 1.0;
             ctes.fill = GridBagConstraints.BOTH;
-            this.getContentPane().add(new PublicationGUI(text, this), ctes);
-            reset();
+            this.getContentPane().add(new PublicationGUI(listPublicaciones.get(i).getContenido(), this), ctes);
         }
     }
 
@@ -84,7 +85,7 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
 
     private void setView() {
         setTitle(getTitle());
-        setVisible(false);
+        setVisible(true);
         setBounds(10, 10, 700, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(true);

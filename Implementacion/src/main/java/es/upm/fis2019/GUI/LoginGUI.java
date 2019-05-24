@@ -1,8 +1,5 @@
 package es.upm.fis2019.GUI;
-import es.upm.fis2019.ControladorGestorUsuarios;
-import es.upm.fis2019.ControladorUsuario;
-import es.upm.fis2019.IBusca;
-import es.upm.fis2019.IUsuario;
+import es.upm.fis2019.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,12 +23,8 @@ public class LoginGUI extends JFrame implements ActionListener{
     private JButton cancelButton=new JButton("CANCEL");
     private JCheckBox showPassword=new JCheckBox("Show password");
     private String title = "Login";
-    private ControladorUsuario controladorUsuario;
-    private PublicacionesUsuarioGUI publicacionesUsuarioGUI;
 
-    public LoginGUI(ControladorUsuario controladorUsuario, PublicacionesUsuarioGUI publicacionesUsuarioGUI){
-        this.controladorUsuario=controladorUsuario;
-        this.publicacionesUsuarioGUI = publicacionesUsuarioGUI;
+    public LoginGUI(){
         setLayoutManager();
         setLocationAndSize();
         addComponentToContainer();
@@ -101,12 +94,12 @@ public class LoginGUI extends JFrame implements ActionListener{
             iUsuario=iBusca.buscarUsuario(userText);
 
             if (userText.equalsIgnoreCase(iUsuario.getAlias()) && pwdText.equalsIgnoreCase(iUsuario.getPassword())) {
-
+                Sesion sesion = new Sesion((Usuario) iUsuario);
                 JOptionPane.showMessageDialog(this, "Login Successful");
+                PublicacionesUsuarioGUI publicacionesUsuarioGUI = new PublicacionesUsuarioGUI(new ControladorUsuario(sesion));
                 //this.publicacionesUsuarioGUI.displayPublicacionesPropias();
                 //TODO Verificar el user, iniciar sesion, buscar publicaciones del usuario
                 this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-                this.publicacionesUsuarioGUI.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
