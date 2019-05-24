@@ -38,6 +38,7 @@ public class GestorUsuarios implements ICreador,IBuscador{
             System.err.println(e.getMessage());
         }
 
+        
         accesobd.desconectar();
 
         return usuario;
