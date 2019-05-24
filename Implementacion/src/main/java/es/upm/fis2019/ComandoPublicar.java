@@ -14,10 +14,9 @@ public class ComandoPublicar implements IComando {
     public void ejecutar() {
         IPublicador publicacion = Sesion.getInstance().getUsuario();
         switch (Tipo){
-            case "Texto": publicacion.publicar(new PublicacionTexto(ID,0,0, Contenido)); break;
-            case "Enlace": publicacion.publicar(new PublicacionEnlace(ID,0,0, Contenido)); break;
+            case "Texto": publicacion.publicar(new PublicacionTexto(ID,0,0, new Texto(Contenido))); break;
+            case "Enlace": publicacion.publicar(new PublicacionEnlace(ID,0,0, new Enlace(Contenido))); break;
             //case "Referencia": publicacion.publicar(new PublicacionReferencia()); break;
-            default: publicacion.publicar(new PublicacionTexto(ID,0,0, Contenido)); break;
         }
 
     }

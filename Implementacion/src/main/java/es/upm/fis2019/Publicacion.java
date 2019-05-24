@@ -138,7 +138,11 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
 
     @Override
     public void Borrar(){
+        String query="delete from publicacion where id = '"+this.id+"';"  ;
 
+        accesobd.conectar();
+        accesobd.ejecutar(query);
+        accesobd.desconectar();
     }
 
     @Override
@@ -155,7 +159,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
         accesobd.ejecutar(tablaComenta);
         accesobd.desconectar();
 
-        comentarios.add(new Comentario(id,txt));
+        comentarios.add(new Comentario(id,txt,Sesion.getInstance().getUsuario().getAlias()));
     }
 
 
@@ -165,7 +169,11 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     }
 
     public static void main(String[] args) {
+        Publicacion a=new PublicacionEnlace("a",3,4,new Enlace("asd"));
+        a.Comentar("c","askjvljylvgg");
+        a.Borrar();
 
+       System.out.println(a.getComentarios().toString());
     }
 
 }

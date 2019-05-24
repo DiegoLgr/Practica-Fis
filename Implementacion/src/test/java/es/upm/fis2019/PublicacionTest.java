@@ -8,13 +8,13 @@ public class PublicacionTest {
 
     @Test
     public void getComentarios() {
-        Publicacion a=new PublicacionEnlace("a",3,4,"asd");
-
+        Publicacion a=new PublicacionEnlace("a",3,4,new Enlace("asd"));
+        System.out.println(a.getComentarios());
     }
 
     @Test
     public void likear() {
-        ILikeable Publicacion = new PublicacionTexto("a",0,0,null);
+        ILikeable Publicacion = new PublicacionTexto("a",0,0,new Texto(""));
         Publicacion.Likear(new Usuario("f","f","f"));
 
         //Y se muestran las publicaciones
@@ -24,7 +24,7 @@ public class PublicacionTest {
 
     @Test
     public void dislikear() {
-        ILikeable Publicacion = new PublicacionTexto("b",0,0,null);
+        ILikeable Publicacion = new PublicacionTexto("b",0,0,new Texto(""));
         Publicacion.Dislikear(new Usuario("","",""));
 
         //Y se muestran las publicaciones
@@ -34,7 +34,7 @@ public class PublicacionTest {
 
     @Test
     public void comentar() {
-        Publicacion a=new PublicacionEnlace("a",3,4,"asd");
+        Publicacion a=new PublicacionEnlace("a",3,4,new Enlace("asd"));
         IComando comando = new ComandoComentarPublicacion(a,"PaTaTa mal escrito");
         comando.ejecutar();
         System.out.println(a.getComentarios().toString());

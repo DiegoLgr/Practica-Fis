@@ -30,13 +30,13 @@ public class UsuarioTest {
 
     @Test
     public void getPublicacionesUsuario() {
-        IComando com=new ComandoGetPublicacionesUsuario(new Usuario("a","fgag","asgasg"));
+        IComando com=new ComandoGetPublicacionesUsuario(new Usuario("Fran701","fgag","asgasg"));
         com.ejecutar();
     }
 
     @Test
     public void Publicar() {
-        IComando com = new ComandoPublicar("Esta es de prueba","x","Enlace");
+        IComando com = new ComandoPublicar("Esta es du prueba","u","Enlace");
         com.ejecutar();
     }
 
