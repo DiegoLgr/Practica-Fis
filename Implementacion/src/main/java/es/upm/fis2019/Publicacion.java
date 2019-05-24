@@ -15,6 +15,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
     private List<IComentario> comentarios;
     private List<IUsuario> UsuariosLikes, UsuariosDislike;
     private IEjecutador accesobd;
+    private String Autor;
 
     public Publicacion(String id, int likes, int dislikes) {
         this.id = id;
@@ -23,18 +24,21 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
         UsuariosLikes = new ArrayList<>();
         UsuariosDislike = new ArrayList<>();
         this.fecha="";
-        this.comentarios=new ArrayList<IComentario>();
+        this.comentarios=new ArrayList<>();
         this.accesobd=Conexion.getInstance();
+    }
+
+    public String getAutor() {
+        return Autor;
+    }
+
+    public void setAutor(String autor) {
+        Autor = autor;
     }
 
     @Override
     public String getId(){
         return id;
-    }
-
-    //@Override
-    public void AniadirComentario(Comentario comentario){
-                                                                                         //Realizar el método
     }
 
     @Override

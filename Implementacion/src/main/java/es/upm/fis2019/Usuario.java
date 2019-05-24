@@ -51,6 +51,7 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable, 
 
         try {
             while (rs.next()){
+                Publicacion p;
                 String Autor = rs.getString(1);
                 String IdPubli = rs.getString(2);
                 String contenido = rs.getString(6);
@@ -61,15 +62,21 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable, 
 
                 switch (tipo){
                     case ("texto"):
-                        //publicaciones.add(new PublicacionTexto());
+                        p = new PublicacionTexto(IdPubli,likes,dislikes,fecha,contenido);
+                        p.setAutor(Autor);
+                        publicaciones.add(p);
                         break;
 
                     case ("enlace"):
-                        //publicaciones.add(new PublicacionEnlace());
+                        p = new PublicacionEnlace(IdPubli,likes,dislikes,fecha,contenido);
+                        p.setAutor(Autor);
+                        publicaciones.add(p);
                         break;
 
                     default:
-                        //publicaciones.add(new PublicacionTexto());
+                        p = new PublicacionTexto(IdPubli,likes,dislikes,fecha,contenido);
+                        p.setAutor(Autor);
+                        publicaciones.add(p);
                         break;
                 }
 

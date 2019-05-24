@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class UsuarioTest {
@@ -26,6 +28,10 @@ public class UsuarioTest {
 
     @Test
     public void getPublicacionesTimeline() {
+        ComandoGetPublicacionesTimeline Com = new ComandoGetPublicacionesTimeline(new Usuario("Fran701","",""));
+        Com.ejecutar();
+        List<IPublicacion> Lista = Com.getTimeline();
+        System.out.println(Lista.toString());
     }
 
     @Test
