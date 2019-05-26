@@ -1,22 +1,22 @@
 package es.upm.fis2019;
+import java.util.List;
 
 public class TestControladorUsuario {
-    /*public static void testGetPublicacionesPropias(){
-        Sesion sesion = new Sesion();
-        sesion.setUsuario(new Usuario("Usiario", "Prueba@usuario.com", "123"));
+    public static void testGetPublicacionesPropias() {
+        Sesion sesion = new Sesion(new Usuario("Siorata", "", "Siorata"));
         ControladorUsuario controladorUsuario = new ControladorUsuario(sesion);
-        Publicacion[] publicaciones = controladorUsuario.getPublicacionesPropias();
-        for(int i=0; i<publicaciones.length; i++){
-            System.out.println(publicaciones[i].getContenido());
+        List<IPublicacion> publicaciones = controladorUsuario.getPublicacionesPropias();
+        for (IPublicacion i : publicaciones) {
+            System.out.println(i.getContenido());
         }
     }
-    public static void TestPublicar(){
-        Sesion sesion = new Sesion();
-        sesion.setUsuario(new Usuario("Usiario", "Prueba@usuario.com", "123"));
+
+    public static void TestPublicar() {
+        Sesion sesion = new Sesion(new Usuario("Siorata", "", "Siorata"));
+        sesion.setUsuario(new Usuario("Siorata", "Prueba@usuario.com", "Siorata"));
         ControladorUsuario controladorUsuario = new ControladorUsuario(sesion);
         controladorUsuario.publicar("nada", "Texto");
-
-*/
     }
+}
 
 

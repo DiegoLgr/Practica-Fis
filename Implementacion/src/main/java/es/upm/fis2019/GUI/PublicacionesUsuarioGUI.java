@@ -26,7 +26,6 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
     public PublicacionesUsuarioGUI(IPidePublicacion gestorPublicaciones) {
         this.gestorPublicaciones = gestorPublicaciones;
         this.getContentPane().setLayout(new GridBagLayout());
-        //this.getContentPane().add(publicationView);
         addButtons();
         addPublications();
         navegation();
@@ -55,7 +54,7 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
             ctes.gridheight = 1;
             ctes.weighty = 1.0;
             ctes.fill = GridBagConstraints.BOTH;
-            this.getContentPane().add(new PublicationGUI(listPublicaciones.get(i).getContenido(), this), ctes);
+            this.getContentPane().add(new PublicationGUI(listPublicaciones.get(i), this), ctes);
         }
     }
 
@@ -110,7 +109,7 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == publicar) {
-            WriteGUI writeGUI = new WriteGUI();
+            WriteGUI writeGUI = new WriteGUI("Publicacion");
         }
     }
 }

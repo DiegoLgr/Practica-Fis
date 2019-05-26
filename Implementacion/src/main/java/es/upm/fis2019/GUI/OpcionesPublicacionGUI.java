@@ -13,10 +13,12 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
     private String text;
     private GridBagConstraints ctes = new GridBagConstraints();
     private PublicacionesUsuarioGUI publicacionesUsuarioGUI;
+    private PublicationGUI publicationGUI;
 
     public OpcionesPublicacionGUI(PublicationGUI publicationGUI, PublicacionesUsuarioGUI publicacionesUsuarioGUI){
         this.publicacionesUsuarioGUI=publicacionesUsuarioGUI;
         this.text= publicationGUI.getText();
+        this.publicationGUI = publicationGUI;
         this.getContentPane().setLayout(new GridBagLayout());
         addActionEvent();
         addButtons();
@@ -96,7 +98,7 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==comentar){
-            WriteGUI writeGUI = new WriteGUI();
+            WriteGUI writeGUI = new WriteGUI(this.publicationGUI.getPublicacion(), "Comentario");
         }
         else {
             //TODO Que borre de verdad

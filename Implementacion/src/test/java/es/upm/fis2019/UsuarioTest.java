@@ -8,8 +8,10 @@ import static org.junit.Assert.*;
 
 public class UsuarioTest {
 
+    Sesion sesion;
     @Before
     public void setUp() throws Exception {
+        sesion = new Sesion( new Usuario("Siorata", "", "Siorata"));
     }
 
     @After

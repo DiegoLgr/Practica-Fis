@@ -3,34 +3,20 @@ package es.upm.fis2019;
 import es.upm.fis2019.GUI.ManagerGUI;
 
 public class App {
-	public static void main(String[] args) {
-		lanzarApp();
-		//runTests();
-	}
-	private static void lanzarApp(){
+    static ControladorGestorUsuarios controladorGestorUsuarios;
+    static ControladorComentario controladorComentario;
+    static ControladorPublicaciones controladorPublicaciones;
 
-		ControladorGestorUsuarios controladorGestorUsuarios = new ControladorGestorUsuarios();
-		ControladorComentario controladorComentario = new ControladorComentario();
-		ControladorPublicaciones controladorPublicaciones = new ControladorPublicaciones();
+    public static void main(String[] args) {
+        App.controladorGestorUsuarios = new ControladorGestorUsuarios();
+        App.controladorComentario = new ControladorComentario();
+        App.controladorPublicaciones = new ControladorPublicaciones();
 
-		ManagerGUI gui = new ManagerGUI(controladorGestorUsuarios);
-		gui.run();
-	}
-	private static void runTests(){
-		System.out.println("~~~ Publicaciones ~~~");
-		TestPublicacion.testGetLikes();
-		TestPublicacion.testGetDislikes();
-
-
-		System.out.println("~~~ Comentario ~~~");
-	/*
-		TestComentario.testGetFecha();
-		TestComentario.testGetId();
-		TestComentario.testGetText();
-		TestComentario.testGetRespuesta();
-	 */
-		System.out.println("~~~ ControladorUsuario ~~~");
-		//TestControladorUsuario.testGetPublicacionesPropias();
-		//TestControladorUsuario.TestPublicar();
-	}
+        ManagerGUI gui = new ManagerGUI(controladorGestorUsuarios);
+        gui.run();
+    }
+    public static ControladorPublicaciones getControladorPublicaciones(){
+        return App.controladorPublicaciones;
+    }
 }
+

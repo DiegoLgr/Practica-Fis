@@ -65,7 +65,7 @@ public class ComentarioGUI extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==answer){
-            WriteGUI writeGUI = new WriteGUI();
+            WriteGUI writeGUI = new WriteGUI("Respuesta");
         }
     }
 }

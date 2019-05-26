@@ -79,15 +79,9 @@ public class LoginGUI extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == loginButton) {
             String userText;
-//            char[] pwdText;
             String pwdText;
             userText = userTextField.getText();
             pwdText = passwordField.getText();
-//            pwdText = passwordField.getPassword();
-//            String pwd = "";
-//            for(char a:pwdText){
-//                pwd += a;
-//            }
 
             IUsuario iUsuario;
             IBusca iBusca= new ControladorGestorUsuarios();
@@ -97,8 +91,6 @@ public class LoginGUI extends JFrame implements ActionListener{
                 Sesion sesion = new Sesion((Usuario) iUsuario);
                 JOptionPane.showMessageDialog(this, "Login Successful");
                 PublicacionesUsuarioGUI publicacionesUsuarioGUI = new PublicacionesUsuarioGUI(new ControladorUsuario(sesion));
-                //this.publicacionesUsuarioGUI.displayPublicacionesPropias();
-                //TODO Verificar el user, iniciar sesion, buscar publicaciones del usuario
                 this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
