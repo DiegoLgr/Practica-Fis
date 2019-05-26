@@ -4,6 +4,8 @@ import es.upm.fis2019.GUI.ManagerGUI;
 
 public class App {
     static ControladorGestorUsuarios controladorGestorUsuarios;
+
+
     static ControladorComentario controladorComentario;
     static ControladorPublicaciones controladorPublicaciones;
 
@@ -17,6 +19,10 @@ public class App {
     }
     public static ControladorPublicaciones getControladorPublicaciones(){
         return App.controladorPublicaciones;
+    }
+
+    public static ControladorComentario getControladorComentario() {
+        return controladorComentario;
     }
 }
 

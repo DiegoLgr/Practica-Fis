@@ -139,7 +139,8 @@ public class WriteGUI extends JFrame implements ActionListener {
 
                     break;
                 case "Respuesta":
-                    System.out.println("respondiendo");
+                    IResponde controladorComentario = App.getControladorComentario();
+                    controladorComentario.responderComentario(texto);
                     break;
             }
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
