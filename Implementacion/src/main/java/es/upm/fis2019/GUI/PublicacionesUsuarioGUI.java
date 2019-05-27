@@ -25,16 +25,14 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
 
 
     public PublicacionesUsuarioGUI() {
-        this.gestorPublicaciones = App.getContoladorUsuario();
         this.getContentPane().setLayout(new GridBagLayout());
         addButtons();
-        addPublications();
         navegation();
-        setView();
     }
 
-    private void addButtons() {
+    // ############# Componentes visuales #############
 
+    private void addButtons() {
         ctes.gridx = 1;
         ctes.gridy = 0;
         ctes.gridwidth = 1;
@@ -44,23 +42,6 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
         reset();
 
     }
-
-    private void addPublications() {
-        //TODO cambiar el new y que ya esten instanciadas las publicaciones GUI al llamar al metodo y que lo que haga sea  coger publicacion 1 y situarla en el 0,1 , la dos y en el 0,2...
-        List<IPublicacion> listPublicaciones = gestorPublicaciones.getPublicacionesPropias();
-//        String text = "Lorem ipsum dolor sit amet consectetur adipiscing elit, volutpat fames quam aliquet ac cras, curae varius vestibulum proin eleifend tempor. ";
-        for (int i = 0; i < listPublicaciones.size(); i++) {
-            ctes.gridx = 0;
-            ctes.gridy = i + 1;
-            ctes.gridwidth = 3;
-            ctes.gridheight = 1;
-            ctes.weighty = 1.0;
-            ctes.fill = GridBagConstraints.BOTH;
-            this.getContentPane().add(new PublicationGUI(listPublicaciones.get(i), this), ctes);
-            reset();
-        }
-    }
-
     private void navegation() {
         ctes.gridx = 0;
         ctes.gridy = 7;
@@ -78,18 +59,28 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
         addActionEvent();
     }
 
-    public void displayPublicacionesPropias() {
-        List<IPublicacion> publicaciones = getPublicaciones();
-        /*
-        for (int i=0; i<publicaciones.length; i++){
-            JLabel publicacion = new JLabel(publicaciones[i].getContenido());
-            publicacion.setBounds(10, 10+25*i, 500, 25);
-            this.panel.add(publicacion);
-        }*/
-//        publicationView.updateUI();
+    // ############# Logica de la vista #############
+
+     private void addPublications() {
+        //TODO cambiar el new y que ya esten instanciadas las publicaciones GUI al llamar al metodo y que lo que haga sea  coger publicacion 1 y situarla en el 0,1 , la dos y en el 0,2...
+        List<IPublicacion> listPublicaciones = gestorPublicaciones.getPublicacionesPropias();
+        for (int i = 0; i < listPublicaciones.size(); i++) {
+            ctes.gridx = 0;
+            ctes.gridy = i + 1;
+            ctes.gridwidth = 3;
+            ctes.gridheight = 1;
+            ctes.weighty = 1.0;
+            ctes.fill = GridBagConstraints.BOTH;
+            this.getContentPane().add(new PublicationGUI(listPublicaciones.get(i), this), ctes);
+            reset();
+        }
     }
 
-    private void setView() {
+
+    public void display() {
+        this.gestorPublicaciones = App.getContoladorUsuario();
+        addPublications();
+
         setTitle("Publicaciones");
         setVisible(true);
         setBounds(10, 10, 700, 700);
@@ -109,7 +100,7 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
         addButtons();
 //        addPublications();
         navegation();
-        setView();
+        display();
     }
 
     private List<IPublicacion> getPublicaciones() {

@@ -23,12 +23,14 @@ public class LoginGUI extends JFrame implements ActionListener{
     private JCheckBox showPassword=new JCheckBox("Show password");
     private String title = "Login";
 
-    public LoginGUI(){
+    private ManagerGUI gui;
+
+    public LoginGUI(ManagerGUI gui){
         setLayoutManager();
         setLocationAndSize();
         addComponentToContainer();
         addActionEvent();
-        //setView();
+        this.gui = gui;
     }
 
     public String getTitle(){
@@ -38,6 +40,9 @@ public class LoginGUI extends JFrame implements ActionListener{
     private void setLayoutManager(){
         container.setLayout(null);
     }
+
+    // ############# Generando los componentes gráficos #############
+
     private void setLocationAndSize(){
         titleLabel.setBounds(150,80,100,30);
         userLabel.setBounds(50,150,100,30);
@@ -58,7 +63,6 @@ public class LoginGUI extends JFrame implements ActionListener{
         container.add(loginButton);
         container.add(cancelButton);
     }
-
     private void addActionEvent()
     {
         loginButton.addActionListener(this);
@@ -66,35 +70,17 @@ public class LoginGUI extends JFrame implements ActionListener{
         showPassword.addActionListener(this);
     }
 
-    public void display(){
-        setTitle(getTitle());
-        setVisible(true);
-        setBounds(10,10,370,500);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
-    }
+    // ############# Logica de la vista #############
 
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == loginButton) {
-            String userText;
-            String pwdText;
-            userText = userTextField.getText();
-            pwdText = passwordField.getText();
-
-            IUsuario iUsuario;
-            IBusca iBusca= new ControladorGestorUsuarios();
-            iUsuario=iBusca.buscarUsuario(userText);
-
-            if (userText.equalsIgnoreCase(iUsuario.getAlias()) && pwdText.equalsIgnoreCase(iUsuario.getPassword())) {
-                Sesion.getInstance().setUsuario((Usuario) iUsuario);
-                JOptionPane.showMessageDialog(this, "Login Successful");
-                PublicacionesUsuarioGUI publicacionesUsuarioGUI = new PublicacionesUsuarioGUI();
-                this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
-            }
-
+           if(this.userLogedSuccesfully()){
+               gui.getPublicacionesUsuario().display();
+               this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+           }else{
+               JOptionPane.showMessageDialog(this, "Invalid Username or Password");
+           }
         }
         if (e.getSource() == cancelButton) {
             userTextField.setText("");
@@ -106,8 +92,34 @@ public class LoginGUI extends JFrame implements ActionListener{
             } else {
                 passwordField.setEchoChar('*');
             }
-
-
         }
+    }
+    private boolean userLogedSuccesfully(){
+        String userText;
+            String pwdText;
+            userText = userTextField.getText();
+            pwdText = passwordField.getText();
+
+            IUsuario iUsuario;
+            IBusca iBusca= new ControladorGestorUsuarios();
+            iUsuario=iBusca.buscarUsuario(userText);
+
+            if (userText.equalsIgnoreCase(iUsuario.getAlias()) && pwdText.equalsIgnoreCase(iUsuario.getPassword())) {
+                Sesion.getInstance().setUsuario((Usuario) iUsuario);
+                return true;
+            } else {
+                return false;
+            }
+
+    }
+
+    // ############# Funciones públicas #############
+
+    public void display(){
+        setTitle(getTitle());
+        setVisible(true);
+        setBounds(10,10,370,500);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
     }
 }

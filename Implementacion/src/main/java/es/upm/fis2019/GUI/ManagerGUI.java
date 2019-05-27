@@ -2,18 +2,28 @@ package es.upm.fis2019.GUI;
 
 import es.upm.fis2019.ControladorGestorUsuarios;
 import es.upm.fis2019.ControladorUsuario;
+import es.upm.fis2019.Login;
 
 public class ManagerGUI {
-    private ControladorGestorUsuarios controladorGestorUsuarios;
+    private LoginGUI login;
 
-    public ManagerGUI(ControladorGestorUsuarios controladorGestorUsuarios) {
-        this.controladorGestorUsuarios = controladorGestorUsuarios;
+
+
+    private PublicacionesUsuarioGUI publicacionesUsuario;
+
+    public ManagerGUI() {
+        this.login = new LoginGUI(this);
+        this.publicacionesUsuario = new PublicacionesUsuarioGUI();
     }
 
     public void run() {
-        LoginGUI login = new LoginGUI();
-        login.display();
+        this.login.display();
+    }
 
+    public PublicacionesUsuarioGUI getPublicacionesUsuario() {
+        return publicacionesUsuario;
+    }
+}
 
 //        JFrame frame = new JFrame("Demo application");
 //        frame.setSize(600, 250);
@@ -28,6 +38,3 @@ public class ManagerGUI {
 //        LoginGUI login = new LoginGUI(this.controladorUsuario, vistaPublicacionesPropias);
 
 //        login.displayLogin();
-    }
-}
-

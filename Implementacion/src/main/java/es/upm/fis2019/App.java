@@ -19,7 +19,7 @@ public class App {
         App.contoladorUsuario = new ControladorUsuario();
 
 
-        ManagerGUI gui = new ManagerGUI(controladorGestorUsuarios);
+        ManagerGUI gui = new ManagerGUI();
         gui.run();
     }
 
