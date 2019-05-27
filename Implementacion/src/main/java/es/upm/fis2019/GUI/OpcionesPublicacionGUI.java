@@ -1,5 +1,10 @@
 package es.upm.fis2019.GUI;
 
+import es.upm.fis2019.App;
+import es.upm.fis2019.IBorraPublicacion;
+import es.upm.fis2019.IPublicacion;
+import es.upm.fis2019.Iborrable;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,8 +19,12 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
     private GridBagConstraints ctes = new GridBagConstraints();
     private PublicacionesUsuarioGUI publicacionesUsuarioGUI;
     private PublicationGUI publicationGUI;
+    private IPublicacion publicacion;
+    private PublicacionesUsuarioGUI gui;
 
-    public OpcionesPublicacionGUI(PublicationGUI publicationGUI, PublicacionesUsuarioGUI publicacionesUsuarioGUI){
+    public OpcionesPublicacionGUI(PublicationGUI publicationGUI, PublicacionesUsuarioGUI publicacionesUsuarioGUI, IPublicacion publicacion, PublicacionesUsuarioGUI gui){
+        this.gui = gui;
+        this.publicacion = publicacion;
         this.publicacionesUsuarioGUI=publicacionesUsuarioGUI;
         this.text= publicationGUI.getText();
         this.publicationGUI = publicationGUI;
@@ -101,7 +110,9 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
             WriteGUI writeGUI = new WriteGUI(this.publicationGUI.getPublicacion(), "Comentario");
         }
         else {
-            //TODO Que borre de verdad
+            IBorraPublicacion borrador = App.getControladorPublicaciones();
+            borrador.borrarPublicacion(this.publicacion);
+            gui.updateGUI();
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
     }
