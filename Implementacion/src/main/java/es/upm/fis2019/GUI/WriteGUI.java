@@ -134,7 +134,7 @@ public class WriteGUI extends JFrame implements ActionListener {
 
             switch (this.tipo) {
                 case "Publicacion":
-                    IPublica controladorUsuario = new ControladorUsuario(Sesion.getInstance());
+                    IPublica controladorUsuario = new ControladorUsuario();
                     controladorUsuario.publicar(texto, tipo);
                     break;
                 case "Comentario":
@@ -144,7 +144,6 @@ public class WriteGUI extends JFrame implements ActionListener {
                     break;
                 case "Respuesta":
                     IResponde controladorComentario = App.getControladorComentario();
-                    controladorComentario.responderComentario(texto);
                     break;
             }
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));

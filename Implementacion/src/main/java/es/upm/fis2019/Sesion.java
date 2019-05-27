@@ -4,8 +4,7 @@ public class Sesion {
     private Usuario usuario;
     private static Sesion sesion;
 
-    public Sesion(Usuario user){
-        usuario = user;
+    public Sesion(){
         sesion=this;
     }
 

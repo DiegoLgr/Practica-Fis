@@ -1,5 +1,6 @@
 package es.upm.fis2019.GUI;
 
+import es.upm.fis2019.App;
 import es.upm.fis2019.IPidePublicacion;
 import es.upm.fis2019.IPublicacion;
 import es.upm.fis2019.Publicacion;
@@ -23,8 +24,8 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
     private JButton izquierda = new JButton("<=");
 
 
-    public PublicacionesUsuarioGUI(IPidePublicacion gestorPublicaciones) {
-        this.gestorPublicaciones = gestorPublicaciones;
+    public PublicacionesUsuarioGUI() {
+        this.gestorPublicaciones = App.getContoladorUsuario();
         this.getContentPane().setLayout(new GridBagLayout());
         addButtons();
         addPublications();

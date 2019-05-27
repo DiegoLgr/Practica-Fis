@@ -11,8 +11,8 @@ public class ManagerGUI {
     }
 
     public void run() {
-        //TODO el constructor de PublicacionesUsuarioGUI NO va aqui, se crea en login una vez hemos establecido sesion
         LoginGUI login = new LoginGUI();
+        login.display();
 
 
 //        JFrame frame = new JFrame("Demo application");

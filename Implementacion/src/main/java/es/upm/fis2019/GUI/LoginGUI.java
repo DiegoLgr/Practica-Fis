@@ -12,7 +12,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginGUI extends JFrame implements ActionListener{
-
     private Container container = getContentPane();
     private JLabel titleLabel=new JLabel("LOGIN");
     private JLabel userLabel=new JLabel("USER");
@@ -29,7 +28,7 @@ public class LoginGUI extends JFrame implements ActionListener{
         setLocationAndSize();
         addComponentToContainer();
         addActionEvent();
-        setView();
+        //setView();
     }
 
     public String getTitle(){
@@ -67,7 +66,7 @@ public class LoginGUI extends JFrame implements ActionListener{
         showPassword.addActionListener(this);
     }
 
-    private void setView(){
+    public void display(){
         setTitle(getTitle());
         setVisible(true);
         setBounds(10,10,370,500);
@@ -88,9 +87,9 @@ public class LoginGUI extends JFrame implements ActionListener{
             iUsuario=iBusca.buscarUsuario(userText);
 
             if (userText.equalsIgnoreCase(iUsuario.getAlias()) && pwdText.equalsIgnoreCase(iUsuario.getPassword())) {
-                Sesion sesion = new Sesion((Usuario) iUsuario);
+                Sesion.getInstance().setUsuario((Usuario) iUsuario);
                 JOptionPane.showMessageDialog(this, "Login Successful");
-                PublicacionesUsuarioGUI publicacionesUsuarioGUI = new PublicacionesUsuarioGUI(new ControladorUsuario(sesion));
+                PublicacionesUsuarioGUI publicacionesUsuarioGUI = new PublicacionesUsuarioGUI();
                 this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
