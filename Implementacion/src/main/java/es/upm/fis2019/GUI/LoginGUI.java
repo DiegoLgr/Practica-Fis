@@ -118,7 +118,7 @@ public class LoginGUI extends JFrame implements ActionListener{
     public void display(){
         setTitle(getTitle());
         setVisible(true);
-        setBounds(10,10,370,500);
+        setBounds(500,200,370,500);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
     }

@@ -20,6 +20,7 @@ public class WriteGUI extends JFrame implements ActionListener {
     private GridBagConstraints ctes = new GridBagConstraints();
     private String tipo;
     private IPublicacion publicacion;
+    private ManagerGUI gui;
 
     public WriteGUI(IPublicacion publicacion, String tipo) {
         this.publicacion = publicacion;
@@ -28,15 +29,14 @@ public class WriteGUI extends JFrame implements ActionListener {
         addComponents();
         this.tipo = tipo;
         this.setTitle(tipo);
-        setView();
     }
-    public WriteGUI(String tipo) {
+    public WriteGUI(ManagerGUI gui) {
+        this.gui = gui;
         this.getContentPane().setLayout(new GridBagLayout());
         setWrite();
         addComponents();
-        this.tipo = tipo;
+        this.tipo = "Publicacion";
         this.setTitle(tipo);
-        setView();
     }
 
     private void addTextArea() {
@@ -84,7 +84,7 @@ public class WriteGUI extends JFrame implements ActionListener {
         ctes.weighty = 0.0;
     }
 
-    private void setView() {
+    public void display() {
         setBounds(10, 10, 300, 300);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
@@ -136,6 +136,7 @@ public class WriteGUI extends JFrame implements ActionListener {
                 case "Publicacion":
                     IPublica controladorUsuario = new ControladorUsuario();
                     controladorUsuario.publicar(texto, tipo);
+                    gui.getPublicacionesUsuario().display();
                     break;
                 case "Comentario":
                     IComenta controladorPublicaciones = App.getControladorPublicaciones();

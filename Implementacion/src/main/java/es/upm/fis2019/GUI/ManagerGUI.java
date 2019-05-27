@@ -13,7 +13,7 @@ public class ManagerGUI {
 
     public ManagerGUI() {
         this.login = new LoginGUI(this);
-        this.publicacionesUsuario = new PublicacionesUsuarioGUI();
+        this.publicacionesUsuario = new PublicacionesUsuarioGUI(this);
     }
 
     public void run() {
