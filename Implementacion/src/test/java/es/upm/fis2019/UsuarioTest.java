@@ -44,7 +44,7 @@ public class UsuarioTest {
 
     @Test
     public void cambiarAlias() {
-        IComando com= new ComandoCambiarAlias("loco");
+        IComando com= new ComandoCambiarAlias("lco");
         com.ejecutar();
     }
 }

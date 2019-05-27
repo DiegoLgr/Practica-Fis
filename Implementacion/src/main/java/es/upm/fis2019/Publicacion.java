@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IComentable {
+public abstract class Publicacion implements IPublicacion,ILikeable,IComentable {
     private String id;
     private int likes;
     private int dislikes;
@@ -136,14 +136,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
         accesobd.desconectar();
     }
 
-    @Override
-    public void Borrar(){
-        String query="delete from publicacion where id = '"+this.id+"';"  ;
 
-        accesobd.conectar();
-        accesobd.ejecutar(query);
-        accesobd.desconectar();
-    }
 
     @Override
     public void Comentar(String id,String txt){
@@ -168,13 +161,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
         return aux;
     }
 
-    public static void main(String[] args) {
-        Publicacion a=new PublicacionEnlace("a",3,4,new Enlace("asd"));
-        a.Comentar("c","askjvljylvgg");
-        a.Borrar();
 
-       System.out.println(a.getComentarios().toString());
-    }
 
 }
 

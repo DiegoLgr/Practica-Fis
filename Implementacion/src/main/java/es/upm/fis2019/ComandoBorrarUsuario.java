@@ -7,8 +7,6 @@ public class ComandoBorrarUsuario implements IComando {
 
     @Override
     public void ejecutar() {
-        Iborrable publicacion = this.usuario;
-        publicacion.Borrar();
 
     }
 }
