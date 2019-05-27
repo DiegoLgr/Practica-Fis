@@ -15,12 +15,12 @@ import java.util.List;
 
 public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
 
-    //TODO COMMIT GRANDE, POSIBLEMENTE EL SABADO. BUSCAR PUBLICACIONES EN BASE DE DATOS LEER LISTA Y DEVOLVER 5 EN FUNCION DE LA PAGINA EN LA QUE NOS ENCONTREMOS(MAX 10)
-
 
     private IPidePublicacion gestorPublicaciones;
     private GridBagConstraints ctes = new GridBagConstraints();
     private JButton publicar = new JButton("PUBLICAR");
+    private JButton derecha = new JButton("=>");
+    private JButton izquierda = new JButton("<=");
 
 
     public PublicacionesUsuarioGUI(IPidePublicacion gestorPublicaciones) {
@@ -34,40 +34,46 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
 
     private void addButtons() {
 
-        ctes.gridx = 0;
+        ctes.gridx = 1;
         ctes.gridy = 0;
-        ctes.gridwidth = 2;
+        ctes.gridwidth = 1;
         ctes.gridheight = 1;
-        ctes.weighty = 1.0;
         ctes.weightx = 1.0;
         this.getContentPane().add(publicar, ctes);
+        reset();
 
     }
 
     private void addPublications() {
-        List<IPublicacion>listPublicaciones = gestorPublicaciones.getPublicacionesPropias();
-        String text = "Lorem ipsum dolor sit amet consectetur adipiscing elit, volutpat fames quam aliquet ac cras, curae varius vestibulum proin eleifend tempor. ";
+        //TODO cambiar el new y que ya esten instanciadas las publicaciones GUI al llamar al metodo y que lo que haga sea  coger publicacion 1 y situarla en el 0,1 , la dos y en el 0,2...
+        List<IPublicacion> listPublicaciones = gestorPublicaciones.getPublicacionesPropias();
+//        String text = "Lorem ipsum dolor sit amet consectetur adipiscing elit, volutpat fames quam aliquet ac cras, curae varius vestibulum proin eleifend tempor. ";
         for (int i = 0; i < listPublicaciones.size(); i++) {
             ctes.gridx = 0;
             ctes.gridy = i + 1;
-            ctes.gridwidth = 6;
+            ctes.gridwidth = 3;
             ctes.gridheight = 1;
             ctes.weighty = 1.0;
             ctes.fill = GridBagConstraints.BOTH;
             this.getContentPane().add(new PublicationGUI(listPublicaciones.get(i), this), ctes);
+            reset();
         }
     }
 
     private void navegation() {
+        ctes.gridx = 0;
+        ctes.gridy = 7;
+        ctes.gridwidth = 1;
+        ctes.gridheight = 1;
+        this.getContentPane().add(izquierda, ctes);
+        reset();
 
-        for (int i = 0; i < 2; i++) {
-            ctes.gridx = 2 * i;
-            ctes.gridy = 7;
-            ctes.gridwidth = 1;
-            ctes.gridheight = 1;
-            this.getContentPane().add(new JButton(), ctes);
-            reset();
-        }
+        ctes.gridx = 2;
+        ctes.gridy = 7;
+        ctes.gridwidth = 1;
+        ctes.gridheight = 1;
+        this.getContentPane().add(derecha, ctes);
+        reset();
         addActionEvent();
     }
 
@@ -83,7 +89,7 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
     }
 
     private void setView() {
-        setTitle(getTitle());
+        setTitle("Publicaciones");
         setVisible(true);
         setBounds(10, 10, 700, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -94,6 +100,15 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
         ctes.fill = GridBagConstraints.NONE;
         ctes.weightx = 0.0;
         ctes.weighty = 0.0;
+    }
+
+    public void updateGUI() {
+        //TODO solucionar que se inserten 2 veces, TODO arriba deberia solucionarlo
+        this.getContentPane().removeAll();
+        addButtons();
+//        addPublications();
+        navegation();
+        setView();
     }
 
     private List<IPublicacion> getPublicaciones() {
@@ -110,6 +125,7 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == publicar) {
             WriteGUI writeGUI = new WriteGUI("Publicacion");
+            updateGUI();
         }
     }
 }

@@ -1,6 +1,9 @@
 package es.upm.fis2019.GUI;
 
+import es.upm.fis2019.ControladorPublicaciones;
+import es.upm.fis2019.ILikea;
 import es.upm.fis2019.IPublicacion;
+import es.upm.fis2019.Publicacion;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,9 +17,9 @@ public class PublicationGUI extends JPanel implements ActionListener{
 
     private JLabel label;
     private String text;
-    private JButton like = new JButton("LIKE");
-    private JButton dislike = new JButton("DISLIKE");
-    private JButton option = new JButton("OPTION");
+    private JButton like;
+    private JButton dislike;
+    private JButton option = new JButton("OPTIONS");
     private PublicacionesUsuarioGUI publicacionesUsuarioGUI;
     private IPublicacion publicacion;
     private GridBagConstraints ctes = new GridBagConstraints();
@@ -29,6 +32,8 @@ public class PublicationGUI extends JPanel implements ActionListener{
         this.publicacionesUsuarioGUI=publicacionesUsuarioGUI;
         this.text=publicacion.getContenido();
         this.publicacion = publicacion;
+        like = new JButton("LIKE: "+ publicacion.getLikes());
+        dislike = new JButton("DISLIKE: "+ publicacion.getDislikes());
         label = new JLabel("<html><h2>"+this.text+"<h2><html>");
         addComponents();
         setVisible(true);
@@ -47,6 +52,10 @@ public class PublicationGUI extends JPanel implements ActionListener{
         addLabel(label);
     }
 
+    private void updateGUI(){
+        this.revalidate();
+    }
+
     public String getText() {
         return text;
     }
@@ -57,37 +66,17 @@ public class PublicationGUI extends JPanel implements ActionListener{
         addLabel(label);
         addButton(like,0);
         addButton(dislike,1);
-        addLikes();
         addButton(option,2);
         addActionEvent();
         setBorder(new EmptyBorder(5,5,5,5));
     }
 
-    private void addLikes(){
-        ctes.gridx=2;
-        ctes.gridy=0;
-        ctes.gridheight=1;
-        ctes.gridwidth=1;
-        ctes.weighty = 1.0;
-        ctes.weightx = 1.0;
-        add(new JLabel("4"),ctes);
-        reset();
-
-        ctes.gridx=2;
-        ctes.gridy=1;
-        ctes.gridheight=1;
-        ctes.gridwidth=1;
-        ctes.weighty = 1.0;
-        ctes.weightx = 1.0;
-        add(new JLabel("4"),ctes);
-        reset();
-    }
     private void addLabel(JLabel label){
         ctes.gridx=0;
         ctes.gridy=0;
         ctes.gridheight=3;
         ctes.gridwidth=2;
-        ctes.weightx = 1.0;
+        ctes.weightx = 4.0;
         ctes.weighty = 1.0;
         ctes.fill = GridBagConstraints.BOTH;
         add(label,ctes);
@@ -95,7 +84,7 @@ public class PublicationGUI extends JPanel implements ActionListener{
     }
 
     private void addButton(JButton button, int i){
-        ctes.gridx = 3;
+        ctes.gridx = 4;
         ctes.gridy = i;
         ctes.gridwidth = 1;
         ctes.gridheight = 1;
@@ -115,10 +104,16 @@ public class PublicationGUI extends JPanel implements ActionListener{
             OpcionesPublicacionGUI opcionesPublicacionGUI= new OpcionesPublicacionGUI(this, this.publicacionesUsuarioGUI);
         }
         else if(e.getSource()==like){
-            //TODO incrementar likes
+            ILikea like = new ControladorPublicaciones();
+            like.likear((Publicacion) this.publicacion);
+            this.like.setEnabled(false);
+            publicacionesUsuarioGUI.updateGUI();
         }
         else{
-            //TODO incrementar dislikes
+            ILikea dislike = new ControladorPublicaciones();
+            dislike.dislikear((Publicacion) this.publicacion);
+            this.dislike.setEnabled(false);
+            publicacionesUsuarioGUI.updateGUI();
         }
     }
     public IPublicacion getPublicacion(){
