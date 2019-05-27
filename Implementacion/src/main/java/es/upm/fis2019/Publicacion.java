@@ -39,6 +39,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,IComentable 
 
     @Override
     public List<IComentario> getComentarios() {
+        this.comentarios.clear();
         String query = "SELECT c_id, texto, fecha, respuesta, u_id\n" +
                 "FROM comenta INNER JOIN comentario ON comentario.id = comenta.c_id\n" +
                 "WHERE p_id = \""+this.id+"\";";

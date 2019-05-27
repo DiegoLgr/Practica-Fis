@@ -106,6 +106,7 @@ public class PublicationGUI extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == option) {
             OpcionesPublicacionGUI opcionesPublicacionGUI= new OpcionesPublicacionGUI(this, this.publicacionesUsuarioGUI, this.publicacion, this.publicacionesUsuarioGUI);
+            opcionesPublicacionGUI.display();
         }
         else if(e.getSource()==like){
             if(!this.hasBeenLikeado){

@@ -1,5 +1,7 @@
 package es.upm.fis2019.GUI;
 
+import es.upm.fis2019.IComentario;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -10,11 +12,15 @@ public class ComentarioGUI extends JPanel implements ActionListener{
 
     private JButton answer = new JButton("RESPONDER");
     private JLabel label;
+    private JLabel respuesta;
+    private IComentario comentario;
 
     private GridBagConstraints ctes = new GridBagConstraints();
 
-    public ComentarioGUI(String text){
-        this.label = new JLabel("<html><h4>"+text+"<h4><html>");
+    public ComentarioGUI(IComentario comentario){
+        this.comentario = comentario;
+        this.label = new JLabel("<html><h4>"+comentario.getTexto()+"<h4><html>");
+        this.respuesta = new JLabel("<html><h4>"+comentario.getRespuesta()+"<h4><html>");
         addComponents();
         setVisible(true);
     }
@@ -23,6 +29,7 @@ public class ComentarioGUI extends JPanel implements ActionListener{
 
         setLayout(new GridBagLayout());
         addLabel(label);
+        // TODO Añadir la respuesta(es solo posicionar this.respuesta)
         addButton(answer);
         addActionEvent();
         setBorder(new EmptyBorder(5,5,5,5));
@@ -65,7 +72,8 @@ public class ComentarioGUI extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==answer){
-            //WriteGUI writeGUI = new WriteGUI("Respuesta");
+            WriteGUI writeGUI = new WriteGUI(this.comentario);
+            writeGUI.display();
         }
     }
 }
