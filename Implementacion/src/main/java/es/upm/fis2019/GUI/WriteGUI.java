@@ -126,12 +126,16 @@ public class WriteGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == send) {
-
+            String tipo = "Texto";
             String texto = textArea.getText();
+            if (texto.matches("^www.*")){
+                tipo = "Enlace";
+            }
+
             switch (this.tipo) {
                 case "Publicacion":
                     IPublica controladorUsuario = new ControladorUsuario(Sesion.getInstance());
-                    controladorUsuario.publicar(texto, "Texto");
+                    controladorUsuario.publicar(texto, tipo);
                     break;
                 case "Comentario":
                     IComenta controladorPublicaciones = App.getControladorPublicaciones();
