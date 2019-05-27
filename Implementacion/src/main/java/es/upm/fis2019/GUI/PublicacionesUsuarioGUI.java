@@ -87,8 +87,7 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
     }
 
     public void updateGUI() {
-        //TODO solucionar que se inserten 2 veces, TODO arriba deberia solucionarlo
-        this.getContentPane().removeAll();
+        this.panel.removeAll(); this.gestorPublicaciones = App.getContoladorUsuario();
         display();
     }
 

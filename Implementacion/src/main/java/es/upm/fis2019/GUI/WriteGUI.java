@@ -128,24 +128,26 @@ public class WriteGUI extends JFrame implements ActionListener {
         if (e.getSource() == send) {
             String tipo = "Texto";
             String texto = textArea.getText();
-            if (texto.matches("^www.*")){
-                tipo = "Enlace";
-            }
+            if (!texto.isEmpty()) {
+                if (texto.matches("^www.*")) {
+                    tipo = "Enlace";
+                }
 
-            switch (this.tipo) {
-                case "Publicacion":
-                    IPublica controladorUsuario = new ControladorUsuario();
-                    controladorUsuario.publicar(texto, tipo);
-                    gui.getPublicacionesUsuario().display();
-                    break;
-                case "Comentario":
-                    IComenta controladorPublicaciones = App.getControladorPublicaciones();
-                    controladorPublicaciones.comentarPublicacion((Publicacion) publicacion, texto);
+                switch (this.tipo) {
+                    case "Publicacion":
+                        IPublica controladorUsuario = new ControladorUsuario();
+                        controladorUsuario.publicar(texto, tipo);
+                        gui.getPublicacionesUsuario().updateGUI();
+                        break;
+                    case "Comentario":
+                        IComenta controladorPublicaciones = App.getControladorPublicaciones();
+                        controladorPublicaciones.comentarPublicacion((Publicacion) publicacion, texto);
 
-                    break;
-                case "Respuesta":
-                    IResponde controladorComentario = App.getControladorComentario();
-                    break;
+                        break;
+                    case "Respuesta":
+                        IResponde controladorComentario = App.getControladorComentario();
+                        break;
+                }
             }
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }

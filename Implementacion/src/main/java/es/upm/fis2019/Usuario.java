@@ -39,7 +39,7 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable, 
 
     @Override
     public List<IPublicacion> GetPublicacionesUsuario(String PrimeraFecha) {
-
+        this.publicaciones.clear();
         ResultSet rs=getPublicacionesUsuarioBd();
         // loop through the result set
            try {
