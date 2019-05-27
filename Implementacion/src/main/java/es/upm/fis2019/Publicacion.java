@@ -103,36 +103,26 @@ public abstract class Publicacion implements IPublicacion,ILikeable,IComentable 
 
 
     @Override
-    public void Likear(IUsuario user) {
-        this.likes++;
-        UsuariosLikes.add(user); //Se aniade el usuario que ha dado like a una lista de usuarios que dan like
-
-        String query = "UPDATE publicacion\n" +
-                        "SET likes = 1 + (\n" +
-                                "SELECT likes\n" +
-                                "FROM publicacion\n"+
-                                "WHERE id = \"" + this.id + "\"" +
-                        ")\n" +
-                        "WHERE id = \"" + this.id + "\";";
-        accesobd.conectar();
-        accesobd.ejecutar(query);
-        accesobd.desconectar();
+    public void Dislikear(IUsuario user, int likes, int dislikes) {
+      this.Likear(user, likes, dislikes);
     }
 
     @Override
-    public void Dislikear(IUsuario user) {
-        this.dislikes++;
+    public void Likear(IUsuario user, int likes, int dislikes) {
+        this.dislikes = dislikes;
+        this.likes = likes;
         UsuariosDislike.add(user);//Añadir el usuario a una lista de usuarios que han dado dislike
 
-        String query = "UPDATE publicacion\n" +
-                "SET dislikes = 1 + (\n" +
-                    "SELECT dislikes\n" +
-                    "FROM publicacion\n"+
-                    "WHERE id = \"" + this.id + "\"" +
-                ")\n" +
+        String queryLikes = "UPDATE publicacion\n" +
+                "SET likes = " + this.likes + "\n" +
+                "WHERE id = \"" + this.id + "\";";
+
+        String queryDislikes = "UPDATE publicacion\n" +
+                "SET dislikes = " + this.dislikes +"\n" +
                 "WHERE id = \"" + this.id + "\";";
         accesobd.conectar();
-        accesobd.ejecutar(query);
+        accesobd.ejecutar(queryLikes);
+        accesobd.ejecutar(queryDislikes);
         accesobd.desconectar();
     }
 
