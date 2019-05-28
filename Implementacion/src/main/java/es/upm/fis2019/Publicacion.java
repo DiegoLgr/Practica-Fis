@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IComentable {
+public abstract class Publicacion implements IPublicacion,ILikeable,IComentable {
     private String id;
     private int likes;
     private int dislikes;
@@ -39,6 +39,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
 
     @Override
     public List<IComentario> getComentarios() {
+        this.comentarios.clear();
         String query = "SELECT c_id, texto, fecha, respuesta, u_id\n" +
                 "FROM comenta INNER JOIN comentario ON comentario.id = comenta.c_id\n" +
                 "WHERE p_id = \""+this.id+"\";";
@@ -103,47 +104,30 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
 
 
     @Override
-    public void Likear(IUsuario user) {
-        this.likes++;
-        UsuariosLikes.add(user); //Se aniade el usuario que ha dado like a una lista de usuarios que dan like
-
-        String query = "UPDATE publicacion\n" +
-                        "SET likes = 1 + (\n" +
-                                "SELECT likes\n" +
-                                "FROM publicacion\n"+
-                                "WHERE id = \"" + this.id + "\"" +
-                        ")\n" +
-                        "WHERE id = \"" + this.id + "\";";
-        accesobd.conectar();
-        accesobd.ejecutar(query);
-        accesobd.desconectar();
+    public void Dislikear(IUsuario user, int likes, int dislikes) {
+      this.Likear(user, likes, dislikes);
     }
 
     @Override
-    public void Dislikear(IUsuario user) {
-        this.dislikes++;
+    public void Likear(IUsuario user, int likes, int dislikes) {
+        this.dislikes = dislikes;
+        this.likes = likes;
         UsuariosDislike.add(user);//Añadir el usuario a una lista de usuarios que han dado dislike
 
-        String query = "UPDATE publicacion\n" +
-                "SET dislikes = 1 + (\n" +
-                    "SELECT dislikes\n" +
-                    "FROM publicacion\n"+
-                    "WHERE id = \"" + this.id + "\"" +
-                ")\n" +
+        String queryLikes = "UPDATE publicacion\n" +
+                "SET likes = " + this.likes + "\n" +
+                "WHERE id = \"" + this.id + "\";";
+
+        String queryDislikes = "UPDATE publicacion\n" +
+                "SET dislikes = " + this.dislikes +"\n" +
                 "WHERE id = \"" + this.id + "\";";
         accesobd.conectar();
-        accesobd.ejecutar(query);
+        accesobd.ejecutar(queryLikes);
+        accesobd.ejecutar(queryDislikes);
         accesobd.desconectar();
     }
 
-    @Override
-    public void Borrar(){
-        String query="delete from publicacion where id = '"+this.id+"';"  ;
 
-        accesobd.conectar();
-        accesobd.ejecutar(query);
-        accesobd.desconectar();
-    }
 
     @Override
     public void Comentar(String id,String txt){
@@ -168,13 +152,7 @@ public abstract class Publicacion implements IPublicacion,ILikeable,Iborrable,IC
         return aux;
     }
 
-    public static void main(String[] args) {
-        Publicacion a=new PublicacionEnlace("a",3,4,new Enlace("asd"));
-        a.Comentar("c","askjvljylvgg");
-        a.Borrar();
 
-       System.out.println(a.getComentarios().toString());
-    }
 
 }
 

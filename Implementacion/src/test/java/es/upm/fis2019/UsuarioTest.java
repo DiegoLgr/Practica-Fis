@@ -9,10 +9,10 @@ import static org.junit.Assert.*;
 public class UsuarioTest {
 
     Sesion sesion;
-    @Before
-    public void setUp() throws Exception {
-        sesion = new Sesion( new Usuario("Siorata", "", "Siorata"));
-    }
+//    @Before
+//    public void setUp() throws Exception {
+//        sesion = new Sesion( new Usuario("Siorata", "", "Siorata"));
+//    }
 
     @After
     public void tearDown() throws Exception {
@@ -44,7 +44,7 @@ public class UsuarioTest {
 
     @Test
     public void cambiarAlias() {
-        IComando com= new ComandoCambiarAlias("loco");
+        IComando com= new ComandoCambiarAlias("lco");
         com.ejecutar();
     }
 }

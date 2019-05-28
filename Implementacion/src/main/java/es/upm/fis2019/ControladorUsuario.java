@@ -7,17 +7,14 @@ import java.util.Date;
 import java.util.List;
 
 public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublica, IPidePublicacion {
-    private Sesion sesion;
-
-	public ControladorUsuario(Sesion sesion){
-		this.sesion = Sesion.getInstance();
-	}
 
 	public Boolean verificar(String credencial, String passw){
 		return true;
 	}
-	public Boolean cambiarAlias(String nuevoAlias){
-		return true;
+	public void cambiarAlias(String nuevoAlias){
+		ComandoCambiarAlias cambiarAlias = new ComandoCambiarAlias(nuevoAlias);
+		cambiarAlias.ejecutar();
+
 	}
 	public void eliminarUsuario(Usuario usuario){
 
@@ -42,7 +39,7 @@ public class ControladorUsuario implements IAutentica, IEliminarUsuario, IPublic
 
 	public List<IPublicacion> getPublicacionesPropias(){
 		ComandoGetPublicacionesUsuario comandoGetPublicacionesUsuario =
-				new ComandoGetPublicacionesUsuario(sesion.getUsuario());
+				new ComandoGetPublicacionesUsuario(Sesion.getInstance().getUsuario());
 		comandoGetPublicacionesUsuario.ejecutar();
 		return comandoGetPublicacionesUsuario.getPublicaciones();
 	}

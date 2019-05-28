@@ -36,11 +36,10 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable, 
     public List<IPublicacion> GetPublicacionesTimeline(String PrimeraFecha) {
         return null;
     }
-    @Override
-    public void Borrar(){}
+
     @Override
     public List<IPublicacion> GetPublicacionesUsuario(String PrimeraFecha) {
-
+        this.publicaciones.clear();
         ResultSet rs=getPublicacionesUsuarioBd();
         // loop through the result set
            try {
@@ -130,6 +129,19 @@ public class Usuario implements IUsuario, IRecuperador, IPublicador, Iborrable, 
 
     @Override
     public void VerificarCredenciales(String credencial, String pssw) {
+
+    }
+
+    @Override
+    public void borrarPublicacion(IPublicacion p) {
+
+        String query="delete from publicacion where id = '"+p.getId()+"';"  ;
+
+        accesobd.conectar();
+        accesobd.ejecutar(query);
+        accesobd.desconectar();
+        if(publicaciones.contains(p))
+        publicaciones.remove(p);
 
     }
 }

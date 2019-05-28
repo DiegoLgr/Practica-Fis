@@ -6,7 +6,7 @@ public class ControladorPublicaciones implements IComenta, IBorraPublicacion, IL
 		comandoComentarPubli.ejecutar();
 		return true;
 	}
-	public Boolean borrarPublicacion(Publicacion publicacion){
+	public Boolean borrarPublicacion(IPublicacion publicacion){
 
 		ComandoBorrarPublicacion borrarPublicacion = new ComandoBorrarPublicacion(publicacion);
 
@@ -14,14 +14,15 @@ public class ControladorPublicaciones implements IComenta, IBorraPublicacion, IL
 
 		return true;
 	};
-	public Boolean likear(Publicacion publicacion){
-
+	public Boolean likear(Publicacion publicacion, int likes, int dislikes){
 		IComando comandoLikearPublicacion = new ComandoLikearPublicacion(publicacion);
+		((ComandoLikearPublicacion) comandoLikearPublicacion).setLikesDislikes(likes, dislikes);
 		comandoLikearPublicacion.ejecutar();
 		return true;
 	};
-	public Boolean dislikear(Publicacion publicacion){
+	public Boolean dislikear(Publicacion publicacion, int likes, int dislikes){
 		IComando dislikear = new ComandoDislikearPublicacion(publicacion);
+		((ComandoDislikearPublicacion) dislikear).setLikesDislikes(likes, dislikes);
 		dislikear.ejecutar();
 		return true;
 	};

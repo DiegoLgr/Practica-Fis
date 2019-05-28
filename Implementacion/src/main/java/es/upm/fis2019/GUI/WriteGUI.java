@@ -20,23 +20,35 @@ public class WriteGUI extends JFrame implements ActionListener {
     private GridBagConstraints ctes = new GridBagConstraints();
     private String tipo;
     private IPublicacion publicacion;
+    private ManagerGUI gui;
+    private OpcionesPublicacionGUI parentView;
+    private IComentario comentario;
 
-    public WriteGUI(IPublicacion publicacion, String tipo) {
+    public WriteGUI(IPublicacion publicacion, String tipo, OpcionesPublicacionGUI parentView) {
+        this.parentView = parentView;
         this.publicacion = publicacion;
         this.getContentPane().setLayout(new GridBagLayout());
         setWrite();
         addComponents();
         this.tipo = tipo;
         this.setTitle(tipo);
-        setView();
     }
-    public WriteGUI(String tipo) {
+    public WriteGUI(ManagerGUI gui) {
+        this.gui = gui;
         this.getContentPane().setLayout(new GridBagLayout());
         setWrite();
         addComponents();
-        this.tipo = tipo;
+        this.tipo = "Publicacion";
         this.setTitle(tipo);
-        setView();
+    }
+    public WriteGUI(IComentario comentario) {
+        this.comentario = comentario;
+        this.gui = gui;
+        this.getContentPane().setLayout(new GridBagLayout());
+        setWrite();
+        addComponents();
+        this.tipo = "Cometario";
+        this.setTitle(tipo);
     }
 
     private void addTextArea() {
@@ -84,7 +96,7 @@ public class WriteGUI extends JFrame implements ActionListener {
         ctes.weighty = 0.0;
     }
 
-    private void setView() {
+    public void display() {
         setBounds(10, 10, 300, 300);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
@@ -128,24 +140,28 @@ public class WriteGUI extends JFrame implements ActionListener {
         if (e.getSource() == send) {
             String tipo = "Texto";
             String texto = textArea.getText();
-            if (texto.matches("^www.*")){
-                tipo = "Enlace";
-            }
+            if (!texto.isEmpty()) {
+                if (texto.matches("^www.*")) {
+                    tipo = "Enlace";
+                }
 
-            switch (this.tipo) {
-                case "Publicacion":
-                    IPublica controladorUsuario = new ControladorUsuario(Sesion.getInstance());
-                    controladorUsuario.publicar(texto, tipo);
-                    break;
-                case "Comentario":
-                    IComenta controladorPublicaciones = App.getControladorPublicaciones();
-                    controladorPublicaciones.comentarPublicacion((Publicacion) publicacion, texto);
-
-                    break;
-                case "Respuesta":
-                    IResponde controladorComentario = App.getControladorComentario();
-                    controladorComentario.responderComentario(texto);
-                    break;
+                switch (this.tipo) {
+                    case "Publicacion":
+                        IPublica controladorUsuario = new ControladorUsuario();
+                        controladorUsuario.publicar(texto, tipo);
+                        gui.getPublicacionesUsuario().updateGUI();
+                        break;
+                    case "Comentario":
+                        IComenta controladorPublicaciones = App.getControladorPublicaciones();
+                        controladorPublicaciones.comentarPublicacion((Publicacion) publicacion, texto);
+                        parentView.resetView();
+                        break;
+                    case "Respuesta":
+                        IResponde controladorComentario = App.getControladorComentario();
+                        controladorComentario.responderComentario(texto, (IRespondible) this.comentario);
+                        parentView.resetView();
+                        break;
+                }
             }
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }

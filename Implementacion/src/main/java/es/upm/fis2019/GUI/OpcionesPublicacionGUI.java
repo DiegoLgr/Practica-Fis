@@ -1,10 +1,13 @@
 package es.upm.fis2019.GUI;
 
+import es.upm.fis2019.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
 public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
 
@@ -12,19 +15,16 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
     private JButton comentar = new JButton("COMMENT");
     private String text;
     private GridBagConstraints ctes = new GridBagConstraints();
-    private PublicacionesUsuarioGUI publicacionesUsuarioGUI;
     private PublicationGUI publicationGUI;
+    private IPublicacion publicacion;
+    private PublicacionesUsuarioGUI gui;
 
-    public OpcionesPublicacionGUI(PublicationGUI publicationGUI, PublicacionesUsuarioGUI publicacionesUsuarioGUI){
-        this.publicacionesUsuarioGUI=publicacionesUsuarioGUI;
+    public OpcionesPublicacionGUI(PublicationGUI publicationGUI, IPublicacion publicacion, PublicacionesUsuarioGUI gui){
+        this.gui = gui;
+        this.publicacion = publicacion;
         this.text= publicationGUI.getText();
         this.publicationGUI = publicationGUI;
         this.getContentPane().setLayout(new GridBagLayout());
-        addActionEvent();
-        addButtons();
-        addPublication();
-        addComments();
-        setView();
     }
 
     private void addButtons(){
@@ -48,7 +48,11 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
         reset();
     }
 
-    private void setView(){
+    public void display(){
+        addActionEvent();
+        addButtons();
+        addPublication();
+        addComments();
         setTitle(getTitle());
         setVisible(true);
         setBounds(10,10,500,900);
@@ -69,15 +73,15 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
     }
 
     private void addComments(){
-        String text = "Lorem ipsum dolor sit amet consectetur adipiscing elit, volutpat fames quam aliquet ac cras, curae varius vestibulum proin eleifend tempor. ";
-        for(int i=0; i<5; i++){
+        List<IComentario> comentarios = this.publicacion.getComentarios();
+        for(int i=0; i<comentarios.size(); i++){
             ctes.gridx=0;
             ctes.gridy=i+2;
             ctes.gridwidth=6;
             ctes.gridheight=1;
             ctes.weighty = 1.0;
             ctes.fill = GridBagConstraints.BOTH;
-            this.getContentPane().add(new ComentarioGUI(text), ctes);
+            this.getContentPane().add(new ComentarioGUI(comentarios.get(i)),ctes);
             reset();
         }
     }
@@ -95,13 +99,20 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
     }
 
 
+    public void resetView(){
+        this.getContentPane().removeAll();
+        this.display();
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==comentar){
-            WriteGUI writeGUI = new WriteGUI(this.publicationGUI.getPublicacion(), "Comentario");
+            WriteGUI writeGUI = new WriteGUI(this.publicationGUI.getPublicacion(), "Comentario", this);
+            writeGUI.display();
         }
         else {
-            //TODO Que borre de verdad
+            IBorraPublicacion borrador = App.getControladorPublicaciones();
+            borrador.borrarPublicacion(this.publicacion);
+            gui.updateGUI();
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
     }

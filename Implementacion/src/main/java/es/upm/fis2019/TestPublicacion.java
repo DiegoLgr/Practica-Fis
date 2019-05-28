@@ -8,7 +8,7 @@ public class TestPublicacion {
 
         ControladorPublicaciones controladorPublicaciones = new ControladorPublicaciones();
         //Dar like
-        controladorPublicaciones.likear(publicacion);
+        controladorPublicaciones.likear(publicacion, 1, 1);
         System.out.println("Like +1 , test get Likes should be 2: " + publicacionEnVista.getLikes());
 
 

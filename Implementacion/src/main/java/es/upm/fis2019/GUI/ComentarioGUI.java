@@ -1,5 +1,7 @@
 package es.upm.fis2019.GUI;
 
+import es.upm.fis2019.IComentario;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -10,11 +12,15 @@ public class ComentarioGUI extends JPanel implements ActionListener{
 
     private JButton answer = new JButton("RESPONDER");
     private JLabel label;
+    private JLabel respuesta;
+    private IComentario comentario;
 
     private GridBagConstraints ctes = new GridBagConstraints();
 
-    public ComentarioGUI(String text){
-        this.label = new JLabel("<html><h4>"+text+"<h4><html>");
+    public ComentarioGUI(IComentario comentario){
+        this.comentario = comentario;
+        this.label = new JLabel("<html><h4>"+comentario.getTexto()+"<h4><html>");
+        this.respuesta = new JLabel("<html><h4>"+comentario.getRespuesta()+"<h4><html>");
         addComponents();
         setVisible(true);
     }
@@ -22,13 +28,15 @@ public class ComentarioGUI extends JPanel implements ActionListener{
     private void addComponents(){
 
         setLayout(new GridBagLayout());
-        addLabel(label);
+        addLabel();
+        addRespuesta();
+        // TODO Añadir la respuesta(es solo posicionar this.respuesta)
         addButton(answer);
         addActionEvent();
         setBorder(new EmptyBorder(5,5,5,5));
     }
 
-    private void addLabel(JLabel label){
+    private void addLabel(){
         ctes.gridx=0;
         ctes.gridy=0;
         ctes.gridheight=3;
@@ -36,7 +44,7 @@ public class ComentarioGUI extends JPanel implements ActionListener{
         ctes.weightx = 1.0;
         ctes.weighty = 1.0;
         ctes.fill = GridBagConstraints.BOTH;
-        add(label,ctes);
+        add(this.label,ctes);
         reset();
     }
 
@@ -47,6 +55,17 @@ public class ComentarioGUI extends JPanel implements ActionListener{
         ctes.gridheight = 1;
         ctes.weighty = 1.0;
         add (button, ctes);
+        reset();
+    }
+
+    private void addRespuesta(){
+        ctes.gridx = 1;
+        ctes.gridy = 3;
+        ctes.gridwidth = 1;
+        ctes.gridheight = 1;
+        ctes.weighty = 1.0;
+        ctes.fill = GridBagConstraints.BOTH;
+        add(this.respuesta,ctes);
         reset();
     }
 
@@ -65,7 +84,8 @@ public class ComentarioGUI extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==answer){
-            WriteGUI writeGUI = new WriteGUI("Respuesta");
+            WriteGUI writeGUI = new WriteGUI(this.comentario);
+            writeGUI.display();
         }
     }
 }

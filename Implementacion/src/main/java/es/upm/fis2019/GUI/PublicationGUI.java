@@ -15,6 +15,10 @@ public class PublicationGUI extends JPanel implements ActionListener{
 
     //TODO añadir label likes y dislikes, commit nocturno probablemente
 
+    private int likes;
+    private int dislikes;
+    private boolean hasBeenLikeado;
+    private boolean hasBeenDislikeado;
     private JLabel label;
     private String text;
     private JButton like;
@@ -24,15 +28,15 @@ public class PublicationGUI extends JPanel implements ActionListener{
     private IPublicacion publicacion;
     private GridBagConstraints ctes = new GridBagConstraints();
 
-//    public PublicationGUI(){
-//        setVisible(true);
-//    }
 
     public PublicationGUI(IPublicacion publicacion, PublicacionesUsuarioGUI publicacionesUsuarioGUI){
         this.publicacionesUsuarioGUI=publicacionesUsuarioGUI;
         this.text=publicacion.getContenido();
         this.publicacion = publicacion;
-        like = new JButton("LIKE: "+ publicacion.getLikes());
+        this.likes = publicacion.getLikes();
+        this.dislikes = publicacion.getDislikes();
+
+        like = new JButton("LIKE: "+ this.likes);
         dislike = new JButton("DISLIKE: "+ publicacion.getDislikes());
         label = new JLabel("<html><h2>"+this.text+"<h2><html>");
         addComponents();
@@ -101,19 +105,43 @@ public class PublicationGUI extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == option) {
-            OpcionesPublicacionGUI opcionesPublicacionGUI= new OpcionesPublicacionGUI(this, this.publicacionesUsuarioGUI);
+            OpcionesPublicacionGUI opcionesPublicacionGUI= new OpcionesPublicacionGUI(this, this.publicacion, this.publicacionesUsuarioGUI);
+            opcionesPublicacionGUI.display();
         }
         else if(e.getSource()==like){
+            if(!this.hasBeenLikeado){
+                this.likes ++;
+                this.hasBeenLikeado = true;
+            }else{
+               this.likes --;
+               this.hasBeenLikeado = false;
+            }
+            if(this.hasBeenDislikeado){
+                this.dislikes --;
+                this.hasBeenDislikeado = false;
+            }
+
             ILikea like = new ControladorPublicaciones();
-            like.likear((Publicacion) this.publicacion);
-            this.like.setEnabled(false);
-            publicacionesUsuarioGUI.updateGUI();
+            like.likear((Publicacion) this.publicacion, this.likes, this.dislikes);
+            this.like.setText("LIKES: " + this.likes);
+            this.dislike.setText("DISLIKES: " + this.dislikes);
         }
         else{
+            if(!this.hasBeenDislikeado){
+                this.dislikes ++;
+                this.hasBeenDislikeado = true;
+            }else{
+               this.dislikes --;
+               this.hasBeenDislikeado = false;
+            }
+            if(this.hasBeenLikeado){
+                this.likes --;
+                this.hasBeenLikeado = false;
+            }
             ILikea dislike = new ControladorPublicaciones();
-            dislike.dislikear((Publicacion) this.publicacion);
-            this.dislike.setEnabled(false);
-            publicacionesUsuarioGUI.updateGUI();
+            dislike.dislikear((Publicacion) this.publicacion, this.likes, this.dislikes);
+            this.like.setText("LIKES: " + this.likes);
+            this.dislike.setText("DISLIKES: " + this.dislikes);
         }
     }
     public IPublicacion getPublicacion(){
