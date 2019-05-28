@@ -39,7 +39,7 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
         this.getContentPane().add(scrollPane);
         this.panel.setBorder(BorderFactory.createEmptyBorder(50,50,50,50));
         this.panel.setBackground(Color.WHITE);
-        setBounds(550,100,700,900);
+        setBounds(600,90,700,900);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBackground(Color.WHITE);
