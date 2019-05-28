@@ -19,8 +19,10 @@ public class ComentarioGUI extends JPanel implements ActionListener{
 
     public ComentarioGUI(IComentario comentario){
         this.comentario = comentario;
-        this.label = new JLabel("<html><h4>"+comentario.getTexto()+"<h4><html>");
-        this.respuesta = new JLabel("<html><h4>"+comentario.getRespuesta()+"<h4><html>");
+        this.label = new JLabel("<html><h2>"+comentario.getTexto()+"</h2></html>");
+        String respuesta = comentario.getRespuesta();
+        if(respuesta != null)
+            this.respuesta = new JLabel("<html><p>"+respuesta+"</p></html>");
         addComponents();
         setVisible(true);
     }
@@ -30,7 +32,6 @@ public class ComentarioGUI extends JPanel implements ActionListener{
         setLayout(new GridBagLayout());
         addLabel();
         addRespuesta();
-        // TODO Añadir la respuesta(es solo posicionar this.respuesta)
         addButton(answer);
         addActionEvent();
         setBorder(new EmptyBorder(5,5,5,5));
@@ -59,6 +60,8 @@ public class ComentarioGUI extends JPanel implements ActionListener{
     }
 
     private void addRespuesta(){
+        if(respuesta == null) return;
+
         ctes.gridx = 1;
         ctes.gridy = 3;
         ctes.gridwidth = 1;

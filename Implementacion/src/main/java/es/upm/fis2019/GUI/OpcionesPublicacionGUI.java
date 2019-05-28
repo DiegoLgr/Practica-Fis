@@ -61,7 +61,7 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
     }
 
     private void addPublication(){
-        JLabel label = new JLabel("<html><h2>"+this.text+"<h2><html>");
+        JLabel label = new JLabel("<html><h1 style=\"color:red;\">"+this.text+"</h1></html>");
         ctes.gridx=0;
         ctes.gridy=1;
         ctes.gridwidth=6;
