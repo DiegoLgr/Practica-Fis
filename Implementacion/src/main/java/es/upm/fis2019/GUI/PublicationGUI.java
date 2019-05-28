@@ -23,7 +23,9 @@ public class PublicationGUI extends JPanel implements ActionListener{
     private String text;
     private JButton like;
     private JButton dislike;
-    private JButton option = new JButton("OPTIONS");
+    private String applyButtonTextColor = "color: #ffffff;";
+    private String applyButtonTextSize = "font-size: 9px;";
+    private JButton option = new JButton("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">MORE</spam></html>");
     private PublicacionesUsuarioGUI publicacionesUsuarioGUI;
     private IPublicacion publicacion;
     private GridBagConstraints ctes = new GridBagConstraints();
@@ -36,8 +38,8 @@ public class PublicationGUI extends JPanel implements ActionListener{
         this.likes = publicacion.getLikes();
         this.dislikes = publicacion.getDislikes();
 
-        like = new JButton("LIKE: "+ this.likes);
-        dislike = new JButton("DISLIKE: "+ publicacion.getDislikes());
+        like = new JButton("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">LIKES  "+this.likes+"</spam></html>");
+        dislike = new JButton("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">DISLIKES  "+this.dislikes+"</spam></html>");
         label = new JLabel("<html><h2>"+this.text+"<h2><html>");
         addComponents();
         setVisible(true);
@@ -65,7 +67,7 @@ public class PublicationGUI extends JPanel implements ActionListener{
     }
 
     private void addComponents(){
-
+        setBackground(Color.WHITE);
         setLayout(new GridBagLayout());
         addLabel(label);
         addButton(like,0);
@@ -88,11 +90,13 @@ public class PublicationGUI extends JPanel implements ActionListener{
     }
 
     private void addButton(JButton button, int i){
-        ctes.gridx = 4;
+        ctes.gridx = 5;
         ctes.gridy = i;
-        ctes.gridwidth = 1;
+        ctes.gridwidth = 2;
         ctes.gridheight = 1;
         ctes.weighty = 1.0;
+        button.setBackground(new Color(12, 86, 206));
+        button.setPreferredSize(new Dimension(120, 30));
         add (button, ctes);
         reset();
     }
@@ -123,8 +127,8 @@ public class PublicationGUI extends JPanel implements ActionListener{
 
             ILikea like = new ControladorPublicaciones();
             like.likear((Publicacion) this.publicacion, this.likes, this.dislikes);
-            this.like.setText("LIKES: " + this.likes);
-            this.dislike.setText("DISLIKES: " + this.dislikes);
+            this.like.setText("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">LIKES  "+this.likes+"</spam></html>");
+            this.dislike.setText("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">DISLIKES  "+this.dislikes+"</spam></html>");
         }
         else{
             if(!this.hasBeenDislikeado){
@@ -140,8 +144,8 @@ public class PublicationGUI extends JPanel implements ActionListener{
             }
             ILikea dislike = new ControladorPublicaciones();
             dislike.dislikear((Publicacion) this.publicacion, this.likes, this.dislikes);
-            this.like.setText("LIKES: " + this.likes);
-            this.dislike.setText("DISLIKES: " + this.dislikes);
+            this.like.setText("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">LIKES  "+this.likes+"</spam></html>");
+            this.dislike.setText("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">DISLIKES  "+this.dislikes+"</spam></html>");
         }
     }
     public IPublicacion getPublicacion(){

@@ -10,7 +10,9 @@ import java.awt.event.ActionListener;
 
 public class ComentarioGUI extends JPanel implements ActionListener{
 
-    private JButton answer = new JButton("RESPONDER");
+    private String applyButtonTextColor = "color: #ffffff;";
+    private String applyButtonTextSize = "font-size: 12px;";
+    private JButton answer = new JButton("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">RESPONDER</spam></html>");
     private JLabel label;
     private JLabel respuesta;
     private IComentario comentario;
@@ -24,6 +26,7 @@ public class ComentarioGUI extends JPanel implements ActionListener{
         if(respuesta != null)
             this.respuesta = new JLabel("<html><p>"+respuesta+"</p></html>");
         addComponents();
+        setBackground(Color.WHITE);
         setVisible(true);
     }
 
@@ -55,6 +58,7 @@ public class ComentarioGUI extends JPanel implements ActionListener{
         ctes.gridwidth = 1;
         ctes.gridheight = 1;
         ctes.weighty = 1.0;
+        button.setBackground(new Color(12,86,206));
         add (button, ctes);
         reset();
     }

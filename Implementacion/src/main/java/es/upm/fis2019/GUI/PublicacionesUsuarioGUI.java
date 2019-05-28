@@ -20,7 +20,9 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
 
     private IPidePublicacion gestorPublicaciones;
     private GridBagConstraints ctes = new GridBagConstraints();
-    private JButton publicar = new JButton("PUBLICAR");
+    private String applyButtonTextColor = "color: #ffffff;";
+    private String applyButtonTextSize = "font-size: 12px;";
+    private JButton publicar = new JButton("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">PUBLICAR</spam></html>");
     private JPanel panel;
     private ManagerGUI gui;
 
@@ -34,13 +36,14 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
         this.panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.getVerticalScrollBar().setUnitIncrement(20);
 
         this.getContentPane().setPreferredSize(new Dimension(700, 500));
         this.getContentPane().add(scrollPane);
         setTitle("Publicaciones");
         this.panel.setBorder(BorderFactory.createEmptyBorder(50,50,50,50));
+        this.panel.setBackground(Color.WHITE);
         setBounds(500,200,370,500);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -48,13 +51,14 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
     private void addButtons() {
         ctes.gridx = 1;
         ctes.gridy = 0;
-        ctes.gridwidth = 1;
         ctes.gridheight = 1;
+        ctes.gridwidth = 1;
         ctes.weightx = 1.0;
+        publicar.setBackground(new Color(12,86,206));
+        publicar.setPreferredSize(new Dimension(150, 50));
         this.panel.add(publicar, ctes);
         publicar.addActionListener(this);
         reset();
-
     }
 
     // ############# Logica de la vista #############

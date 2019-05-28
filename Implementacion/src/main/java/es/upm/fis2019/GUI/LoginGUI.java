@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 
 public class LoginGUI extends JFrame implements ActionListener {
     private String applyTextColor = "color: #0C56CE;";
-    private String applyButtonTextColor = "color: #ffffff;";
     private String applyTextSize = "font-size: 8px;";
+    private String applyButtonTextColor = "color: #ffffff;";
     private String applyButtonTextSize = "font-size: 12px;";
     private Container container = getContentPane();
     private JLabel titleLabel = new JLabel("<html><h1 style=\""+applyTextColor+"\">LOGIN</h1></html>");

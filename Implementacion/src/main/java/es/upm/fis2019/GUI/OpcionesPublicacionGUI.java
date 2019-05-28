@@ -10,9 +10,10 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 
 public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
-
-    private JButton borrar = new JButton("BORRAR");
-    private JButton comentar = new JButton("COMMENT");
+    private String applyButtonTextColor = "color: #ffffff;";
+    private String applyButtonTextSize = "font-size: 12px;";
+    private JButton borrar = new JButton("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">BORRAR</spam></html>");
+    private JButton comentar = new JButton("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">COMENTAR</spam></html>");
     private String text;
     private GridBagConstraints ctes = new GridBagConstraints();
     private PublicationGUI publicationGUI;
@@ -25,6 +26,7 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
         this.text= publicationGUI.getText();
         this.publicationGUI = publicationGUI;
         this.getContentPane().setLayout(new GridBagLayout());
+        setBackground(Color.WHITE);
     }
 
     private void addButtons(){
@@ -35,6 +37,7 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
         ctes.gridheight=1;
         ctes.weighty = 1.0;
         ctes.weightx = 3.0;
+        borrar.setBackground(new Color(12,86,206));
         this.getContentPane().add(borrar,ctes);
         reset();
 
@@ -44,6 +47,8 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
         ctes.gridheight=1;
         ctes.weighty = 1.0;
         ctes.weightx = 3.0;
+        comentar.setBackground(new Color(12,86,206));
+        this.getContentPane().setBackground(Color.WHITE);
         this.getContentPane().add(comentar,ctes);
         reset();
     }
@@ -61,7 +66,9 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
     }
 
     private void addPublication(){
-        JLabel label = new JLabel("<html><h1 style=\"color:red;\">"+this.text+"</h1></html>");
+        String applyTextColor = "color: #0C56CE;";
+        JLabel label = new JLabel("<html><h1 style=\""+applyTextColor+"\">"+this.text+"</h1></html>");
+        label.setBackground(Color.WHITE);
         ctes.gridx=0;
         ctes.gridy=1;
         ctes.gridwidth=6;
