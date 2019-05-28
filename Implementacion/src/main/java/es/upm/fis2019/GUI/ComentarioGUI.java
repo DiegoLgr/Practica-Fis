@@ -10,7 +10,9 @@ import java.awt.event.ActionListener;
 
 public class ComentarioGUI extends JPanel implements ActionListener{
 
-    private JButton answer = new JButton("RESPONDER");
+    private String applyButtonTextColor = "color: #ffffff;";
+    private String applyButtonTextSize = "font-size: 12px;";
+    private JButton answer = new JButton("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">RESPONDER</spam></html>");
     private JLabel label;
     private JLabel respuesta;
     private IComentario comentario;
@@ -20,9 +22,12 @@ public class ComentarioGUI extends JPanel implements ActionListener{
     public ComentarioGUI(IComentario comentario, OpcionesPublicacionGUI opciones){
         this.opciones = opciones;
         this.comentario = comentario;
-        this.label = new JLabel("<html><h4>"+comentario.getTexto()+"<h4><html>");
-        this.respuesta = new JLabel("<html><h4>"+comentario.getRespuesta()+"<h4><html>");
+        this.label = new JLabel("<html><h2>"+comentario.getTexto()+"</h2></html>");
+        String respuesta = comentario.getRespuesta();
+        if(respuesta != null)
+            this.respuesta = new JLabel("<html><p>"+respuesta+"</p></html>");
         addComponents();
+        setBackground(Color.WHITE);
         setVisible(true);
     }
 
@@ -31,7 +36,6 @@ public class ComentarioGUI extends JPanel implements ActionListener{
         setLayout(new GridBagLayout());
         addLabel();
         addRespuesta();
-        // TODO Añadir la respuesta(es solo posicionar this.respuesta)
         addButton(answer);
         addActionEvent();
         setBorder(new EmptyBorder(5,5,5,5));
@@ -55,11 +59,14 @@ public class ComentarioGUI extends JPanel implements ActionListener{
         ctes.gridwidth = 1;
         ctes.gridheight = 1;
         ctes.weighty = 1.0;
+        button.setBackground(new Color(12,86,206));
         add (button, ctes);
         reset();
     }
 
     private void addRespuesta(){
+        if(respuesta == null) return;
+
         ctes.gridx = 1;
         ctes.gridy = 3;
         ctes.gridwidth = 1;

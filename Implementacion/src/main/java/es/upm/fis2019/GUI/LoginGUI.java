@@ -13,16 +13,22 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginGUI extends JFrame implements ActionListener {
+    private String applyTextColor = "color: #0C56CE;";
+    private String applyTextSize = "font-size: 8px;";
+    private String applyButtonTextColor = "color: #ffffff;";
+    private String applyButtonTextSize = "font-size: 12px;";
     private Container container = getContentPane();
-    private JLabel titleLabel = new JLabel("LOGIN");
-    private JLabel userLabel = new JLabel("USER");
-    private JLabel passwordLabel = new JLabel("PASSWORD");
+    private JLabel titleLabel = new JLabel("<html><h1 style=\""+applyTextColor+"\">LOGIN</h1></html>");
+    private JLabel userLabel = new JLabel("<html><span style=\""+applyTextColor+applyTextSize+"\">Username</spam></html>");
+    private JLabel passwordLabel = new JLabel("<html><span style=\""+applyTextColor+applyTextSize+"\">Password</spam></html>");
     private JTextField userTextField = new JTextField();
     private JPasswordField passwordField = new JPasswordField();
-    private JButton loginButton = new JButton("LOGIN");
+    private JButton loginButton = new JButton("<html><span style=\""+applyButtonTextColor+applyButtonTextSize+"\">LOGIN</spam></html>");
     private JButton cancelButton = new JButton("CANCEL");
-    private JCheckBox showPassword = new JCheckBox("Show password");
+    private JCheckBox showPassword = new JCheckBox("<html><span style=\""+applyTextColor+applyTextSize+"\">show Password</spam></html>");
     private String title = "Login";
+    private int fieldsStartY = 110;
+    private int fieldsStartx = 50;
 
     private ManagerGUI gui;
 
@@ -45,13 +51,15 @@ public class LoginGUI extends JFrame implements ActionListener {
     // ############# Generando los componentes gráficos #############
 
     private void setLocationAndSize() {
-        titleLabel.setBounds(150, 80, 100, 30);
-        userLabel.setBounds(50, 150, 100, 30);
-        passwordLabel.setBounds(50, 220, 100, 30);
-        userTextField.setBounds(150, 150, 150, 30);
-        passwordField.setBounds(150, 220, 150, 30);
-        showPassword.setBounds(150, 250, 150, 30);
-        loginButton.setBounds(50, 300, 100, 30);
+        titleLabel.setBounds(150, 40, 100, 30);
+        userLabel.setBounds(fieldsStartx, fieldsStartY, 100, 15);
+        userTextField.setBounds(fieldsStartx, fieldsStartY+14, 270, 30);
+        passwordLabel.setBounds(fieldsStartx, fieldsStartY+46, 100, 15);
+        passwordField.setBounds(fieldsStartx, fieldsStartY+60, 270, 30);
+        showPassword.setBounds(fieldsStartx + 170, fieldsStartY+92, 150, 15);
+        showPassword.setBackground(new Color(255,255,255));
+        loginButton.setBounds(110, 300, 150, 50);
+        loginButton.setBackground(new Color(12,86,206));
         cancelButton.setBounds(200, 300, 100, 30);
     }
 
@@ -63,7 +71,7 @@ public class LoginGUI extends JFrame implements ActionListener {
         container.add(passwordField);
         container.add(showPassword);
         container.add(loginButton);
-        container.add(cancelButton);
+        //container.add(cancelButton);
     }
 
     private void addActionEvent() {
@@ -107,10 +115,17 @@ public class LoginGUI extends JFrame implements ActionListener {
         IUsuario iUsuario;
         IBusca iBusca = new ControladorGestorUsuarios();
         iUsuario = iBusca.buscarUsuario(userText);
+        if (!userText.isEmpty() && !pwdText.isEmpty()){
+            System.out.println(userText);
+            String realUser = iUsuario.getAlias();
+            String realUserPsw = iUsuario.getPassword();
 
-        if (userText.equalsIgnoreCase(iUsuario.getAlias()) && pwdText.equalsIgnoreCase(iUsuario.getPassword())) {
-            Sesion.getInstance().setUsuario((Usuario) iUsuario);
-            return true;
+            if (userText.equalsIgnoreCase(realUser) && pwdText.equalsIgnoreCase(realUserPsw)) {
+                Sesion.getInstance().setUsuario((Usuario) iUsuario);
+                return true;
+            }else{
+                return false;
+            }
         } else {
             return false;
         }
@@ -124,6 +139,7 @@ public class LoginGUI extends JFrame implements ActionListener {
         setVisible(true);
         setBounds(500, 200, 370, 500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setBackground(Color.white);
         setResizable(false);
     }
 }
