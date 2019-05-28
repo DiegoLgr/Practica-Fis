@@ -35,6 +35,7 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
         panel.setLayout(new GridBagLayout());
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
 
         this.getContentPane().setPreferredSize(new Dimension(700, 500));
         this.getContentPane().add(scrollPane);

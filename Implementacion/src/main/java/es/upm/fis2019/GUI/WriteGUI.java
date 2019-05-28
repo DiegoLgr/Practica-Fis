@@ -159,6 +159,7 @@ public class WriteGUI extends JFrame implements ActionListener {
                     case "Respuesta":
                         IResponde controladorComentario = App.getControladorComentario();
                         controladorComentario.responderComentario(texto, (IRespondible) this.comentario);
+                        parentView.resetView();
                         break;
                 }
             }

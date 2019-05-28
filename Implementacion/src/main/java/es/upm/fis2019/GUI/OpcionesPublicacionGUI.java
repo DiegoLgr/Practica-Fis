@@ -15,15 +15,13 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
     private JButton comentar = new JButton("COMMENT");
     private String text;
     private GridBagConstraints ctes = new GridBagConstraints();
-    private PublicacionesUsuarioGUI publicacionesUsuarioGUI;
     private PublicationGUI publicationGUI;
     private IPublicacion publicacion;
     private PublicacionesUsuarioGUI gui;
 
-    public OpcionesPublicacionGUI(PublicationGUI publicationGUI, PublicacionesUsuarioGUI publicacionesUsuarioGUI, IPublicacion publicacion, PublicacionesUsuarioGUI gui){
+    public OpcionesPublicacionGUI(PublicationGUI publicationGUI, IPublicacion publicacion, PublicacionesUsuarioGUI gui){
         this.gui = gui;
         this.publicacion = publicacion;
-        this.publicacionesUsuarioGUI=publicacionesUsuarioGUI;
         this.text= publicationGUI.getText();
         this.publicationGUI = publicationGUI;
         this.getContentPane().setLayout(new GridBagLayout());
