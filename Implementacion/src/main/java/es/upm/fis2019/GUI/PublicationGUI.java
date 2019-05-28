@@ -17,8 +17,8 @@ public class PublicationGUI extends JPanel implements ActionListener{
 
     private int likes;
     private int dislikes;
-    boolean hasBeenLikeado;
-    boolean hasBeenDislikeado;
+    private boolean hasBeenLikeado;
+    private boolean hasBeenDislikeado;
     private JLabel label;
     private String text;
     private JButton like;
