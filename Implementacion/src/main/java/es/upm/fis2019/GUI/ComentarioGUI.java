@@ -14,10 +14,11 @@ public class ComentarioGUI extends JPanel implements ActionListener{
     private JLabel label;
     private JLabel respuesta;
     private IComentario comentario;
-
+    private OpcionesPublicacionGUI opciones;
     private GridBagConstraints ctes = new GridBagConstraints();
 
-    public ComentarioGUI(IComentario comentario){
+    public ComentarioGUI(IComentario comentario, OpcionesPublicacionGUI opciones){
+        this.opciones = opciones;
         this.comentario = comentario;
         this.label = new JLabel("<html><h4>"+comentario.getTexto()+"<h4><html>");
         this.respuesta = new JLabel("<html><h4>"+comentario.getRespuesta()+"<h4><html>");
@@ -84,7 +85,7 @@ public class ComentarioGUI extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==answer){
-            WriteGUI writeGUI = new WriteGUI(this.comentario);
+            WriteGUI writeGUI = new WriteGUI(this.comentario, opciones);
             writeGUI.display();
         }
     }

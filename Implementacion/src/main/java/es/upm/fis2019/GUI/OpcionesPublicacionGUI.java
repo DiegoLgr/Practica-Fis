@@ -81,7 +81,7 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
             ctes.gridheight=1;
             ctes.weighty = 1.0;
             ctes.fill = GridBagConstraints.BOTH;
-            this.getContentPane().add(new ComentarioGUI(comentarios.get(i)),ctes);
+            this.getContentPane().add(new ComentarioGUI(comentarios.get(i), this),ctes);
             reset();
         }
     }

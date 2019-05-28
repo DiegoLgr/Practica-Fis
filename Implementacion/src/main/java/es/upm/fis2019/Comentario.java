@@ -6,6 +6,8 @@ public class Comentario implements IComentario, IRespondible{
     private String fecha;
     private String respuesta;
     private  String Autor;
+    private Sesion sesion;
+    private Conexion c;
 
     //Constructor para crear los comentarios
     public Comentario(String id, String texto,String autor){
@@ -49,7 +51,13 @@ public class Comentario implements IComentario, IRespondible{
     //Es basicamente un setRespuesta.
     @Override
     public void Responder(String texto) {
-            this.respuesta=texto;
+        c=Conexion.getInstance();
+
+        String query="Update comentario set respuesta='"+ texto +"' where id='"+this.getId()+"';";
+        c.conectar();
+        c.ejecutar(query);
+        c.desconectar();
+        this.respuesta=texto;
     }
 
     @Override
@@ -59,5 +67,13 @@ public class Comentario implements IComentario, IRespondible{
         return aux;
     }
 
+    public static void main(String[] args) {
+        Comentario pene=new Comentario("c4","a","a");
+        ControladorComentario a=new ControladorComentario();
+        a.responderComentario("esto funciona coño",pene);
+
+
+
+    }
 
 }

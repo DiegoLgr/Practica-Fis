@@ -41,13 +41,13 @@ public class WriteGUI extends JFrame implements ActionListener {
         this.tipo = "Publicacion";
         this.setTitle(tipo);
     }
-    public WriteGUI(IComentario comentario) {
+    public WriteGUI(IComentario comentario, OpcionesPublicacionGUI parentView) {
+        this.parentView = parentView;
         this.comentario = comentario;
-        this.gui = gui;
         this.getContentPane().setLayout(new GridBagLayout());
         setWrite();
         addComponents();
-        this.tipo = "Cometario";
+        this.tipo = "Respuesta";
         this.setTitle(tipo);
     }
 
@@ -157,8 +157,9 @@ public class WriteGUI extends JFrame implements ActionListener {
                         parentView.resetView();
                         break;
                     case "Respuesta":
-                        IResponde controladorComentario = App.getControladorComentario();
-                        controladorComentario.responderComentario(texto, (IRespondible) this.comentario);
+//                        IResponde controladorComentario = App.getControladorComentario();
+//                        Comentario comentario = new Comentario("c1", "a", "a");
+                        App.getControladorComentario().responderComentario(texto, (Comentario)this.comentario);
                         parentView.resetView();
                         break;
                 }
