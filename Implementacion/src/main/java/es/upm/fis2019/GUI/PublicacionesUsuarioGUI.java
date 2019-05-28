@@ -38,13 +38,14 @@ public class PublicacionesUsuarioGUI extends JFrame implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+        setResizable(false);
 
         this.getContentPane().setPreferredSize(new Dimension(700, 500));
         this.getContentPane().add(scrollPane);
         setTitle("Publicaciones");
         this.panel.setBorder(BorderFactory.createEmptyBorder(50,50,50,50));
         this.panel.setBackground(Color.WHITE);
-        setBounds(500,200,370,500);
+        setBounds(550,100,700,900);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }

@@ -19,37 +19,54 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
     private PublicationGUI publicationGUI;
     private IPublicacion publicacion;
     private PublicacionesUsuarioGUI gui;
+    private JPanel panel;
 
     public OpcionesPublicacionGUI(PublicationGUI publicationGUI, IPublicacion publicacion, PublicacionesUsuarioGUI gui){
         this.gui = gui;
         this.publicacion = publicacion;
         this.text= publicationGUI.getText();
         this.publicationGUI = publicationGUI;
-        this.getContentPane().setLayout(new GridBagLayout());
+        setLayout();
+    }
+    private void setLayout(){
+        this.panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+
+        this.getContentPane().setPreferredSize(new Dimension(700, 500));
+        this.getContentPane().add(scrollPane);
+        this.panel.setBorder(BorderFactory.createEmptyBorder(50,50,50,50));
+        this.panel.setBackground(Color.WHITE);
+        setBounds(550,100,700,900);
+        pack();
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBackground(Color.WHITE);
+        setResizable(false);
     }
 
     private void addButtons(){
 
-        ctes.gridx=0;
+        ctes.gridx=10;
         ctes.gridy=0;
         ctes.gridwidth=3;
         ctes.gridheight=1;
         ctes.weighty = 1.0;
         ctes.weightx = 3.0;
-        borrar.setBackground(new Color(12,86,206));
-        this.getContentPane().add(borrar,ctes);
+        borrar.setBackground(new Color(206,66,37));
+        this.panel.add(borrar,ctes);
         reset();
 
-        ctes.gridx=3;
+        ctes.gridx=7;
         ctes.gridy=0;
         ctes.gridwidth=3;
         ctes.gridheight=1;
         ctes.weighty = 1.0;
         ctes.weightx = 3.0;
         comentar.setBackground(new Color(12,86,206));
-        this.getContentPane().setBackground(Color.WHITE);
-        this.getContentPane().add(comentar,ctes);
+        this.panel.setBackground(Color.WHITE);
+        this.panel.add(comentar,ctes);
         reset();
     }
 
@@ -60,9 +77,7 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
         addComments();
         setTitle(getTitle());
         setVisible(true);
-        setBounds(10,10,500,900);
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        setResizable(true);
     }
 
     private void addPublication(){
@@ -70,12 +85,12 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
         JLabel label = new JLabel("<html><h1 style=\""+applyTextColor+"\">"+this.text+"</h1></html>");
         label.setBackground(Color.WHITE);
         ctes.gridx=0;
-        ctes.gridy=1;
+        ctes.gridy=0;
         ctes.gridwidth=6;
         ctes.gridheight=1;
         ctes.weighty = 1.0;
         ctes.fill = GridBagConstraints.BOTH;
-        this.getContentPane().add(label,ctes);
+        this.panel.add(label,ctes);
         reset();
     }
 
@@ -88,7 +103,7 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
             ctes.gridheight=1;
             ctes.weighty = 1.0;
             ctes.fill = GridBagConstraints.BOTH;
-            this.getContentPane().add(new ComentarioGUI(comentarios.get(i), this),ctes);
+            this.panel.add(new ComentarioGUI(comentarios.get(i), this),ctes);
             reset();
         }
     }
@@ -107,7 +122,7 @@ public class OpcionesPublicacionGUI extends JFrame implements ActionListener{
 
 
     public void resetView(){
-        this.getContentPane().removeAll();
+        this.panel.removeAll();
         this.display();
     }
     @Override

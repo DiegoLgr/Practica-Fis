@@ -97,7 +97,7 @@ public class WriteGUI extends JFrame implements ActionListener {
     }
 
     public void display() {
-        setBounds(10, 10, 300, 300);
+        setBounds(550, 250, 700, 300);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
@@ -157,8 +157,6 @@ public class WriteGUI extends JFrame implements ActionListener {
                         parentView.resetView();
                         break;
                     case "Respuesta":
-//                        IResponde controladorComentario = App.getControladorComentario();
-//                        Comentario comentario = new Comentario("c1", "a", "a");
                         App.getControladorComentario().responderComentario(texto, (Comentario)this.comentario);
                         parentView.resetView();
                         break;
