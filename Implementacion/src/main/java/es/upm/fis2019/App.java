@@ -1,16 +1,41 @@
 package es.upm.fis2019;
 
+import es.upm.fis2019.GUI.ManagerGUI;
+
 public class App {
-	public static void main(String[] args) {
-		Sesion sesion = new Sesion();
-		sesion.setUsuario(new Usuario("usuarioPrueba", "prueba@upm.com", "123")); // Esto hace lo que debieria hacer el login.
+    static ControladorGestorUsuarios controladorGestorUsuarios;
+    static ControladorComentario controladorComentario;
+    static ControladorPublicaciones controladorPublicaciones;
+    static ControladorUsuario contoladorUsuario;
 
-		ControladorGestorUsuarios controladorGestorUsuarios = new ControladorGestorUsuarios();
-		ControladorUsuario controladorUsuario = new ControladorUsuario(sesion);
-		ControladorComentario controladorComentario = new ControladorComentario();
-		ControladorPublicaciones controladorPublicaciones = new ControladorPublicaciones();
+    static Sesion sesion;
 
-		ManagerGui gui = new ManagerGui(controladorGestorUsuarios, controladorUsuario);
-		gui.run();
-	}
+    public static void main(String[] args) {
+        new Sesion();
+
+        App.controladorGestorUsuarios = new ControladorGestorUsuarios();
+        App.controladorComentario = new ControladorComentario();
+        App.controladorPublicaciones = new ControladorPublicaciones();
+        App.contoladorUsuario = new ControladorUsuario();
+
+
+        ManagerGUI gui = new ManagerGUI();
+        gui.run();
+    }
+
+    public static ControladorPublicaciones getControladorPublicaciones() {
+        return App.controladorPublicaciones;
+    }
+
+    public static ControladorComentario getControladorComentario() {
+        return controladorComentario;
+    }
+
+    public static ControladorGestorUsuarios getControladorGestorUsuarios() {
+        return controladorGestorUsuarios;
+    }
+
+    public static ControladorUsuario getContoladorUsuario() {
+        return contoladorUsuario;
+    }
 }

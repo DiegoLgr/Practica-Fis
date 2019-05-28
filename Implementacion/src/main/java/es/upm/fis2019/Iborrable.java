@@ -1,4 +1,4 @@
 package es.upm.fis2019;
 public interface Iborrable {
-	public void Borrar();
+	public void borrarPublicacion(IPublicacion p);
 }
